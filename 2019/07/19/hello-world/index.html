@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hello World | 沈建谅的博客</title>
+  <title>Windows系统配置Linux子系统开发ARM | 沈建谅的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="Win10可以支持Ubuntu子系统，再也不需要虚拟机！ 安装系统系统要求：最新版win10，打开应用商店安装Ubuntu应用软件，需要系统开启虚拟机功能以及LINUX子系统功能。 配置 Ubuntu换源等操作。 More info: Writing 安装 gcc 交叉编译工具下载链接: gcc-toolchain 123$ tar xvf gcc-linaro-7.2.1-2017.11-x86">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
+<meta property="og:title" content="Windows系统配置Linux子系统开发ARM">
 <meta property="og:url" content="http://yoursite.com/2019/07/19/hello-world/index.html">
 <meta property="og:site_name" content="沈建谅的博客">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="Win10可以支持Ubuntu子系统，再也不需要虚拟机！ 安装系统系统要求：最新版win10，打开应用商店安装Ubuntu应用软件，需要系统开启虚拟机功能以及LINUX子系统功能。 配置 Ubuntu换源等操作。 More info: Writing 安装 gcc 交叉编译工具下载链接: gcc-toolchain 123$ tar xvf gcc-linaro-7.2.1-2017.11-x86">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-19T11:42:09.451Z">
+<meta property="og:updated_time" content="2019-07-19T12:57:43.700Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="Windows系统配置Linux子系统开发ARM">
+<meta name="twitter:description" content="Win10可以支持Ubuntu子系统，再也不需要虚拟机！ 安装系统系统要求：最新版win10，打开应用商店安装Ubuntu应用软件，需要系统开启虚拟机功能以及LINUX子系统功能。 配置 Ubuntu换源等操作。 More info: Writing 安装 gcc 交叉编译工具下载链接: gcc-toolchain 123$ tar xvf gcc-linaro-7.2.1-2017.11-x86">
   
     <link rel="alternative" href="/atom.xml" title="沈建谅的博客" type="application/atom+xml">
   
@@ -151,7 +151,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      Windows系统配置Linux子系统开发ARM
     </h1>
   
 
@@ -164,19 +164,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
+        <p>Win10可以支持Ubuntu子系统，再也不需要虚拟机！</p>
+<h2 id="安装系统"><a href="#安装系统" class="headerlink" title="安装系统"></a>安装系统</h2><p>系统要求：最新版win10，打开应用商店安装Ubuntu应用软件，需要系统开启虚拟机功能以及LINUX子系统功能。</p>
+<h3 id="配置-Ubuntu"><a href="#配置-Ubuntu" class="headerlink" title="配置 Ubuntu"></a>配置 Ubuntu</h3><p>换源等操作。</p>
 <p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<h3 id="安装-gcc-交叉编译工具"><a href="#安装-gcc-交叉编译工具" class="headerlink" title="安装 gcc 交叉编译工具"></a>安装 gcc 交叉编译工具</h3><p>下载链接: <a href="https://releases.linaro.org/components/toolchain/binaries/7.2-2017.11/arm-linux-gnueabihf/" target="_blank" rel="noopener">gcc-toolchain</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ tar xvf gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabihf.tar.xz -C /usr/<span class="built_in">local</span>/arm_gcc</span><br><span class="line">$ sudo vim /etc/profile</span><br><span class="line">$ <span class="built_in">export</span> PATH=/usr/<span class="built_in">local</span>/arm_gcc/bin/:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<h3 id="安装-Minicom"><a href="#安装-Minicom" class="headerlink" title="安装 Minicom"></a>安装 Minicom</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apr-get install minicom</span><br><span class="line">$ sudo minicom -D /dev/ttySx</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<h3 id="编译代码"><a href="#编译代码" class="headerlink" title="编译代码"></a>编译代码</h3><p>需要在CMakelists.txt中set gcc和g++路径，其余与Linux正常。</p>
 
       
 
@@ -268,20 +265,6 @@
 </article>
 
   
-<nav id="article-nav">
-  
-    <a href="/2019/07/19/first-blog/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          first blog
-        
-      </div>
-    </a>
-  
-  
-</nav>
-
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
