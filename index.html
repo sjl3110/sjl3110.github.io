@@ -145,19 +145,19 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-windows_wsl" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/19/hello-world/">Windows系统配置Linux子系统开发ARM</a>
+      <a class="article-title" href="/2019/07/19/windows_wsl/">Windows系统配置Linux子系统开发ARM</a>
     </h1>
   
 
         
-        <a href="/2019/07/19/hello-world/" class="archive-article-date">
+        <a href="/2019/07/19/windows_wsl/" class="archive-article-date">
   	<time datetime="2019-07-19T11:42:09.451Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-19</time>
 </a>
         
@@ -167,11 +167,19 @@
       
         <p>Win10可以支持Ubuntu子系统，再也不需要虚拟机！</p>
 <h2 id="安装系统"><a href="#安装系统" class="headerlink" title="安装系统"></a>安装系统</h2><p>系统要求：最新版win10，打开应用商店安装Ubuntu应用软件，需要系统开启虚拟机功能以及LINUX子系统功能。</p>
-<h3 id="配置-Ubuntu"><a href="#配置-Ubuntu" class="headerlink" title="配置 Ubuntu"></a>配置 Ubuntu</h3><p>换源等操作。</p>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="安装-gcc-交叉编译工具"><a href="#安装-gcc-交叉编译工具" class="headerlink" title="安装 gcc 交叉编译工具"></a>安装 gcc 交叉编译工具</h3><p>下载链接: <a href="https://releases.linaro.org/components/toolchain/binaries/7.2-2017.11/arm-linux-gnueabihf/" target="_blank" rel="noopener">gcc-toolchain</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ tar xvf gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabihf.tar.xz -C /usr/<span class="built_in">local</span>/arm_gcc</span><br><span class="line">$ sudo vim /etc/profile</span><br><span class="line">$ <span class="built_in">export</span> PATH=/usr/<span class="built_in">local</span>/arm_gcc/bin/:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
+<h3 id="配置-Ubuntu"><a href="#配置-Ubuntu" class="headerlink" title="配置 Ubuntu"></a>配置 Ubuntu</h3><p>换源等操作</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /etc/apt</span><br><span class="line">$ sudo cp sources.list sources.list.bak</span><br><span class="line">$ sudo vi sources.list</span><br><span class="line">$ add </span><br><span class="line">  deb http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse</span><br><span class="line">  deb http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse</span><br><span class="line">  deb http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse</span><br><span class="line">  deb http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse</span><br><span class="line">  deb http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse</span><br><span class="line">  deb-src http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse</span><br><span class="line">  deb-src http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse</span><br><span class="line">  deb-src http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse</span><br><span class="line">  deb-src http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse</span><br><span class="line">  deb-src http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse</span><br><span class="line">$ sudo apt-get update</span><br><span class="line">$ sudo apt-get upgrade</span><br></pre></td></tr></table></figure>
 
+<h3 id="安装-gcc-交叉编译工具"><a href="#安装-gcc-交叉编译工具" class="headerlink" title="安装 gcc 交叉编译工具"></a>安装 gcc 交叉编译工具</h3><h4 id="命名规则"><a href="#命名规则" class="headerlink" title="命名规则"></a>命名规则</h4><ul>
+<li>交叉编译工具链的命名规则为：arch [-vendor] [-os] [-(gnu)eabi]</li>
+<li>arch - 体系架构，如ARM，MIPS</li>
+<li>vendor - 工具链提供商</li>
+<li>os - 目标操作系统</li>
+<li>eabi - 嵌入式应用二进制接口（Embedded ApplicationBinary Interface）<br>根据对操作系统的支持与否，ARM  GCC可分为支持和不支持操作系统，如  <pre><code>arm-none-eabi：这个是没有操作系统的，自然不可能支持那些跟操作系统关系密切的函数，比如fork()。使用的是newlib这个专用于嵌入式系统的C库。  
+arm-none-linux-eabi：用于Linux的，使用Glibc。  </code></pre>比如:<br>arm-none-eabi-gcc：用于编译 ARM 架构的裸机系统（包括 ARM Linux 的 boot、kernel，不适用编译 Linux 应用 Application）。<br>arm-none-linux-gnueabi-gcc：主要用于基于 ARM 架构的 Linux 系统，可用于编译 ARM 架构的 u-boot、Linux内核、Linux应用等。<br>arm-eabi-gcc：Android ARM 编译器。<br>armcc ARM：公司推出的编译工具，功能和 arm-none-eabi 类似。<br>arm-none-uclinuxeabi-gcc：用于uCLinux，使用Glibc。<br>arm-none-symbianelf-gcc：用于symbian。<br>下载链接: <a href="https://releases.linaro.org/components/toolchain/binaries/7.2-2017.11/arm-linux-gnueabihf/" target="_blank" rel="noopener">gcc-toolchain</a><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ tar xvf gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabihf.tar.xz -C /usr/<span class="built_in">local</span>/arm_gcc</span><br><span class="line">$ sudo vim /etc/profile</span><br><span class="line">$ <span class="built_in">export</span> PATH=/usr/<span class="built_in">local</span>/arm_gcc/bin/:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
 <h3 id="安装-Minicom"><a href="#安装-Minicom" class="headerlink" title="安装 Minicom"></a>安装 Minicom</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apr-get install minicom</span><br><span class="line">$ sudo minicom -D /dev/ttySx</span><br></pre></td></tr></table></figure>
 
 <h3 id="编译代码"><a href="#编译代码" class="headerlink" title="编译代码"></a>编译代码</h3><p>需要在CMakelists.txt中set gcc和g++路径，其余与Linux正常。</p>
@@ -187,7 +195,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/19/hello-world/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/07/19/windows_wsl/">展开全文 >></a>
         </p>
       
 
