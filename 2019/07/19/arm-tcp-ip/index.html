@@ -9,14 +9,14 @@
   <title>基于TCP/IP网络socket通信 | 沈建谅的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="网络传输文件现有的工具为ssh或者tcp指令，ssh中的scp指令如下： 1$ scp file name@IP:file_path  检测，在百兆带宽的情况下，可以达到5~6MB/s。SSH的用户层工作原理，除去登陆密码以及公钥或者私钥的建立，底层的工作模式也需要考虑。   服务端 server.c  12345678910111213141516171819202122232425262728">
-<meta name="keywords" content="linux,2019.07">
+<meta name="keywords" content="linux,2019.07,socket">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于TCP&#x2F;IP网络socket通信">
 <meta property="og:url" content="http://yoursite.com/2019/07/19/arm-tcp-ip/index.html">
 <meta property="og:site_name" content="沈建谅的博客">
 <meta property="og:description" content="网络传输文件现有的工具为ssh或者tcp指令，ssh中的scp指令如下： 1$ scp file name@IP:file_path  检测，在百兆带宽的情况下，可以达到5~6MB/s。SSH的用户层工作原理，除去登陆密码以及公钥或者私钥的建立，底层的工作模式也需要考虑。   服务端 server.c  12345678910111213141516171819202122232425262728">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-19T16:33:02.133Z">
+<meta property="og:updated_time" content="2019-07-19T16:42:36.582Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于TCP&#x2F;IP网络socket通信">
 <meta name="twitter:description" content="网络传输文件现有的工具为ssh或者tcp指令，ssh中的scp指令如下： 1$ scp file name@IP:file_path  检测，在百兆带宽的情况下，可以达到5~6MB/s。SSH的用户层工作原理，除去登陆密码以及公钥或者私钥的建立，底层的工作模式也需要考虑。   服务端 server.c  12345678910111213141516171819202122232425262728">
@@ -60,10 +60,6 @@
 			
 				<li><a href="/">主页</a></li>
 	        
-				<li><a href="/">2019.07</a></li>
-	        
-				<li><a href="/arm">arm</a></li>
-	        
 			</ul>
 		</nav>
 		<nav class="header-smart-menu">
@@ -86,9 +82,11 @@
 				
 					<a class="github" target="_blank" href="https://github.com/sjl3110" title="github"><i class="icon-github"></i></a>
 		        
-					<a class="weixin" target="_blank" href="#" title="weixin"><i class="icon-weixin"></i></a>
+					<a class="weixin" target="_blank" href="/sjl3110" title="weixin"><i class="icon-weixin"></i></a>
 		        
 					<a class="bilibili" target="_blank" href="https://space.bilibili.com/27069966?from=search&seid=12732919905525483928" title="bilibili"><i class="icon-bilibili"></i></a>
+		        
+					<a class="mail" target="_blank" href="/jianliang_shen@zju.edu.cn" title="mail"><i class="icon-mail"></i></a>
 		        
 			</div>
 		</nav>
@@ -116,10 +114,6 @@
 			
 				
 			
-				
-			
-				
-			
 			
 			
 			<nav class="header-nav">
@@ -127,22 +121,20 @@
 					
 						<a class="github" target="_blank" href="https://github.com/sjl3110" title="github"><i class="icon-github"></i></a>
 			        
-						<a class="weixin" target="_blank" href="#" title="weixin"><i class="icon-weixin"></i></a>
+						<a class="weixin" target="_blank" href="/sjl3110" title="weixin"><i class="icon-weixin"></i></a>
 			        
 						<a class="bilibili" target="_blank" href="https://space.bilibili.com/27069966?from=search&seid=12732919905525483928" title="bilibili"><i class="icon-bilibili"></i></a>
+			        
+						<a class="mail" target="_blank" href="/jianliang_shen@zju.edu.cn" title="mail"><i class="icon-mail"></i></a>
 			        
 				</div>
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 70%">
+				<ul style="width: 50%">
 				
 				
-					<li style="width: 33.333333333333336%"><a href="/">主页</a></li>
-		        
-					<li style="width: 33.333333333333336%"><a href="/">2019.07</a></li>
-		        
-					<li style="width: 33.333333333333336%"><a href="/arm">arm</a></li>
+					<li style="width: 100%"><a href="/">主页</a></li>
 		        
 				</ul>
 			</nav>
@@ -232,6 +224,10 @@
       		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">2019.07</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">socket</a>
         		</li>
       		
 		</ul>
@@ -451,6 +447,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">2019.07</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">github</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">socket</a>
               </li>
             
             <div class="clearfix"></div>
