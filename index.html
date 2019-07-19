@@ -171,7 +171,26 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>文章转载来自<a href="https://blog.csdn.net/qq_40147863/article/details/84942914" target="_blank" rel="noopener">使用 Hexo + Github 搭建自己的博客（图文教程）</a><br>替换主题参考<a href="https://blog.csdn.net/qq_40147863/article/details/84946894" target="_blank" rel="noopener">Hexo 安装和替换主题、自定义博客主题</a></p>
+<h2 id="1-搭建过程"><a href="#1-搭建过程" class="headerlink" title="1.搭建过程"></a>1.搭建过程</h2><ol>
+<li><p>安装git node.js，查看版本命令用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ npm -v</span><br><span class="line">$ node -v</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新建一个repository，名称为 <code>name.github.io</code></p>
+</li>
+<li><p>安装Hexo</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo -g</span><br><span class="line">$ hexo -v</span><br><span class="line">$ hexo init</span><br><span class="line">$ npm install</span><br><span class="line">$ hexo g</span><br><span class="line">$ hexo s  <span class="comment">#查看本地新建的hexo</span></span><br><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改_config.yml</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">  repository:</span> <span class="string">git@github.com:sjl3110/sjl3110.github.io.git</span></span><br><span class="line"><span class="attr">  branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>建立ssh密钥</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">"mail@xx.com"</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>并将默认保存位置的<code>id_rsa.pub</code>内容存放到github网站中的SSH密钥中。</p>
+<h2 id="2-维护过程"><a href="#2-维护过程" class="headerlink" title="2.维护过程"></a>2.维护过程</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new post <span class="string">"blog-name"</span></span><br><span class="line">$ hexo d -g</span><br></pre></td></tr></table></figure>
       
 
       
@@ -184,7 +203,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">hexo github</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
         		</li>
       		
 		</ul>
@@ -335,10 +354,10 @@
       
         <p>Win10可以支持Ubuntu子系统，再也不需要虚拟机！</p>
 <h2 id="安装系统"><a href="#安装系统" class="headerlink" title="安装系统"></a>安装系统</h2><p>系统要求：最新版win10，打开应用商店安装Ubuntu应用软件，需要系统开启虚拟机功能以及LINUX子系统功能。  </p>
-<h3 id="配置-Ubuntu"><a href="#配置-Ubuntu" class="headerlink" title="配置 Ubuntu"></a>配置 Ubuntu</h3><p>换源等操作</p>
+<h3 id="1-配置-Ubuntu"><a href="#1-配置-Ubuntu" class="headerlink" title="1.配置 Ubuntu"></a>1.配置 Ubuntu</h3><p>换源等操作</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /etc/apt</span><br><span class="line">$ sudo cp sources.list sources.list.bak</span><br><span class="line">$ sudo vi sources.list</span><br><span class="line">$ add </span><br><span class="line">  deb http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse</span><br><span class="line">  deb http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse</span><br><span class="line">  deb http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse</span><br><span class="line">  deb http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse</span><br><span class="line">  deb http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse</span><br><span class="line">  deb-src http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse</span><br><span class="line">  deb-src http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse</span><br><span class="line">  deb-src http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse</span><br><span class="line">  deb-src http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse</span><br><span class="line">  deb-src http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse</span><br><span class="line">$ sudo apt-get update</span><br><span class="line">$ sudo apt-get upgrade</span><br></pre></td></tr></table></figure>
 
-<h3 id="安装-gcc-交叉编译工具"><a href="#安装-gcc-交叉编译工具" class="headerlink" title="安装 gcc 交叉编译工具"></a>安装 gcc 交叉编译工具</h3><h4 id="命名规则"><a href="#命名规则" class="headerlink" title="命名规则"></a>命名规则</h4><ul>
+<h3 id="2-安装-gcc-交叉编译工具"><a href="#2-安装-gcc-交叉编译工具" class="headerlink" title="2.安装 gcc 交叉编译工具"></a>2.安装 gcc 交叉编译工具</h3><h4 id="命名规则"><a href="#命名规则" class="headerlink" title="命名规则"></a>命名规则</h4><ul>
 <li>交叉编译工具链的命名规则为：arch [-vendor] [-os] [-(gnu)eabi]</li>
 <li>arch - 体系架构，如ARM，MIPS</li>
 <li>vendor - 工具链提供商</li>
@@ -348,9 +367,9 @@
 </li>
 </ul>
 <p>安装完成后如下：<br><img src="https://github.com/sjl3110/pictures-for-hexo/blob/master/wsl_ubuntu.JPG?raw=true" alt="avatar"></p>
-<h3 id="安装-Minicom"><a href="#安装-Minicom" class="headerlink" title="安装 Minicom"></a>安装 Minicom</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apr-get install minicom</span><br><span class="line">$ sudo minicom -D /dev/ttySx</span><br></pre></td></tr></table></figure>
+<h3 id="3-安装-Minicom"><a href="#3-安装-Minicom" class="headerlink" title="3.安装 Minicom"></a>3.安装 Minicom</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apr-get install minicom</span><br><span class="line">$ sudo minicom -D /dev/ttySx</span><br></pre></td></tr></table></figure>
 
-<h3 id="编译代码"><a href="#编译代码" class="headerlink" title="编译代码"></a>编译代码</h3><p>需要在CMakelists.txt中set gcc和g++路径，其余与Linux正常。</p>
+<h3 id="4-编译代码"><a href="#4-编译代码" class="headerlink" title="4.编译代码"></a>4.编译代码</h3><p>需要在CMakelists.txt中set gcc和g++路径，其余与Linux正常。</p>
 
       
 
@@ -506,6 +525,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">hexo github</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
             
             <div class="clearfix"></div>

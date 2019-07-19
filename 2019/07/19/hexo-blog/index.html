@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>如何利用hexo和github搭建免费个人博客 | 沈建谅的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="浙江大学">
-<meta name="keywords" content="hexo github">
+  <meta name="description" content="文章转载来自使用 Hexo + Github 搭建自己的博客（图文教程）替换主题参考Hexo 安装和替换主题、自定义博客主题 1.搭建过程 安装git node.js，查看版本命令用 12$ npm -v$ node -v  新建一个repository，名称为 name.github.io  安装Hexo 1234567$ npm install hexo -g$ hexo -v$ hexo i">
+<meta name="keywords" content="hexo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何利用hexo和github搭建免费个人博客">
 <meta property="og:url" content="http://yoursite.com/2019/07/19/hexo-blog/index.html">
 <meta property="og:site_name" content="沈建谅的博客">
-<meta property="og:description" content="浙江大学">
+<meta property="og:description" content="文章转载来自使用 Hexo + Github 搭建自己的博客（图文教程）替换主题参考Hexo 安装和替换主题、自定义博客主题 1.搭建过程 安装git node.js，查看版本命令用 12$ npm -v$ node -v  新建一个repository，名称为 name.github.io  安装Hexo 1234567$ npm install hexo -g$ hexo -v$ hexo i">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-19T15:32:59.150Z">
+<meta property="og:updated_time" content="2019-07-19T15:59:14.098Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何利用hexo和github搭建免费个人博客">
-<meta name="twitter:description" content="浙江大学">
+<meta name="twitter:description" content="文章转载来自使用 Hexo + Github 搭建自己的博客（图文教程）替换主题参考Hexo 安装和替换主题、自定义博客主题 1.搭建过程 安装git node.js，查看版本命令用 12$ npm -v$ node -v  新建一个repository，名称为 name.github.io  安装Hexo 1234567$ npm install hexo -g$ hexo -v$ hexo i">
   
     <link rel="alternative" href="/atom.xml" title="沈建谅的博客" type="application/atom+xml">
   
@@ -171,7 +171,26 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>文章转载来自<a href="https://blog.csdn.net/qq_40147863/article/details/84942914" target="_blank" rel="noopener">使用 Hexo + Github 搭建自己的博客（图文教程）</a><br>替换主题参考<a href="https://blog.csdn.net/qq_40147863/article/details/84946894" target="_blank" rel="noopener">Hexo 安装和替换主题、自定义博客主题</a></p>
+<h2 id="1-搭建过程"><a href="#1-搭建过程" class="headerlink" title="1.搭建过程"></a>1.搭建过程</h2><ol>
+<li><p>安装git node.js，查看版本命令用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ npm -v</span><br><span class="line">$ node -v</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新建一个repository，名称为 <code>name.github.io</code></p>
+</li>
+<li><p>安装Hexo</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo -g</span><br><span class="line">$ hexo -v</span><br><span class="line">$ hexo init</span><br><span class="line">$ npm install</span><br><span class="line">$ hexo g</span><br><span class="line">$ hexo s  <span class="comment">#查看本地新建的hexo</span></span><br><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改_config.yml</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">  repository:</span> <span class="string">git@github.com:sjl3110/sjl3110.github.io.git</span></span><br><span class="line"><span class="attr">  branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>建立ssh密钥</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">"mail@xx.com"</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>并将默认保存位置的<code>id_rsa.pub</code>内容存放到github网站中的SSH密钥中。</p>
+<h2 id="2-维护过程"><a href="#2-维护过程" class="headerlink" title="2.维护过程"></a>2.维护过程</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new post <span class="string">"blog-name"</span></span><br><span class="line">$ hexo d -g</span><br></pre></td></tr></table></figure>
       
 
       
@@ -205,7 +224,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">hexo github</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
         		</li>
       		
 		</ul>
@@ -412,6 +431,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">hexo github</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
             
             <div class="clearfix"></div>
