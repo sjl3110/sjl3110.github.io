@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="linux,socket,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="网络传输文件现有的工具为ssh或者tcp指令，ssh中的scp指令如下： 1$ scp file name@IP:file_path  检测，在百兆带宽的情况下，可以达到5~6MB/s。SSH的用户层工作原理，除去登陆密码以及公钥或者私钥的建立，底层的工作模式也需要考虑。   服务端 server.c  12345678910111213141516171819202122232425262728">
+<meta name="keywords" content="linux,socket">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于TCP&#x2F;IP网络socket通信">
+<meta property="og:url" content="http://yoursite.com/2019/07/19/arm-tcp-ip/index.html">
+<meta property="og:site_name" content="沈建谅的博客">
+<meta property="og:description" content="网络传输文件现有的工具为ssh或者tcp指令，ssh中的scp指令如下： 1$ scp file name@IP:file_path  检测，在百兆带宽的情况下，可以达到5~6MB/s。SSH的用户层工作原理，除去登陆密码以及公钥或者私钥的建立，底层的工作模式也需要考虑。   服务端 server.c  12345678910111213141516171819202122232425262728">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-20T02:34:35.673Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于TCP&#x2F;IP网络socket通信">
+<meta name="twitter:description" content="网络传输文件现有的工具为ssh或者tcp指令，ssh中的scp指令如下： 1$ scp file name@IP:file_path  检测，在百兆带宽的情况下，可以达到5~6MB/s。SSH的用户层工作原理，除去登陆密码以及公钥或者私钥的建立，底层的工作模式也需要考虑。   服务端 server.c  12345678910111213141516171819202122232425262728">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/19/arm-tcp-ip/">
+
+
+
+
+
+  <title>基于TCP/IP网络socket通信 | 沈建谅的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">沈建谅的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/19/arm-tcp-ip/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="沈建谅">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://b-ssl.duitang.com/uploads/item/201512/17/20151217132944_UNTM2.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="沈建谅的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">基于TCP/IP网络socket通信</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-19T21:55:15+08:00">
+                2019-07-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>网络传输文件现有的工具为ssh或者tcp指令，ssh中的scp指令如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ scp file name@IP:file_path</span><br></pre></td></tr></table></figure>
+
+<p>检测，在百兆带宽的情况下，可以达到5~6MB/s。<br>SSH的用户层工作原理，除去登陆密码以及公钥或者私钥的建立，底层的工作模式也需要考虑。  </p>
+<h2 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h2><details>
+<summary>server.c</summary>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;netinet/in.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;arpa/inet.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/shm.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;time.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PORT 8888</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> QUEUE_SIZE 10</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> BUFFER_SIZE 10000</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//传进来的sockfd，就是互相建立好连接之后的socket文件描述符</span></span><br><span class="line"><span class="comment">//通过这个sockfd，可以完成 [服务端]&lt;---&gt;[客户端] 互相收发数据</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">transfer_file</span><span class="params">(<span class="keyword">int</span> sockfd)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    FILE *fp;</span><br><span class="line">    <span class="keyword">int</span> ch;</span><br><span class="line">    <span class="keyword">time_t</span> t_start, t_end;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> send_num;</span><br><span class="line">    <span class="keyword">long</span> length = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//char name[LEN];    // storage for output filename</span></span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    fp = fopen(<span class="string">"test.txt"</span>, <span class="string">"r"</span>);</span><br><span class="line">    <span class="keyword">if</span> (fp == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"couldn't open the file \n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(EXIT_FAILURE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    fseek(fp, <span class="number">0L</span>, SEEK_END); <span class="comment">//将文件指针移到末尾</span></span><br><span class="line">    length = ftell(fp);    <span class="comment">//获取文件长度</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%ld\n"</span>, length);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">char</span> str[<span class="number">10</span>];</span><br><span class="line">    <span class="built_in">sprintf</span>(str, <span class="string">"%ld"</span>, length);   <span class="comment">//将文件长度转换为字符串str</span></span><br><span class="line">    send(sockfd, str, <span class="keyword">sizeof</span>(str), <span class="number">0</span>);  <span class="comment">//将文件长度发送给client</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">char</span> buffer1[BUFFER_SIZE];</span><br><span class="line">    recv(sockfd, buffer1, <span class="keyword">sizeof</span>(buffer1), <span class="number">0</span>);    <span class="comment">//等待对方读取完长度后返回“ready”</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">strcmp</span>(buffer1, <span class="string">"ready"</span>) == <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        fseek(fp, <span class="number">0L</span>, SEEK_SET);          <span class="comment">//文件指针移到开头</span></span><br><span class="line">        <span class="comment">// char buffer[1];</span></span><br><span class="line">        <span class="comment">// copy data</span></span><br><span class="line">        <span class="comment">// while ((ch = getc(fp)) != EOF)</span></span><br><span class="line">        <span class="comment">// &#123;</span></span><br><span class="line">        <span class="comment">//     buffer[0] = ch;</span></span><br><span class="line">        <span class="comment">//     send(sockfd, buffer, 1, 0);</span></span><br><span class="line">        <span class="comment">// &#125;</span></span><br><span class="line">        t_start = time(<span class="literal">NULL</span>);          <span class="comment">//获取开始时间</span></span><br><span class="line">        <span class="keyword">char</span> buffer[BUFFER_SIZE];       <span class="comment">//新建缓存</span></span><br><span class="line">        send_num = <span class="number">0</span>;                  <span class="comment">//计算发送包的个数</span></span><br><span class="line">        <span class="keyword">while</span> (fread(buffer, <span class="keyword">sizeof</span>(buffer), <span class="number">1</span>, fp))    <span class="comment">//fread 读文件到缓存，读到末尾会EOF（-1）</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//printf("send%d %ld\n",send_num,sizeof(buffer));</span></span><br><span class="line">            send(sockfd, buffer, <span class="keyword">sizeof</span>(buffer), <span class="number">0</span>);      <span class="comment">//发送一个文件包</span></span><br><span class="line">            send_num++;</span><br><span class="line">            <span class="comment">//break;</span></span><br><span class="line">        &#125;</span><br><span class="line">        t_end = time(<span class="literal">NULL</span>);  <span class="comment">//获取结束时间</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"send %d times\n"</span>, send_num);     </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"speed: %.02f MB/s\n"</span>, length / <span class="number">1024</span> / <span class="number">1024</span> / difftime(t_end, t_start));</span><br><span class="line">        <span class="keyword">if</span> (fclose(fp) != <span class="number">0</span>)        <span class="comment">//关闭文件</span></span><br><span class="line">            <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"Error in closing files\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"cannot get start!\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">str_echo</span><span class="params">(<span class="keyword">int</span> sockfd)</span>     <span class="comment">//回环函数</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> buffer[BUFFER_SIZE];     <span class="comment">//新建内存缓冲区</span></span><br><span class="line">    <span class="keyword">pid_t</span> pid = getpid();</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">memset</span>(buffer, <span class="number">0</span>, <span class="keyword">sizeof</span>(buffer));    <span class="comment">//将内存缓冲区清0，初始化</span></span><br><span class="line">        <span class="keyword">int</span> len = recv(sockfd, buffer, <span class="keyword">sizeof</span>(buffer), <span class="number">0</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"pid:%d receive:\n"</span>, pid);</span><br><span class="line">        <span class="built_in">fputs</span>(buffer, <span class="built_in">stdout</span>);</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">strcmp</span>(buffer, <span class="string">"exit\n"</span>) == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"child process: %d exited.\n"</span>, pid);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"the server shutdown.\n"</span>);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">strcmp</span>(buffer, <span class="string">"send\n"</span>) == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"start transfer.\n"</span>);</span><br><span class="line">            transfer_file(sockfd);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"transfer end.\n"</span>);</span><br><span class="line">            <span class="comment">//sleep(10);</span></span><br><span class="line">            <span class="comment">//printf("the server shutdown.\n");</span></span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        send(sockfd, buffer, len, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    close(sockfd);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//定义IPV4的TCP连接的套接字描述符</span></span><br><span class="line">    <span class="keyword">int</span> server_sockfd = socket(AF_INET, SOCK_STREAM, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//定义sockaddr_in</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">server_sockaddr</span>;</span></span><br><span class="line">    server_sockaddr.sin_family = AF_INET;</span><br><span class="line">    server_sockaddr.sin_addr.s_addr = htonl(INADDR_ANY);</span><br><span class="line">    server_sockaddr.sin_port = htons(PORT);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//bind成功返回0，出错返回-1</span></span><br><span class="line">    <span class="keyword">if</span> (bind(server_sockfd, (struct sockaddr *)&amp;server_sockaddr, <span class="keyword">sizeof</span>(server_sockaddr)) == <span class="number">-1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        perror(<span class="string">"bind"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>); <span class="comment">//1为异常退出</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"bind success.\n"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//listen成功返回0，出错返回-1，允许同时帧听的连接数为QUEUE_SIZE</span></span><br><span class="line">    <span class="keyword">if</span> (listen(server_sockfd, QUEUE_SIZE) == <span class="number">-1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        perror(<span class="string">"listen"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"listen success.\n"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (;;)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">client_addr</span>;</span></span><br><span class="line">        <span class="keyword">socklen_t</span> length = <span class="keyword">sizeof</span>(client_addr);</span><br><span class="line">        <span class="comment">//进程阻塞在accept上，成功返回非负描述字，出错返回-1</span></span><br><span class="line">        <span class="keyword">int</span> conn = accept(server_sockfd, (struct sockaddr *)&amp;client_addr, &amp;length);</span><br><span class="line">        <span class="keyword">if</span> (conn &lt; <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            perror(<span class="string">"connect"</span>);</span><br><span class="line">            <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"new client accepted.\n"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">pid_t</span> childid;</span><br><span class="line">        <span class="keyword">if</span> (childid = fork() == <span class="number">0</span>) <span class="comment">//子进程</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"child process: %d created.\n"</span>, getpid());</span><br><span class="line">            close(server_sockfd);   <span class="comment">//在子进程中关闭监听</span></span><br><span class="line">            <span class="keyword">if</span> (str_echo(conn) &lt; <span class="number">0</span>) <span class="comment">//处理监听的连接</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">exit</span>(<span class="number">0</span>);     <span class="comment">//对方发送exit，返回-1，关闭子进程，主进程继续accep</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"closed.\n"</span>);</span><br><span class="line">    close(server_sockfd);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"end\n"</span>);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+<h2 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h2><details>
+<summary>client.c</summary>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;netinet/in.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;arpa/inet.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/shm.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;time.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PORT 8888</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> BUFFER_SIZE 10000</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// void receive_file(int sockfd)</span></span><br><span class="line"><span class="comment">// &#123;</span></span><br><span class="line"><span class="comment">//     FILE *out; // declare two FILE pointers</span></span><br><span class="line"><span class="comment">//     int ch;</span></span><br><span class="line"><span class="comment">//     //char name[LEN];    // storage for output filename</span></span><br><span class="line"><span class="comment">//     int count = 0;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//     if ((out = fopen("out.txt", "w")) == NULL)</span></span><br><span class="line"><span class="comment">//     &#123; // open file for writing</span></span><br><span class="line"><span class="comment">//         fprintf(stderr, "Can't create output file.\n");</span></span><br><span class="line"><span class="comment">//         exit(3);</span></span><br><span class="line"><span class="comment">//     &#125;</span></span><br><span class="line"><span class="comment">//     // copy data</span></span><br><span class="line"><span class="comment">//     while ((ch = getc(in)) != EOF)</span></span><br><span class="line"><span class="comment">//         putc(ch, out);</span></span><br><span class="line"><span class="comment">//     // clean up</span></span><br><span class="line"><span class="comment">//     if (fclose(out) != 0)</span></span><br><span class="line"><span class="comment">//         fprintf(stderr, "Error in closing files\n");</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//     //chmod("test", S_IXUSR);</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (argc != <span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"usage: client IP \n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//定义IPV4的TCP连接的套接字描述符</span></span><br><span class="line">    <span class="keyword">int</span> sock_cli = socket(AF_INET, SOCK_STREAM, <span class="number">0</span>);</span><br><span class="line">    FILE *out;</span><br><span class="line">    <span class="keyword">time_t</span> t_start, t_end;</span><br><span class="line">    <span class="keyword">long</span> i, receive_length, file_length, length;</span><br><span class="line">    <span class="keyword">int</span> receive_num;</span><br><span class="line">    <span class="comment">//定义sockaddr_in</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">servaddr</span>;</span></span><br><span class="line">    <span class="built_in">memset</span>(&amp;servaddr, <span class="number">0</span>, <span class="keyword">sizeof</span>(servaddr));</span><br><span class="line">    servaddr.sin_family = AF_INET;</span><br><span class="line">    servaddr.sin_addr.s_addr = inet_addr(argv[<span class="number">1</span>]);</span><br><span class="line">    servaddr.sin_port = htons(PORT); <span class="comment">//服务器端口</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//连接服务器，成功返回0，错误返回-1</span></span><br><span class="line">    <span class="keyword">if</span> (connect(sock_cli, (struct sockaddr *)&amp;servaddr, <span class="keyword">sizeof</span>(servaddr)) &lt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        perror(<span class="string">"connect"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"connect server(IP:%s).\n"</span>, argv[<span class="number">1</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">char</span> sendbuf[BUFFER_SIZE];</span><br><span class="line">    <span class="keyword">char</span> recvbuf[BUFFER_SIZE];</span><br><span class="line">    <span class="built_in">memset</span>(sendbuf, <span class="number">0</span>, <span class="keyword">sizeof</span>(sendbuf));</span><br><span class="line">    <span class="built_in">memset</span>(recvbuf, <span class="number">0</span>, <span class="keyword">sizeof</span>(recvbuf));</span><br><span class="line"></span><br><span class="line">    <span class="comment">//客户端将控制台输入的信息发送给服务器端，服务器原样返回信息</span></span><br><span class="line">    <span class="keyword">while</span> (fgets(sendbuf, <span class="keyword">sizeof</span>(sendbuf), <span class="built_in">stdin</span>) != <span class="literal">NULL</span>)   <span class="comment">//捕获命令行的字符串到sendbuf</span></span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">memset</span>(recvbuf, <span class="number">0</span>, <span class="keyword">sizeof</span>(recvbuf));</span><br><span class="line">        send(sock_cli, sendbuf, <span class="built_in">strlen</span>(sendbuf), <span class="number">0</span>); <span class="comment">///发送</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">strcmp</span>(sendbuf, <span class="string">"exit\n"</span>) == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"client exited.\n"</span>);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">strcmp</span>(sendbuf, <span class="string">"send\n"</span>) == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> ((out = fopen(<span class="string">"out.txt"</span>, <span class="string">"w"</span>)) == <span class="literal">NULL</span>)</span><br><span class="line">            &#123; <span class="comment">// open file for writing</span></span><br><span class="line">                <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"Can't create output file.\n"</span>);</span><br><span class="line">                <span class="built_in">exit</span>(<span class="number">3</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            recv(sock_cli, recvbuf, <span class="keyword">sizeof</span>(recvbuf), <span class="number">0</span>);</span><br><span class="line">            file_length = atoi(recvbuf);</span><br><span class="line">            <span class="built_in">memset</span>(recvbuf, <span class="number">0</span>, <span class="keyword">sizeof</span>(recvbuf)); <span class="comment">//获取文件长度</span></span><br><span class="line"></span><br><span class="line">            <span class="built_in">memset</span>(sendbuf, <span class="number">0</span>, <span class="keyword">sizeof</span>(sendbuf));</span><br><span class="line">            send(sock_cli, <span class="string">"ready"</span>, <span class="number">5</span>, <span class="number">0</span>); <span class="comment">//发送就绪</span></span><br><span class="line"></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"receive file start.\n"</span>);</span><br><span class="line"></span><br><span class="line">            t_start = time(<span class="literal">NULL</span>);</span><br><span class="line">            length = <span class="number">0</span>;</span><br><span class="line">            receive_num = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span> (length &lt; file_length)</span><br><span class="line">            &#123;</span><br><span class="line">                receive_length = recv(sock_cli, recvbuf, <span class="keyword">sizeof</span>(recvbuf), MSG_WAITALL); <span class="comment">///接收 //MSG_WAITALL是强行等待缓冲满再结束</span></span><br><span class="line">                <span class="comment">//sleep(1);</span></span><br><span class="line">                <span class="comment">//printf("%d length %d\n", receive_num,receive_length);</span></span><br><span class="line"></span><br><span class="line">                <span class="comment">//fputs(recvbuf, stdout);</span></span><br><span class="line">                <span class="comment">//printf("run dot1\n");</span></span><br><span class="line">                <span class="comment">//for (i = 0; i &lt; receive_length; i++)</span></span><br><span class="line">                <span class="comment">//&#123;</span></span><br><span class="line">                <span class="comment">//putc(recvbuf[i], out);</span></span><br><span class="line">                <span class="comment">//&#125;</span></span><br><span class="line">                <span class="built_in">fprintf</span>(out, <span class="string">"%s"</span>, recvbuf);</span><br><span class="line">                <span class="comment">//memset(sendbuf, 0, sizeof(sendbuf));</span></span><br><span class="line">                <span class="built_in">memset</span>(recvbuf, <span class="number">0</span>, <span class="keyword">sizeof</span>(recvbuf));</span><br><span class="line">                <span class="comment">//printf("run\n");</span></span><br><span class="line">                length = length + receive_length;</span><br><span class="line">                receive_num++;</span><br><span class="line">                <span class="comment">//break;</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"receive %d times\n"</span>, receive_num);</span><br><span class="line">            <span class="keyword">if</span> (fclose(out) != <span class="number">0</span>)</span><br><span class="line">                <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"Error in closing files\n"</span>);</span><br><span class="line">            t_end = time(<span class="literal">NULL</span>);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"time : %.2f s\n"</span>, difftime(t_end, t_start));</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"speed: %.02f MB/s\n"</span>, file_length / <span class="number">1024</span> / <span class="number">1024</span> / difftime(t_end, t_start));</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"receive file end.\n"</span>);</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"client receive:\n"</span>);</span><br><span class="line">        recv(sock_cli, recvbuf, <span class="keyword">sizeof</span>(recvbuf), <span class="number">0</span>); <span class="comment">///接收</span></span><br><span class="line">        <span class="built_in">fputs</span>(recvbuf, <span class="built_in">stdout</span>);</span><br><span class="line">        <span class="built_in">memset</span>(sendbuf, <span class="number">0</span>, <span class="keyword">sizeof</span>(sendbuf));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    close(sock_cli);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+            <a href="/tags/socket/" rel="tag"># socket</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/19/windows_wsl/" rel="next" title="Windows系统配置Linux子系统开发ARM">
+                <i class="fa fa-chevron-left"></i> Windows系统配置Linux子系统开发ARM
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/19/hexo-blog/" rel="prev" title="如何利用hexo和github搭建免费个人博客">
+                如何利用hexo和github搭建免费个人博客 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="http://b-ssl.duitang.com/uploads/item/201512/17/20151217132944_UNTM2.jpeg" alt="沈建谅">
+          <p class="site-author-name" itemprop="name">沈建谅</p>
+           
+              <p class="site-description motion-element" itemprop="description">浙江大学航空航天学院</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.csdn.net/" title="CSDN" target="_blank">CSDN</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#服务端"><span class="nav-number">1.</span> <span class="nav-text">服务端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#客户端"><span class="nav-number">2.</span> <span class="nav-text">客户端</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">沈建谅</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Gemini
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
