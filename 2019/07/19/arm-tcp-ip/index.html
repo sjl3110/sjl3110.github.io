@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang>
+<html class="theme-next pisces use-motion" lang>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
 
 
-  <meta name="keywords" content="linux,2019.07,socket,">
+  <meta name="keywords" content="2019.07,linux,socket,">
 
 
 
@@ -97,7 +97,7 @@
 
 
 <meta name="description" content="网络传输文件现有的工具为ssh或者tcp指令，ssh中的scp指令如下： 1$ scp file name@IP:file_path  检测，在百兆带宽的情况下，可以达到5~6MB/s。SSH的用户层工作原理，除去登陆密码以及公钥或者私钥的建立，底层的工作模式也需要考虑。   服务端 server.c  12345678910111213141516171819202122232425262728">
-<meta name="keywords" content="linux,2019.07,socket">
+<meta name="keywords" content="2019.07,linux,socket">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于TCP&#x2F;IP网络socket通信">
 <meta property="og:url" content="//sjl3110.blog/2019/07/19/arm-tcp-ip/index.html">
@@ -115,7 +115,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Pisces',
     sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
@@ -209,6 +209,16 @@
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
           </a>
         </li>
       
@@ -333,7 +343,7 @@
 
       
         <p>网络传输文件现有的工具为ssh或者tcp指令，ssh中的scp指令如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ scp file name@IP:file_path</span><br></pre></td></tr></table></figure>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>scp file name<span class="variable">@IP</span><span class="symbol">:file_path</span></span><br></pre></td></tr></table></figure>
 
 <p>检测，在百兆带宽的情况下，可以达到5~6MB/s。<br>SSH的用户层工作原理，除去登陆密码以及公钥或者私钥的建立，底层的工作模式也需要考虑。  </p>
 <h2 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h2><details>
@@ -365,9 +375,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/linux/" rel="tag"># linux</a>
-          
             <a href="/tags/2019-07/" rel="tag"># 2019.07</a>
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
           
             <a href="/tags/socket/" rel="tag"># socket</a>
           
@@ -481,10 +491,10 @@
             
             
             <div class="site-state-item site-state-tags">
-              
+              <a href="/tags/index.html">
                 <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">tags</span>
-              
+              </a>
             </div>
           
 
@@ -562,7 +572,7 @@
 <div class="theme-info">
   Theme -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
+    NexT.Pisces
   </a>
 </div>
 
@@ -641,6 +651,13 @@
 
   
   
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
