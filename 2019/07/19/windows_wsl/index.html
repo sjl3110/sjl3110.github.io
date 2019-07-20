@@ -94,19 +94,19 @@
 
 
 
-<meta name="description" content="Win10可以支持Ubuntu子系统，再也不需要虚拟机！ 安装系统系统要求：最新版win10，打开应用商店安装Ubuntu应用软件，需要系统开启虚拟机功能以及LINUX子系统功能。    1.配置 Ubuntu换源等操作 12345678910111213141516$ cd /etc/apt$ sudo cp sources.list sources.list.bak$ sudo vi sou">
+<meta name="description" content="Win10可以支持Ubuntu子系统，再也不需要虚拟机！ 安装系统系统要求：最新版win10，打开应用商店安装Ubuntu应用软件，需要系统开启虚拟机功能以及LINUX子系统功能。  1.配置 Ubuntu换源等操作 12345678910111213141516$ cd /etc/apt$ sudo cp sources.list sources.list.bak$ sudo vi sourc">
 <meta name="keywords" content="arm,linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Windows系统配置Linux子系统开发ARM">
 <meta property="og:url" content="http://yoursite.com/2019/07/19/windows_wsl/index.html">
 <meta property="og:site_name" content="沈建谅的博客">
-<meta property="og:description" content="Win10可以支持Ubuntu子系统，再也不需要虚拟机！ 安装系统系统要求：最新版win10，打开应用商店安装Ubuntu应用软件，需要系统开启虚拟机功能以及LINUX子系统功能。    1.配置 Ubuntu换源等操作 12345678910111213141516$ cd /etc/apt$ sudo cp sources.list sources.list.bak$ sudo vi sou">
+<meta property="og:description" content="Win10可以支持Ubuntu子系统，再也不需要虚拟机！ 安装系统系统要求：最新版win10，打开应用商店安装Ubuntu应用软件，需要系统开启虚拟机功能以及LINUX子系统功能。  1.配置 Ubuntu换源等操作 12345678910111213141516$ cd /etc/apt$ sudo cp sources.list sources.list.bak$ sudo vi sourc">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://github.com/sjl3110/pictures-for-hexo/blob/master/wsl_ubuntu.JPG?raw=true">
-<meta property="og:updated_time" content="2019-07-20T03:21:16.803Z">
+<meta property="og:updated_time" content="2019-07-20T03:24:33.300Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Windows系统配置Linux子系统开发ARM">
-<meta name="twitter:description" content="Win10可以支持Ubuntu子系统，再也不需要虚拟机！ 安装系统系统要求：最新版win10，打开应用商店安装Ubuntu应用软件，需要系统开启虚拟机功能以及LINUX子系统功能。    1.配置 Ubuntu换源等操作 12345678910111213141516$ cd /etc/apt$ sudo cp sources.list sources.list.bak$ sudo vi sou">
+<meta name="twitter:description" content="Win10可以支持Ubuntu子系统，再也不需要虚拟机！ 安装系统系统要求：最新版win10，打开应用商店安装Ubuntu应用软件，需要系统开启虚拟机功能以及LINUX子系统功能。  1.配置 Ubuntu换源等操作 12345678910111213141516$ cd /etc/apt$ sudo cp sources.list sources.list.bak$ sudo vi sourc">
 <meta name="twitter:image" content="https://github.com/sjl3110/pictures-for-hexo/blob/master/wsl_ubuntu.JPG?raw=true">
 
 
@@ -374,11 +374,9 @@
       
 
       
-        <a id="more"></a>
+        <!-- 150 -->
 <p>Win10可以支持Ubuntu子系统，再也不需要虚拟机！</p>
 <h2 id="安装系统"><a href="#安装系统" class="headerlink" title="安装系统"></a>安装系统</h2><p>系统要求：最新版win10，打开应用商店安装Ubuntu应用软件，需要系统开启虚拟机功能以及LINUX子系统功能。 </p>
-<!-- more -->
-
 <h3 id="1-配置-Ubuntu"><a href="#1-配置-Ubuntu" class="headerlink" title="1.配置 Ubuntu"></a>1.配置 Ubuntu</h3><p>换源等操作</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /etc/apt</span><br><span class="line">$ sudo cp sources.list sources.list.bak</span><br><span class="line">$ sudo vi sources.list</span><br><span class="line">$ add </span><br><span class="line">  deb http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse</span><br><span class="line">  deb http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse</span><br><span class="line">  deb http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse</span><br><span class="line">  deb http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse</span><br><span class="line">  deb http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse</span><br><span class="line">  deb-src http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse</span><br><span class="line">  deb-src http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse</span><br><span class="line">  deb-src http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse</span><br><span class="line">  deb-src http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse</span><br><span class="line">  deb-src http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse</span><br><span class="line">$ sudo apt-get update</span><br><span class="line">$ sudo apt-get upgrade</span><br></pre></td></tr></table></figure>
 
