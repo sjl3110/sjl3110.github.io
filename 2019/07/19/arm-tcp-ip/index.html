@@ -108,7 +108,7 @@
 <meta property="og:image" content="https://github.com/sjl3110/pictures-for-hexo/blob/master/tcpip/%E5%8D%8F%E8%AE%AE1.png?raw=true">
 <meta property="og:image" content="https://github.com/sjl3110/pictures-for-hexo/blob/master/tcpip/%E5%8D%8F%E8%AE%AE2.png?raw=true">
 <meta property="og:image" content="https://github.com/sjl3110/pictures-for-hexo/blob/master/tcpip/%E5%8D%8F%E8%AE%AE3.png?raw=true">
-<meta property="og:updated_time" content="2019-07-21T07:51:26.001Z">
+<meta property="og:updated_time" content="2019-07-21T07:54:31.911Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于TCP&#x2F;IP网络socket通信">
 <meta name="twitter:description" content="网络传输文件现有的工具为ssh或者tcp指令，ssh中的scp指令如下： 1$ scp file name@IP:file_path  测试在百兆带宽的情况下，可以达到5~6MB/s。SSH的用户层工作原理，除去登陆密码以及公钥或者私钥的建立，底层的工作模式也需要考虑。">
@@ -408,7 +408,7 @@
 <li>客户端需要加入文件末尾判断的语句；  </li>
 <li>若 T1&gt;T2，则recv()函数并不能一次读取设定长度的数据，即有多少读多少，增加了客户端读取循环的次数，降低了传输效率；</li>
 </ul>
-<h3 id="测试与改进"><a href="#测试与改进" class="headerlink" title="测试与改进"></a>测试与改进</h3><p>实际测试：文件长度50160000，约50MB；网络带宽100Mb，上限约12.5MB/s。设每次发送10000Byte，测得：服务端发送5016个数据包，客户端每次接收1000<del>10000长度不等的包，实际接收了13000个数据包，最终传输速率为2MB/s。<br>改进：每次recv()先与对方确认包的长度，并将内容读满再返回，配置MSG_WAITALL。测试结果：服务端发送5016个数据包，客户端接收了5016个数据包，最终传输速率为10</del>12MB/s。  </p>
+<h3 id="测试与改进"><a href="#测试与改进" class="headerlink" title="测试与改进"></a>测试与改进</h3><p>实际测试：文件长度50160000，约50MB；网络带宽100Mb，上限约12.5MB/s。设每次发送10000Byte，测得：服务端发送5016个数据包，客户端每次接收1000–10000长度不等的包，实际接收了13000个数据包，最终传输速率为2MB/s。<br>改进：每次recv()先与对方确认包的长度，并将内容读满再返回，配置MSG_WAITALL。测试结果：服务端发送5016个数据包，客户端接收了5016个数据包，最终传输速率为10–12MB/s。  </p>
 <h3 id="配置数据包"><a href="#配置数据包" class="headerlink" title="配置数据包"></a>配置数据包</h3><p><img src="https://github.com/sjl3110/pictures-for-hexo/blob/master/tcpip/%E5%8D%8F%E8%AE%AE3.png?raw=true" alt="avatar"></p>
 <ul>
 <li>在应用层编写实现类似底层包的组帧结构的协议，可以完成多个文件的收发；  </li>
