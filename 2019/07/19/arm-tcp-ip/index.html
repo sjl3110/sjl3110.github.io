@@ -108,7 +108,7 @@
 <meta property="og:image" content="https://github.com/sjl3110/pictures-for-hexo/blob/master/tcpip/%E5%8D%8F%E8%AE%AE1.png?raw=true">
 <meta property="og:image" content="https://github.com/sjl3110/pictures-for-hexo/blob/master/tcpip/%E5%8D%8F%E8%AE%AE2.png?raw=true">
 <meta property="og:image" content="https://github.com/sjl3110/pictures-for-hexo/blob/master/tcpip/%E5%8D%8F%E8%AE%AE3.png?raw=true">
-<meta property="og:updated_time" content="2019-07-21T07:54:31.911Z">
+<meta property="og:updated_time" content="2019-07-21T08:01:49.699Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于TCP&#x2F;IP网络socket通信">
 <meta name="twitter:description" content="网络传输文件现有的工具为ssh或者tcp指令，ssh中的scp指令如下： 1$ scp file name@IP:file_path  测试在百兆带宽的情况下，可以达到5~6MB/s。SSH的用户层工作原理，除去登陆密码以及公钥或者私钥的建立，底层的工作模式也需要考虑。">
@@ -390,7 +390,51 @@
 <li>网络设备不在/dev下创建设备文件；  </li>
 <li>底层采用中断的工作方式，并将中断传递给上层应用程序（这与UART类似）。 </li>
 </ul>
-<h3 id="内核配置"><a href="#内核配置" class="headerlink" title="内核配置"></a>内核配置</h3><p>—&gt; Networking support &gt; Networking options<br><img src="https://raw.githubusercontent.com/sjl3110/pictures-for-hexo/master/tcpip/kernel1.png" alt="avatar"><br>网络功能选择：在内核中配置EtherNet网口支持的功能。<br>| 内核选项                          | 含义                 |<br>| ——————————— | ——————– |<br>| Packet socket                     | 支持Socket通信       |<br>| Unix domain sockets               | Socket进程间通信     |<br>| TCP/IP networking                 | TCP/TP网络协议       |<br>| IP:multicasting                   | 组播，多目标发送     |<br>| IP:advanced router                | 高级路由，流量控制   |<br>| IP:kernel level autoconfiguration | 内核启动时自动获取IP |<br>| IP:DHCP suppo                     | DHCP 获取动态IP协议  |<br>| IP:BOOTP support                  | DHCP的前身           |<br>| IP:RARP support                   | 反向地址转换协议     |</p>
+<h3 id="内核配置"><a href="#内核配置" class="headerlink" title="内核配置"></a>内核配置</h3><p>—&gt; Networking support &gt; Networking options<br><img src="https://raw.githubusercontent.com/sjl3110/pictures-for-hexo/master/tcpip/kernel1.png" alt="avatar"><br>网络功能选择：在内核中配置EtherNet网口支持的功能。   </p>
+<table>
+<thead>
+<tr>
+<th>内核选项</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Packet socket</td>
+<td>支持Socket通信</td>
+</tr>
+<tr>
+<td>Unix domain sockets</td>
+<td>Socket进程间通信</td>
+</tr>
+<tr>
+<td>TCP/IP networking</td>
+<td>TCP/TP网络协议</td>
+</tr>
+<tr>
+<td>IP:multicasting</td>
+<td>组播，多目标发送</td>
+</tr>
+<tr>
+<td>IP:advanced router</td>
+<td>高级路由，流量控制</td>
+</tr>
+<tr>
+<td>IP:kernel level autoconfiguration</td>
+<td>内核启动时自动获取IP</td>
+</tr>
+<tr>
+<td>IP:DHCP suppo</td>
+<td>DHCP 获取动态IP协议</td>
+</tr>
+<tr>
+<td>IP:BOOTP support</td>
+<td>DHCP的前身</td>
+</tr>
+<tr>
+<td>IP:RARP support</td>
+<td>反向地址转换协议</td>
+</tr>
+</tbody></table>
 <p>— &gt; Device Drivers &gt; Network device support ─ Ethernet driver support<br><img src="https://raw.githubusercontent.com/sjl3110/pictures-for-hexo/master/tcpip/kernel2.png" alt="avatar"><br>配置芯片驱动：选择对应厂商的芯片，若没有需要写适配的驱动源码！  </p>
 <h3 id="设备树配置"><a href="#设备树配置" class="headerlink" title="设备树配置"></a>设备树配置</h3><p>直接引用dra7.dtsi设备树源文件中的以太网寄存器配置。  </p>
 <figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">&amp;davinci_mdio</span> &#123;</span><br><span class="line"><span class="symbol">    phy0:</span> ethernet-<span class="class">phy@1 </span>&#123;</span><br><span class="line">        reg = <span class="params">&lt;<span class="number">1</span>&gt;</span>;</span><br><span class="line">    &#125;;</span><br><span class="line"><span class="symbol">    phy1:</span> ethernet-<span class="class">phy@2 </span>&#123;</span><br><span class="line">        reg = <span class="params">&lt;<span class="number">2</span>&gt;</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
