@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="配置主机开发环境 1) 安装Ubuntu 16.04操作系统，双系统、虚拟机、单系统或windows子系统2) 安装TI SDK并配置交叉编译环境，并配置环境变量3) 安装SecureCRT或者minicom等串口软件，运行secureCRT或者minicom均需要超级权限sudo。4) 配置有线以太网地址（ipv4）   1234Address:192.168.111.101Netmask:25">
+<meta name="description" content="配置主机开发环境1) 安装Ubuntu 16.04操作系统，双系统、虚拟机、单系统或windows子系统2) 安装TI SDK并配置交叉编译环境，并配置环境变量3) 安装SecureCRT或者minicom等串口软件，运行secureCRT或者minicom均需要超级权限sudo。4) 配置有线以太网地址（ipv4）   1234Address:192.168.111.101Netmask:255">
 <meta name="keywords" content="linux,vscode">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用VScode和Cmake搭建嵌入式开发环境">
 <meta property="og:url" content="http://yoursite.com/2019/07/22/使用VScode和Cmake搭建嵌入式开发环境/index.html">
 <meta property="og:site_name" content="个人博客">
-<meta property="og:description" content="配置主机开发环境 1) 安装Ubuntu 16.04操作系统，双系统、虚拟机、单系统或windows子系统2) 安装TI SDK并配置交叉编译环境，并配置环境变量3) 安装SecureCRT或者minicom等串口软件，运行secureCRT或者minicom均需要超级权限sudo。4) 配置有线以太网地址（ipv4）   1234Address:192.168.111.101Netmask:25">
+<meta property="og:description" content="配置主机开发环境1) 安装Ubuntu 16.04操作系统，双系统、虚拟机、单系统或windows子系统2) 安装TI SDK并配置交叉编译环境，并配置环境变量3) 安装SecureCRT或者minicom等串口软件，运行secureCRT或者minicom均需要超级权限sudo。4) 配置有线以太网地址（ipv4）   1234Address:192.168.111.101Netmask:255">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-22T10:06:15.798Z">
+<meta property="og:updated_time" content="2019-07-22T10:08:08.800Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用VScode和Cmake搭建嵌入式开发环境">
-<meta name="twitter:description" content="配置主机开发环境 1) 安装Ubuntu 16.04操作系统，双系统、虚拟机、单系统或windows子系统2) 安装TI SDK并配置交叉编译环境，并配置环境变量3) 安装SecureCRT或者minicom等串口软件，运行secureCRT或者minicom均需要超级权限sudo。4) 配置有线以太网地址（ipv4）   1234Address:192.168.111.101Netmask:25">
+<meta name="twitter:description" content="配置主机开发环境1) 安装Ubuntu 16.04操作系统，双系统、虚拟机、单系统或windows子系统2) 安装TI SDK并配置交叉编译环境，并配置环境变量3) 安装SecureCRT或者minicom等串口软件，运行secureCRT或者minicom均需要超级权限sudo。4) 配置有线以太网地址（ipv4）   1234Address:192.168.111.101Netmask:255">
 
 
 
@@ -383,13 +383,11 @@
       
 
       
-        <h2 id="配置主机开发环境"><a href="#配置主机开发环境" class="headerlink" title="配置主机开发环境"></a>配置主机开发环境</h2><hr>
-<p>1) 安装Ubuntu 16.04操作系统，双系统、虚拟机、单系统或windows子系统<br>2) 安装TI SDK并配置交叉编译环境，并配置环境变量<br>3) 安装SecureCRT或者minicom等串口软件，运行secureCRT或者minicom均需要超级权限sudo。<br>4) 配置有线以太网地址（ipv4）  </p>
+        <h1 id="配置主机开发环境"><a href="#配置主机开发环境" class="headerlink" title="配置主机开发环境"></a>配置主机开发环境</h1><p>1) 安装Ubuntu 16.04操作系统，双系统、虚拟机、单系统或windows子系统<br>2) 安装TI SDK并配置交叉编译环境，并配置环境变量<br>3) 安装SecureCRT或者minicom等串口软件，运行secureCRT或者minicom均需要超级权限sudo。<br>4) 配置有线以太网地址（ipv4）  </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Address:192.168.111.101</span><br><span class="line">Netmask:255.255.255.0</span><br><span class="line">Gateway:192.168.111.1</span><br><span class="line">DNS:4.4.4.4</span><br></pre></td></tr></table></figure>
 
 <a id="more"></a>   
-<h2 id="配置项目工程"><a href="#配置项目工程" class="headerlink" title="配置项目工程"></a>配置项目工程</h2><hr>
-<p>Linux可以使用许多IDE，甚至可以脱离集成开发环境通过撰写Makefile管理项目文件。  </p>
+<h1 id="配置项目工程"><a href="#配置项目工程" class="headerlink" title="配置项目工程"></a>配置项目工程</h1><p>Linux可以使用许多IDE，甚至可以脱离集成开发环境通过撰写Makefile管理项目文件。  </p>
 <h3 id="Makefile"><a href="#Makefile" class="headerlink" title="Makefile"></a>Makefile</h3><p>假设工程文件中包括main.c、spi.c以及head.h，为了生成可执行文件，需要生成main.c和spi.c的链接文件main.o和spi.o，而main.o和spi.o也需要编译生成。这个过程就是makefile的执行过程。以下为Makefile的内容：  </p>
 <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">CC=gcc                  //gcc或者交叉编译gcc</span><br><span class="line">OBJ=main.o spi.o          //OBJ是生成的链接文件目标，作为变量方便</span><br><span class="line"><span class="section">main: <span class="variable">$(OBJ)</span>             //main可执行文件的生成需要OBJ中的两个文件</span></span><br><span class="line">	<span class="variable">$(CC)</span> -o <span class="variable">$@</span> <span class="variable">$^</span>      // -o表示生成可执行文件 <span class="variable">$@</span>表示目标文件（main）；<span class="variable">$^</span>表示所有依赖文件（OBJ）</span><br><span class="line"><span class="section">spi.o: spi.c head.h </span></span><br><span class="line">	<span class="variable">$(CC)</span> -c <span class="variable">$&lt;</span>         // <span class="variable">$&lt;</span> 表示第一个依赖文件（spi.c）</span><br><span class="line"><span class="section">main.o: main.c head.h</span></span><br><span class="line">	<span class="variable">$(CC)</span> -c <span class="variable">$&lt;</span></span><br><span class="line"><span class="section">clean:                  //make clean删除通过make指令生成的文件</span></span><br><span class="line">	rm main <span class="variable">$(OBJ)</span></span><br></pre></td></tr></table></figure>
 
@@ -405,8 +403,7 @@
 
 <h4 id="文件编译方式"><a href="#文件编译方式" class="headerlink" title="文件编译方式"></a>文件编译方式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ cd ($PRJ)/build  </span><br><span class="line">$ cmake ..  </span><br><span class="line">$ make</span><br><span class="line">$ cd ($PRJ)/bin</span><br></pre></td></tr></table></figure>
 
-<h2 id="配置开发板"><a href="#配置开发板" class="headerlink" title="配置开发板"></a>配置开发板</h2><hr>
-<h3 id="制作SD卡"><a href="#制作SD卡" class="headerlink" title="制作SD卡"></a>制作SD卡</h3><p>运行$tisdk/bin/creat-sdcard.sh，替换zImage以及设备树文件。  </p>
+<h1 id="配置开发板"><a href="#配置开发板" class="headerlink" title="配置开发板"></a>配置开发板</h1><h3 id="制作SD卡"><a href="#制作SD卡" class="headerlink" title="制作SD卡"></a>制作SD卡</h3><p>运行$tisdk/bin/creat-sdcard.sh，替换zImage以及设备树文件。  </p>
 <h3 id="远程登录与传递文件"><a href="#远程登录与传递文件" class="headerlink" title="远程登录与传递文件"></a>远程登录与传递文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ifconfig eth0 192.168.111.100</span><br><span class="line">$ ssh root@192.168.111.100</span><br><span class="line">$ scp file root@192.168.111.100:~</span><br></pre></td></tr></table></figure>
 
 <p>如果显示ssh无法登陆，原因是当前ip地址与开发板的上一次刷的系统配置的ip地址冲突，使用以下命令删除旧的配置：  </p>
@@ -622,7 +619,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置主机开发环境"><span class="nav-number">1.</span> <span class="nav-text">配置主机开发环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置项目工程"><span class="nav-number">2.</span> <span class="nav-text">配置项目工程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Makefile"><span class="nav-number">2.1.</span> <span class="nav-text">Makefile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VScode-Cmake"><span class="nav-number">2.2.</span> <span class="nav-text">VScode + Cmake</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CMakeLists"><span class="nav-number">2.2.1.</span> <span class="nav-text">CMakeLists</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件编译方式"><span class="nav-number">2.2.2.</span> <span class="nav-text">文件编译方式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置开发板"><span class="nav-number">3.</span> <span class="nav-text">配置开发板</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#制作SD卡"><span class="nav-number">3.1.</span> <span class="nav-text">制作SD卡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#远程登录与传递文件"><span class="nav-number">3.2.</span> <span class="nav-text">远程登录与传递文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#固定目标板的IP地址"><span class="nav-number">3.3.</span> <span class="nav-text">固定目标板的IP地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#串口收发文件"><span class="nav-number">3.4.</span> <span class="nav-text">串口收发文件</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#配置主机开发环境"><span class="nav-number">1.</span> <span class="nav-text">配置主机开发环境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置项目工程"><span class="nav-number">2.</span> <span class="nav-text">配置项目工程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Makefile"><span class="nav-number">2.0.1.</span> <span class="nav-text">Makefile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VScode-Cmake"><span class="nav-number">2.0.2.</span> <span class="nav-text">VScode + Cmake</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CMakeLists"><span class="nav-number">2.0.2.1.</span> <span class="nav-text">CMakeLists</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件编译方式"><span class="nav-number">2.0.2.2.</span> <span class="nav-text">文件编译方式</span></a></li></ol></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#配置开发板"><span class="nav-number">3.</span> <span class="nav-text">配置开发板</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#制作SD卡"><span class="nav-number">3.0.1.</span> <span class="nav-text">制作SD卡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#远程登录与传递文件"><span class="nav-number">3.0.2.</span> <span class="nav-text">远程登录与传递文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#固定目标板的IP地址"><span class="nav-number">3.0.3.</span> <span class="nav-text">固定目标板的IP地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#串口收发文件"><span class="nav-number">3.0.4.</span> <span class="nav-text">串口收发文件</span></a></li></ol></li></div>
             
 
           </div>
