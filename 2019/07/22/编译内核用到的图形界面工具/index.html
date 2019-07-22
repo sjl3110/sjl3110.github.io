@@ -104,7 +104,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://github.com/sjl3110/pictures-for-hexo/blob/master/xconfig.png?raw=true">
 <meta property="og:image" content="https://github.com/sjl3110/pictures-for-hexo/blob/master/gconfig.png?raw=true">
-<meta property="og:updated_time" content="2019-07-22T10:13:40.883Z">
+<meta property="og:updated_time" content="2019-07-22T10:16:37.439Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="编译内核用到的图形界面工具">
 <meta name="twitter:description" content="menuconfig运行在没有桌面环境的主机上，可以查看选项功能，不支持搜索，需要安装终端的图形包。 12$ make menuconfig  $ sudo apt-get install libncurses5-dev">
@@ -393,11 +393,11 @@
 <h2 id="xconfig"><a href="#xconfig" class="headerlink" title="xconfig"></a>xconfig</h2><p>可以查看选项功能，支持搜索功能，需要安装QT依赖包。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ make xconfig</span><br><span class="line">$ CHECK   qt</span><br><span class="line">$ Could not find Qt via pkg-config.</span><br><span class="line">$ Please install either Qt 4.8 or 5.x. and make sure it&apos;s in PKG_CONFIG_PATH</span><br><span class="line">$ apt-get install qt4-dev-tools</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://github.com/sjl3110/pictures-for-hexo/blob/master/xconfig.png?raw=true" alt="avatar"></p>
+<p>安装后运行如下：<br><img src="https://github.com/sjl3110/pictures-for-hexo/blob/master/xconfig.png?raw=true" alt="avatar"></p>
 <h2 id="gconfig"><a href="#gconfig" class="headerlink" title="gconfig"></a>gconfig</h2><p>可以查看选项功能，需要安装gtk的包。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ make gconfig</span><br><span class="line"></span><br><span class="line">$ Unable to find the GTK+ installation. Please make sure that</span><br><span class="line">$ the GTK+ 2.0 development package is correctly installed...</span><br><span class="line">$ You need gtk+-2.0, glib-2.0 and libglade-2.0.</span><br><span class="line">$  sudo apt-get install libgtk2.0-dev libglib2.0-dev libglade2-dev</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://github.com/sjl3110/pictures-for-hexo/blob/master/gconfig.png?raw=true" alt="avatar"></p>
+<p>安装后运行如下：<br><img src="https://github.com/sjl3110/pictures-for-hexo/blob/master/gconfig.png?raw=true" alt="avatar"></p>
 
       
     </div>
