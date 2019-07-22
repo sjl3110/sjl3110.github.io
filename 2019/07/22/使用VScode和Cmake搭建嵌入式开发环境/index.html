@@ -102,7 +102,7 @@
 <meta property="og:site_name" content="个人博客">
 <meta property="og:description" content="配置主机开发环境1) 安装Ubuntu 16.04操作系统，双系统、虚拟机、单系统或windows子系统2) 安装TI SDK并配置交叉编译环境，并配置环境变量3) 安装SecureCRT或者minicom等串口软件，运行secureCRT或者minicom均需要超级权限sudo。4) 配置有线以太网地址（ipv4）   1234Address:192.168.111.101Netmask:255">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-22T10:11:47.554Z">
+<meta property="og:updated_time" content="2019-07-22T10:18:17.721Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用VScode和Cmake搭建嵌入式开发环境">
 <meta name="twitter:description" content="配置主机开发环境1) 安装Ubuntu 16.04操作系统，双系统、虚拟机、单系统或windows子系统2) 安装TI SDK并配置交叉编译环境，并配置环境变量3) 安装SecureCRT或者minicom等串口软件，运行secureCRT或者minicom均需要超级权限sudo。4) 配置有线以太网地址（ipv4）   1234Address:192.168.111.101Netmask:255">
@@ -412,8 +412,8 @@
 <h2 id="固定目标板的IP地址"><a href="#固定目标板的IP地址" class="headerlink" title="固定目标板的IP地址"></a>固定目标板的IP地址</h2><p>修改/etc/systemd/network/目录下的10-eth.network文件：  </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[Match]</span><br><span class="line">Name=eth0</span><br><span class="line">KernelCommandLine=!root=/dev/nfs</span><br><span class="line"></span><br><span class="line">[Network]</span><br><span class="line">Address=192.168.111.100/24</span><br><span class="line">Gateway=192.168.111.1</span><br></pre></td></tr></table></figure>
 
-<h2 id="串口收发文件"><a href="#串口收发文件" class="headerlink" title="串口收发文件"></a>串口收发文件</h2><p>目标板没有安装ssh时，通过TCP/IP无法传输文件，在文件容量较小的情况下可以使用lrzsz工具。Lrzsz工具解压后使用./configure命令配置makefile，在主机中需要将bin、src以及根目录下的makefile中的CC均改为交叉编译链，再在主目录中make，最后将src/lrz和src/lsz拷贝至目标板的/bin文件夹下。<br>1) 主机向从机发送文件：从机运行lrz，主机选择通过zModem发送，（minicom中通过Ctrl+A-Z-S进入）文件将保存在从机当前目录下；<br>2) 从机向主机发送文件：主机运行lrz（使用主机的gcc编译），从机运行lsz 文件。</p>
-
+<h2 id="串口收发文件"><a href="#串口收发文件" class="headerlink" title="串口收发文件"></a>串口收发文件</h2><p>目标板没有安装ssh时，通过TCP/IP无法传输文件，在文件容量较小的情况下可以使用lrzsz工具。Lrzsz工具解压后使用./configure命令配置makefile，在主机中需要将bin、src以及根目录下的makefile中的CC均改为交叉编译链，再在主目录中make，最后将src/lrz和src/lsz拷贝至目标板的/bin文件夹下。<br>1) 主机向从机发送文件：从机运行lrz，主机选择通过zModem发送，（minicom中通过Ctrl+A-Z-S进入）文件将保存在从机当前目录下；<br>2) 从机向主机发送文件：主机运行lrz（使用主机的gcc编译），从机运行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ lsz file</span><br></pre></td></tr></table></figure>
       
     </div>
     
