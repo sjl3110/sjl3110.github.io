@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="arm,linux,">
 
 
 
@@ -94,17 +94,18 @@
 
 
 
-<meta name="description" content="联系方式电话：15895898063地址：浙江杭州邮箱：jianliang_shen@zju.edu.cn仓库：https://github.com/sjl3110 教育背景本科：南京理工大学硕士：浙江大学 专业技能嵌入式硬件电路设计ARM Linux系统开发操作系统应用软件开发">
-<meta property="og:type" content="website">
-<meta property="og:title" content="关于">
-<meta property="og:url" content="http://yoursite.com/about/index.html">
+<meta name="description" content="使用开发板版本：TI AM5728 EVM使用SDK版本：ti-processor-sdk-linux-rt-am57xx-evm-05.02.00.10官方软件支持：RT-Linux-software官方软件使用说明(更新至6.00.00.07,2019年7月)：TISDKTI中文社区：e2echina.ti创龙论坛：51ele">
+<meta name="keywords" content="arm,linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ARM Linux开发命令">
+<meta property="og:url" content="http://yoursite.com/2019/07/22/ARM Linux开发命令/index.html">
 <meta property="og:site_name" content="个人博客">
-<meta property="og:description" content="联系方式电话：15895898063地址：浙江杭州邮箱：jianliang_shen@zju.edu.cn仓库：https://github.com/sjl3110 教育背景本科：南京理工大学硕士：浙江大学 专业技能嵌入式硬件电路设计ARM Linux系统开发操作系统应用软件开发">
+<meta property="og:description" content="使用开发板版本：TI AM5728 EVM使用SDK版本：ti-processor-sdk-linux-rt-am57xx-evm-05.02.00.10官方软件支持：RT-Linux-software官方软件使用说明(更新至6.00.00.07,2019年7月)：TISDKTI中文社区：e2echina.ti创龙论坛：51ele">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-20T08:04:14.618Z">
+<meta property="og:updated_time" content="2019-07-22T10:00:27.452Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于">
-<meta name="twitter:description" content="联系方式电话：15895898063地址：浙江杭州邮箱：jianliang_shen@zju.edu.cn仓库：https://github.com/sjl3110 教育背景本科：南京理工大学硕士：浙江大学 专业技能嵌入式硬件电路设计ARM Linux系统开发操作系统应用软件开发">
+<meta name="twitter:title" content="ARM Linux开发命令">
+<meta name="twitter:description" content="使用开发板版本：TI AM5728 EVM使用SDK版本：ti-processor-sdk-linux-rt-am57xx-evm-05.02.00.10官方软件支持：RT-Linux-software官方软件使用说明(更新至6.00.00.07,2019年7月)：TISDKTI中文社区：e2echina.ti创龙论坛：51ele">
 
 
 
@@ -133,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/about/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/22/ARM Linux开发命令/">
 
 
 
 
 
-  <title>关于 | 个人博客</title>
+  <title>ARM Linux开发命令 | 个人博客</title>
   
 
 
@@ -270,36 +271,193 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/22/ARM Linux开发命令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="沈建谅">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://b-ssl.duitang.com/uploads/item/201512/17/20151217132944_UNTM2.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人博客">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">关于</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <h3 id="联系方式"><a href="#联系方式" class="headerlink" title="联系方式"></a>联系方式</h3><p>电话：<code>15895898063</code><br>地址：浙江杭州<br>邮箱：<code>jianliang_shen@zju.edu.cn</code><br>仓库：<a href="https://github.com/sjl3110" target="_blank" rel="noopener">https://github.com/sjl3110</a></p>
-<h3 id="教育背景"><a href="#教育背景" class="headerlink" title="教育背景"></a>教育背景</h3><p>本科：南京理工大学<br>硕士：浙江大学</p>
-<h3 id="专业技能"><a href="#专业技能" class="headerlink" title="专业技能"></a>专业技能</h3><p>嵌入式硬件电路设计<br>ARM Linux系统开发<br>操作系统应用软件开发  </p>
-
+          <h1 class="post-title" itemprop="name headline">ARM Linux开发命令</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-22T17:45:47+08:00">
+                2019-07-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/嵌入式/" itemprop="url" rel="index">
+                    <span itemprop="name">嵌入式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <p>使用开发板版本：TI AM5728 EVM<br>使用SDK版本：ti-processor-sdk-linux-rt-am57xx-evm-05.02.00.10<br>官方软件支持：<a href="http://software-dl.ti.com/processor-sdk-linux-rt/esd/AM57X/latest/index_FDS.html" target="_blank" rel="noopener">RT-Linux-software</a><br>官方软件使用说明(更新至6.00.00.07,2019年7月)：<a href="http://software-dl.ti.com/processor-sdk-linux/esd/docs/06_00_00_07/linux/index.html" target="_blank" rel="noopener">TISDK</a><br>TI中文社区：<a href="https://e2echina.ti.com/" target="_blank" rel="noopener">e2echina.ti</a><br>创龙论坛：<a href="http://www.51ele.net/" target="_blank" rel="noopener">51ele</a>  </p>
+<a id="more"></a>  
+<h2 id="内核编译"><a href="#内核编译" class="headerlink" title="内核编译"></a>内核编译</h2><h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- tisdk_am57xx-evm-rt_defconfig </span><br><span class="line">make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- menuconfig</span><br><span class="line">make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- zImage -j16</span><br><span class="line">make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- distclean</span><br></pre></td></tr></table></figure>
+
+<p>生成的zImage替换/rootfs/boot下的zImage文件。</p>
+<h3 id="内核源码"><a href="#内核源码" class="headerlink" title="内核源码"></a>内核源码</h3><h3 id="内核功能裁剪思路"><a href="#内核功能裁剪思路" class="headerlink" title="内核功能裁剪思路"></a>内核功能裁剪思路</h3><h2 id="设备树改写"><a href="#设备树改写" class="headerlink" title="设备树改写"></a>设备树改写</h2><h3 id="命令-1"><a href="#命令-1" class="headerlink" title="命令"></a>命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- am57xx-evm-reva3.dtb -j8</span><br></pre></td></tr></table></figure>
+
+<p>源码位置：$tisdk/arch/arm/boot/dts/am57xx-beagle-x15-common.dtsi等。生成的am57xx-evm-reva3.dtb替换/rootfs/boot下的设备树文件。  </p>
+<h2 id="编译模块"><a href="#编译模块" class="headerlink" title="编译模块"></a>编译模块</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- modules -j16</span><br><span class="line">sudo make ARCH=arm INSTALL_MOD_PATH=../rootfs modules_install</span><br></pre></td></tr></table></figure>
+
+<p>模块的版本要与内核一致，所以要编译模块。加载模块指令：insmod。卸载模块指令。</p>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/arm/" rel="tag"># arm</a>
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/21/初中往事-初二/" rel="next" title="初中往事--初二篇">
+                <i class="fa fa-chevron-left"></i> 初中往事--初二篇
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/22/使用VScode和Cmake搭建嵌入式开发环境/" rel="prev" title="使用VScode和Cmake搭建嵌入式开发环境">
+                使用VScode和Cmake搭建嵌入式开发环境 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -442,7 +600,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#联系方式"><span class="nav-number">1.</span> <span class="nav-text">联系方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#教育背景"><span class="nav-number">2.</span> <span class="nav-text">教育背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#专业技能"><span class="nav-number">3.</span> <span class="nav-text">专业技能</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#内核编译"><span class="nav-number">1.</span> <span class="nav-text">内核编译</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#命令"><span class="nav-number">1.1.</span> <span class="nav-text">命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内核源码"><span class="nav-number">1.2.</span> <span class="nav-text">内核源码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内核功能裁剪思路"><span class="nav-number">1.3.</span> <span class="nav-text">内核功能裁剪思路</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设备树改写"><span class="nav-number">2.</span> <span class="nav-text">设备树改写</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#命令-1"><span class="nav-number">2.1.</span> <span class="nav-text">命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译模块"><span class="nav-number">3.</span> <span class="nav-text">编译模块</span></a></li></ol></div>
             
 
           </div>
@@ -568,10 +726,10 @@
 
 
   
-    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
-  
+
 
   
 
