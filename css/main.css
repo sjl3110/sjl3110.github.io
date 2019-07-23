@@ -1808,7 +1808,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #d4361f;
+  background: #bd6e85;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2990,6 +2990,14 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: 50% 50%;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  -moz-background-size: cover;
+  -ms-background-size: cover;
+/*这是设置底部文字, 看个人需要修改*/
+}
+body #footer > div > div {
+  color: #eee;
 }
 .main-inner {
   background: #fff;
