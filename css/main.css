@@ -1808,7 +1808,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #32f26c;
+  background: #d4361f;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2983,4 +2983,18 @@ pre .javascript .function {
 }
 .footer {
   bottom: auto;
+}
+body {
+  background: url("https://source.unsplash.com/random/1980x1080?wallpapers");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 50% 50%;
+}
+.main-inner {
+  background: #fff;
+  opacity: 0.9;
+}
+.header-inner {
+  opacity: 0.9;
 }
