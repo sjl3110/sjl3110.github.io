@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
 
 
-  <meta name="keywords" content="linux,arm,">
+  <meta name="keywords" content="linux,kernel,">
 
 
 
@@ -94,20 +94,18 @@
 
 
 
-<meta name="description" content="Win10可以支持Ubuntu子系统，再也不需要虚拟机！   安装系统系统要求：最新版win10，打开应用商店安装Ubuntu应用软件，需要系统开启虚拟机功能以及LINUX子系统功能。安装完成后如下：">
-<meta name="keywords" content="linux,arm">
+<meta name="description" content="Boot options启动设置">
+<meta name="keywords" content="linux,kernel">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Windows系统配置Linux子系统开发ARM">
-<meta property="og:url" content="http://yoursite.com/2019/07/19/Windows系统配置Linux子系统开发ARM/index.html">
+<meta property="og:title" content="linux内核配置--Boot options">
+<meta property="og:url" content="http://yoursite.com/2019/07/24/linux内核配置-Boot-options/index.html">
 <meta property="og:site_name" content="个人博客">
-<meta property="og:description" content="Win10可以支持Ubuntu子系统，再也不需要虚拟机！   安装系统系统要求：最新版win10，打开应用商店安装Ubuntu应用软件，需要系统开启虚拟机功能以及LINUX子系统功能。安装完成后如下：">
+<meta property="og:description" content="Boot options启动设置">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://github.com/sjl3110/pictures-for-hexo/blob/master/wsl_ubuntu.JPG?raw=true">
-<meta property="og:updated_time" content="2019-07-23T07:14:34.386Z">
+<meta property="og:updated_time" content="2019-07-25T11:46:01.418Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Windows系统配置Linux子系统开发ARM">
-<meta name="twitter:description" content="Win10可以支持Ubuntu子系统，再也不需要虚拟机！   安装系统系统要求：最新版win10，打开应用商店安装Ubuntu应用软件，需要系统开启虚拟机功能以及LINUX子系统功能。安装完成后如下：">
-<meta name="twitter:image" content="https://github.com/sjl3110/pictures-for-hexo/blob/master/wsl_ubuntu.JPG?raw=true">
+<meta name="twitter:title" content="linux内核配置--Boot options">
+<meta name="twitter:description" content="Boot options启动设置">
 
 
 
@@ -136,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/07/19/Windows系统配置Linux子系统开发ARM/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/24/linux内核配置-Boot-options/">
 
 
 
 
 
-  <title>Windows系统配置Linux子系统开发ARM | 个人博客</title>
+  <title>linux内核配置--Boot options | 个人博客</title>
   
 
 
@@ -285,7 +283,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/19/Windows系统配置Linux子系统开发ARM/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/24/linux内核配置-Boot-options/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="沈建谅">
@@ -302,7 +300,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Windows系统配置Linux子系统开发ARM</h1>
+          <h1 class="post-title" itemprop="name headline">linux内核配置--Boot options</h1>
         
 
         <div class="post-meta">
@@ -314,8 +312,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-19T19:42:09+08:00">
-                2019-07-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-24T20:21:19+08:00">
+                2019-07-24
               </time>
             
 
@@ -374,25 +372,23 @@
       
 
       
-        <p>Win10可以支持Ubuntu子系统，再也不需要虚拟机！  </p>
-<h2 id="安装系统"><a href="#安装系统" class="headerlink" title="安装系统"></a>安装系统</h2><p>系统要求：最新版win10，打开应用商店安装Ubuntu应用软件，需要系统开启虚拟机功能以及LINUX子系统功能。<br>安装完成后如下：<br><img src="https://github.com/sjl3110/pictures-for-hexo/blob/master/wsl_ubuntu.JPG?raw=true" alt="avatar"></p>
+        <p>Boot options<br>启动设置  </p>
 <a id="more"></a>
-<h3 id="配置-Ubuntu"><a href="#配置-Ubuntu" class="headerlink" title="配置 Ubuntu"></a>配置 Ubuntu</h3><p>换源等操作。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /etc/apt</span><br><span class="line">$ sudo cp sources.list sources.list.bak</span><br><span class="line">$ sudo vi sources.list</span><br><span class="line">$ add </span><br><span class="line">  deb http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse</span><br><span class="line">  deb http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse</span><br><span class="line">  deb http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse</span><br><span class="line">  deb http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse</span><br><span class="line">  deb http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse</span><br><span class="line">  deb-src http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse</span><br><span class="line">  deb-src http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse</span><br><span class="line">  deb-src http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse</span><br><span class="line">  deb-src http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse</span><br><span class="line">  deb-src http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse</span><br><span class="line">$ sudo apt-get update</span><br><span class="line">$ sudo apt-get upgrade</span><br></pre></td></tr></table></figure>
-
-<h3 id="安装-gcc-交叉编译工具"><a href="#安装-gcc-交叉编译工具" class="headerlink" title="安装 gcc 交叉编译工具"></a>安装 gcc 交叉编译工具</h3><h4 id="命名规则"><a href="#命名规则" class="headerlink" title="命名规则"></a>命名规则</h4><p>交叉编译工具链的命名规则为：<code>arch [-vendor] [-os] [-(gnu)eabi]</code></p>
-<ul>
-<li>arch - 体系架构，如ARM，MIPS</li>
-<li>vendor - 工具链提供商</li>
-<li>os - 目标操作系统</li>
-<li>eabi - 嵌入式应用二进制接口（Embedded ApplicationBinary Interface）  </li>
-</ul>
-<p>根据对操作系统的支持与否，ARM  GCC可分为支持和不支持操作系统，如<br>arm-none-eabi：这个是没有操作系统的，自然不可能支持那些跟操作系统关系密切的函数，比如fork()。使用的是newlib这个专用于嵌入式系统的C库。<br>arm-none-linux-eabi：用于Linux的，使用Glibc。<br>比如:<br>arm-none-eabi-gcc：用于编译 ARM 架构的裸机系统（包括 ARM Linux 的 boot、kernel，不适用编译 Linux 应用 Application）。<br>arm-none-linux-gnueabi-gcc：主要用于基于 ARM 架构的 Linux 系统，可用于编译 ARM 架构的 u-boot、Linux内核、Linux应用等。<br>arm-eabi-gcc：Android ARM 编译器。<br>armcc ARM：公司推出的编译工具，功能和 arm-none-eabi 类似。<br>arm-none-uclinuxeabi-gcc：用于uCLinux，使用Glibc。<br>arm-none-symbianelf-gcc：用于symbian。<br>下载链接: <a href="https://releases.linaro.org/components/toolchain/binaries/7.2-2017.11/arm-linux-gnueabihf/" target="_blank" rel="noopener">gcc-toolchain</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ tar xvf gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabihf.tar.xz -C /usr/<span class="built_in">local</span>/arm_gcc</span><br><span class="line">$ sudo vim /etc/profile</span><br><span class="line">$ <span class="built_in">export</span> PATH=/usr/<span class="built_in">local</span>/arm_gcc/bin/:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="安装-Minicom"><a href="#安装-Minicom" class="headerlink" title="安装 Minicom"></a>安装 Minicom</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apr-get install minicom</span><br><span class="line">$ sudo minicom -D /dev/ttySx</span><br></pre></td></tr></table></figure>
-
-<h3 id="编译代码"><a href="#编译代码" class="headerlink" title="编译代码"></a>编译代码</h3><p>需要在CMakelists.txt中set gcc和g++路径，其余与Linux正常。</p>
+<h1 id="Y-Flattened-Device-Tree-support"><a href="#Y-Flattened-Device-Tree-support" class="headerlink" title="-Y- Flattened Device Tree support"></a>-Y- Flattened Device Tree support</h1><p>支持设备树。<br>Include support for flattened device tree machine descriptions.  </p>
+<h2 id="Y-Support-for-the-traditional-ATAGS-boot-data-passing"><a href="#Y-Support-for-the-traditional-ATAGS-boot-data-passing" class="headerlink" title="[Y] Support for the traditional ATAGS boot data passing"></a>[Y] Support for the traditional ATAGS boot data passing</h2><p>支持传统的ATAGS启动数据传递。除非仅依赖设备树，否则建议选择。<br>ATAGS是传统的linux内核接收参数的方式，另一种是DTB。设备启动时，BOOT向内核传递三个参数，其中R0寄存器内容为一个“0”，R1是机器码（与内核匹配），R3为ATAGS或者DTB传递的地址。<br>This is the traditional way of passing data to the kernel at boot time. If you are solely relying on the flattened device tree (or the ARM_ATAG_DTB_COMPAT option) then you may unselect this option to remove ATAGS support from your kernel binary. If unsure, leave this to y.  </p>
+<h3 id="N-Provide-old-way-to-pass-kernel-parameters"><a href="#N-Provide-old-way-to-pass-kernel-parameters" class="headerlink" title="[N] Provide old way to pass kernel parameters"></a>[N] Provide old way to pass kernel parameters</h3><p>提供传递内核参数的旧方法。<br>This was deprecated in 2001 and announced to live on for 5 years. Some old boot loaders still use this way.  </p>
+<h1 id="0x0-Compressed-ROM-boot-loader-base-address"><a href="#0x0-Compressed-ROM-boot-loader-base-address" class="headerlink" title="(0x0) Compressed ROM boot loader base address"></a>(0x0) Compressed ROM boot loader base address</h1><p>default “0”<br>存放基地址，对zImage压缩镜像启动很重要。<br>The physical address at which the ROM-able zImage is to be placed in the target.  Platforms which normally make use of ROM-able zImage formats normally set this to a suitable value in their defconfig file.<br>If ZBOOT_ROM is not enabled, this has no effect.  </p>
+<h1 id="0x0-Compressed-ROM-boot-loader-BSS-address"><a href="#0x0-Compressed-ROM-boot-loader-BSS-address" class="headerlink" title="(0x0) Compressed ROM boot loader BSS address"></a>(0x0) Compressed ROM boot loader BSS address</h1><p>default “0”<br>引导的BSS地址。<br>The base address of an area of read/write memory in the target for the ROM-able zImage which must be available while the decompressor is running. It must be large enough to hold the entire decompressed kernel plus an additional 128 KiB.Platforms which normally make use of ROM-able zImage formats normally set this to a suitable value in their defconfig file.<br>If ZBOOT_ROM is not enabled, this has no effect.</p>
+<h1 id="Y-Use-appended-device-tree-blob-to-zImage-EXPERIMENTAL"><a href="#Y-Use-appended-device-tree-blob-to-zImage-EXPERIMENTAL" class="headerlink" title="[Y] Use appended device tree blob to zImage (EXPERIMENTAL)"></a>[Y] Use appended device tree blob to zImage (EXPERIMENTAL)</h1><p>将附加的设备树blob用于zImage（实验）。<br>With this option, the boot code will look for a device tree binary (DTB) appended to zImage (e.g. cat zImage <filename>.dtb &gt; zImage_w_dtb).This is meant as a backward compatibility convenience for those systems with a bootloader that can’t be upgraded to accommodate the documented boot protocol using a device tree. Beware that there is very little in terms of protection against this option being confused by leftover garbage in memory that might look like a DTB header after a reboot if no actual DTB is appended to Image.  Do not leave this option active in a production kernel if you don’t intend to always append a DTB.<br>Proper passing of the location into r2 of a bootloader provided DTB is always preferable to this option.  </filename></p>
+<h2 id="Y-Supplement-the-appended-DTB-with-traditional-ATAG-information"><a href="#Y-Supplement-the-appended-DTB-with-traditional-ATAG-information" class="headerlink" title="[Y] Supplement the appended DTB with traditional ATAG information"></a>[Y] Supplement the appended DTB with traditional ATAG information</h2><p>用传统的ATAG信息补充附加的DTB<br>Some old bootloaders can’t be updated to a DTB capable one, yet they provide ATAGs with memory configuration, the ramdisk address, the kernel cmdline string, etc.Such information is dynamically provided by the bootloader and can’t always be stored in a static DTB. To allow a device tree enabled kernel to be used with such bootloaders, this option allows zImage to extract the information from the ATAG list and store it at run time into the appended DTB.</p>
+<h1 id="C-Kernel-command-line-type"><a href="#C-Kernel-command-line-type" class="headerlink" title="[C] Kernel command line type"></a>[C] Kernel command line type</h1><p>内核命令行类型。  </p>
+<h2 id="X-Use-bootloader-kernel-arguments-if-available"><a href="#X-Use-bootloader-kernel-arguments-if-available" class="headerlink" title="[X] Use bootloader kernel arguments if available"></a>[X] Use bootloader kernel arguments if available</h2><p>优先使用bootloader（uboot）参数，如果没有就使用DTB ARGS。<br>因为通过uboot修改环境变量比修改内核容易得多，因此使用bootloader更方便。造成的问题是内核配置的变量可能被覆盖。<br>Uses the command-line options passed by the boot loader instead of the device tree bootargs property. If the boot loader doesn’t provide any, the device tree bootargs property will be used.  </p>
+<h2 id="N-Extend-with-bootloader-kernel-arguments"><a href="#N-Extend-with-bootloader-kernel-arguments" class="headerlink" title="[N] Extend with bootloader kernel arguments"></a>[N] Extend with bootloader kernel arguments</h2><p>使用DTB ARGS，bootloader提供的追加在其之后。<br>The command-line arguments provided by the boot loader will be appended to the the device tree bootargs property.  </p>
+<h1 id="N-Default-kernel-command-string"><a href="#N-Default-kernel-command-string" class="headerlink" title="(N) Default kernel command string"></a>(N) Default kernel command string</h1><p>默认的内核命令行字符串。<br>On some architectures (EBSA110 and CATS), there is currently no way for the boot loader to pass arguments to the kernel. For these architectures, you should supply some command-line options at build time by entering them here. As a minimum, you should specify the memory size and the root device (e.g., mem=64M root=/dev/nfs).  </p>
+<h1 id="N-Build-kdump-crash-kernel-EXPERIMENTAL"><a href="#N-Build-kdump-crash-kernel-EXPERIMENTAL" class="headerlink" title="[N] Build kdump crash kernel (EXPERIMENTAL)"></a>[N] Build kdump crash kernel (EXPERIMENTAL)</h1><p>支持core dump的内核调试工具。Kdump是系统崩溃时，通过kexec工具转储内存（运行在一个主内核不占用的额外的内存区域）。<br>Generate crash dump after being started by kexec. This should be normally only set in special crash dump kernels which are loaded in the main kernel with kexec-tools into a specially reserved region and then later executed after a crash by kdump/kexec. The crash dump kernel must be compiled to a memory address not used by the main kernel. For more details see Documentation/kdump/kdump.txt</p>
+<h1 id="Y-Auto-calculation-of-the-decompressed-kernel-image-address"><a href="#Y-Auto-calculation-of-the-decompressed-kernel-image-address" class="headerlink" title="-Y- Auto calculation of the decompressed kernel image address"></a>-Y- Auto calculation of the decompressed kernel image address</h1><p>自动计算解压缩的内核映像地址。如果选择，开机后内核地址为0xf8000000，即在前128MB的位置（0x8000000=128<em>1024</em>1024）。<br>ZRELADDR is the physical address where the decompressed kernel image will be placed. If AUTO_ZRELADDR is selected, the address will be determined at run-time by masking the current IP with 0xf8000000. This assumes the zImage being placed in the first 128MB from start of memory.</p>
+<h1 id="Y-UEFI-runtime-support"><a href="#Y-UEFI-runtime-support" class="headerlink" title="[Y] UEFI runtime support"></a>[Y] UEFI runtime support</h1><p>此选项提供对UEFI固件提供的运行时服务的支持（例如非易失性变量，实时时钟和平台重置）。还提供UEFI存根以允许内核作为EFI应用程序引导。这仅适用于可能在具有UEFI固件的系统上运行的内核。<br>This option provides support for runtime services provided by UEFI firmware (such as non-volatile variables, realtime clock, and platform reset). A UEFI stub is also provided to allow the kernel to be booted as an EFI application. This is only useful for kernels that may run on systems that have UEFI firmware.</p>
+<h2 id="Y-Enable-support-for-SMBIOS-DMI-tables"><a href="#Y-Enable-support-for-SMBIOS-DMI-tables" class="headerlink" title="[Y] Enable support for SMBIOS (DMI) tables"></a>[Y] Enable support for SMBIOS (DMI) tables</h2><p>This enables SMBIOS/DMI feature for systems. This option is only useful on systems that have UEFI firmware. However, even with this option, the resultant kernel should continue to boot on existing non-UEFI platforms.<br>NOTE: This does <em>NOT</em> enable or encourage the use of DMI quirks, i.e., the the practice of identifying the platform via DMI to decide whether certain workarounds for buggy hardware and/or firmware need to be enabled. This would require the DMI subsystem to be enabled much earlier than we do on ARM, which is non-trivial.</p>
 
       
     </div>
@@ -412,7 +408,7 @@
           
             <a href="/tags/linux/" rel="tag"># linux</a>
           
-            <a href="/tags/arm/" rel="tag"># arm</a>
+            <a href="/tags/kernel/" rel="tag"># kernel</a>
           
         </div>
       
@@ -435,15 +431,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2019/07/22/编译内核用到的图形界面工具/" rel="next" title="编译内核用到的图形界面工具">
+                <i class="fa fa-chevron-left"></i> 编译内核用到的图形界面工具
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/19/基于TCP-IP网络socket通信/" rel="prev" title="基于TCP/IP网络socket通信">
-                基于TCP/IP网络socket通信 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -605,7 +601,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装系统"><span class="nav-number">1.</span> <span class="nav-text">安装系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置-Ubuntu"><span class="nav-number">1.1.</span> <span class="nav-text">配置 Ubuntu</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-gcc-交叉编译工具"><span class="nav-number">1.2.</span> <span class="nav-text">安装 gcc 交叉编译工具</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#命名规则"><span class="nav-number">1.2.1.</span> <span class="nav-text">命名规则</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-Minicom"><span class="nav-number">1.3.</span> <span class="nav-text">安装 Minicom</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译代码"><span class="nav-number">1.4.</span> <span class="nav-text">编译代码</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Y-Flattened-Device-Tree-support"><span class="nav-number">1.</span> <span class="nav-text">-Y- Flattened Device Tree support</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Y-Support-for-the-traditional-ATAGS-boot-data-passing"><span class="nav-number">1.1.</span> <span class="nav-text">[Y] Support for the traditional ATAGS boot data passing</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#N-Provide-old-way-to-pass-kernel-parameters"><span class="nav-number">1.1.1.</span> <span class="nav-text">[N] Provide old way to pass kernel parameters</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x0-Compressed-ROM-boot-loader-base-address"><span class="nav-number">2.</span> <span class="nav-text">(0x0) Compressed ROM boot loader base address</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x0-Compressed-ROM-boot-loader-BSS-address"><span class="nav-number">3.</span> <span class="nav-text">(0x0) Compressed ROM boot loader BSS address</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Y-Use-appended-device-tree-blob-to-zImage-EXPERIMENTAL"><span class="nav-number">4.</span> <span class="nav-text">[Y] Use appended device tree blob to zImage (EXPERIMENTAL)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Y-Supplement-the-appended-DTB-with-traditional-ATAG-information"><span class="nav-number">4.1.</span> <span class="nav-text">[Y] Supplement the appended DTB with traditional ATAG information</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C-Kernel-command-line-type"><span class="nav-number">5.</span> <span class="nav-text">[C] Kernel command line type</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#X-Use-bootloader-kernel-arguments-if-available"><span class="nav-number">5.1.</span> <span class="nav-text">[X] Use bootloader kernel arguments if available</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#N-Extend-with-bootloader-kernel-arguments"><span class="nav-number">5.2.</span> <span class="nav-text">[N] Extend with bootloader kernel arguments</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#N-Default-kernel-command-string"><span class="nav-number">6.</span> <span class="nav-text">(N) Default kernel command string</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#N-Build-kdump-crash-kernel-EXPERIMENTAL"><span class="nav-number">7.</span> <span class="nav-text">[N] Build kdump crash kernel (EXPERIMENTAL)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Y-Auto-calculation-of-the-decompressed-kernel-image-address"><span class="nav-number">8.</span> <span class="nav-text">-Y- Auto calculation of the decompressed kernel image address</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Y-UEFI-runtime-support"><span class="nav-number">9.</span> <span class="nav-text">[Y] UEFI runtime support</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Y-Enable-support-for-SMBIOS-DMI-tables"><span class="nav-number">9.1.</span> <span class="nav-text">[Y] Enable support for SMBIOS (DMI) tables</span></a></li></ol></li></ol></div>
             
 
           </div>
