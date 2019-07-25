@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="Boot options启动设置">
+<meta name="description" content="内核的配置过程依赖Makefile和arch/arm/Kconfig以及其他文件下的Kconfig文件，通过make menuconfig或者桌面环境下的xconfig/gconfig可以手动配置内核所支持的功能。以下为Boot options启动设置的配置。">
 <meta name="keywords" content="linux,kernel">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux内核配置--Boot options">
 <meta property="og:url" content="http://yoursite.com/2019/07/24/linux内核配置-Boot-options/index.html">
 <meta property="og:site_name" content="个人博客">
-<meta property="og:description" content="Boot options启动设置">
+<meta property="og:description" content="内核的配置过程依赖Makefile和arch/arm/Kconfig以及其他文件下的Kconfig文件，通过make menuconfig或者桌面环境下的xconfig/gconfig可以手动配置内核所支持的功能。以下为Boot options启动设置的配置。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-25T11:46:01.418Z">
+<meta property="og:updated_time" content="2019-07-25T12:11:32.691Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux内核配置--Boot options">
-<meta name="twitter:description" content="Boot options启动设置">
+<meta name="twitter:description" content="内核的配置过程依赖Makefile和arch/arm/Kconfig以及其他文件下的Kconfig文件，通过make menuconfig或者桌面环境下的xconfig/gconfig可以手动配置内核所支持的功能。以下为Boot options启动设置的配置。">
 
 
 
@@ -372,7 +372,7 @@
       
 
       
-        <p>Boot options<br>启动设置  </p>
+        <p>内核的配置过程依赖Makefile和arch/arm/Kconfig以及其他文件下的Kconfig文件，通过make menuconfig或者桌面环境下的xconfig/gconfig可以手动配置内核所支持的功能。<br>以下为Boot options启动设置的配置。  </p>
 <a id="more"></a>
 <h1 id="Y-Flattened-Device-Tree-support"><a href="#Y-Flattened-Device-Tree-support" class="headerlink" title="-Y- Flattened Device Tree support"></a>-Y- Flattened Device Tree support</h1><p>支持设备树。<br>Include support for flattened device tree machine descriptions.  </p>
 <h2 id="Y-Support-for-the-traditional-ATAGS-boot-data-passing"><a href="#Y-Support-for-the-traditional-ATAGS-boot-data-passing" class="headerlink" title="[Y] Support for the traditional ATAGS boot data passing"></a>[Y] Support for the traditional ATAGS boot data passing</h2><p>支持传统的ATAGS启动数据传递。除非仅依赖设备树，否则建议选择。<br>ATAGS是传统的linux内核接收参数的方式，另一种是DTB。设备启动时，BOOT向内核传递三个参数，其中R0寄存器内容为一个“0”，R1是机器码（与内核匹配），R3为ATAGS或者DTB传递的地址。<br>This is the traditional way of passing data to the kernel at boot time. If you are solely relying on the flattened device tree (or the ARM_ATAG_DTB_COMPAT option) then you may unselect this option to remove ATAGS support from your kernel binary. If unsure, leave this to y.  </p>
