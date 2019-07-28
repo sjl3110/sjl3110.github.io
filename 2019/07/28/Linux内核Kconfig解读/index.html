@@ -102,7 +102,7 @@
 <meta property="og:site_name" content="个人博客">
 <meta property="og:description" content="内核的编译过程arch=arm，tisdk_am57xx-evm-rt_defconfig确定了.config中的配置，主目录的Makefile按照.config文件中的选择遍历所有文件中的Kconfig（首先是arch/arm/Kconfig），按照Kconfig文件中的依赖关系编译文件，再回到顶层目录生成目标文件。 123Kconfig ---&amp;gt; （每个源码目录下）提供选项.config">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-28T14:02:01.231Z">
+<meta property="og:updated_time" content="2019-07-28T14:04:22.194Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux内核Kconfig解读">
 <meta name="twitter:description" content="内核的编译过程arch=arm，tisdk_am57xx-evm-rt_defconfig确定了.config中的配置，主目录的Makefile按照.config文件中的选择遍历所有文件中的Kconfig（首先是arch/arm/Kconfig），按照Kconfig文件中的依赖关系编译文件，再回到顶层目录生成目标文件。 123Kconfig ---&amp;gt; （每个源码目录下）提供选项.config">
@@ -423,7 +423,7 @@
 </tr>
 <tr>
 <td>tristate</td>
-<td>模块选项，<m>或者<y>或者<n>（三态）</n></y></m></td>
+<td>模块选项，<code>&lt;M&gt;</code>或者<code>&lt;Y&gt;</code>或者<code>&lt;N&gt;</code>（三态）</td>
 </tr>
 <tr>
 <td>int/hex/string</td>
