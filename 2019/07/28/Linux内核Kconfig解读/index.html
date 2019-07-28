@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="???????arch=arm?tisdk_am57xx-evm-rt_defconfig???.config?????????Makefile??.config??????????????Kconfig????arch/arm/Kconfig????Kconfig??????????????????????????? 123Kconfig ---&amp;gt; ?????????????.config">
+<meta name="description" content="内核的编译过程arch=arm，tisdk_am57xx-evm-rt_defconfig确定了.config中的配置，主目录的Makefile按照.config文件中的选择遍历所有文件中的Kconfig（首先是arch/arm/Kconfig），按照Kconfig文件中的依赖关系编译文件，再回到顶层目录生成目标文件。  123Kconfig ---&amp;gt; （每个源码目录下）提供选项.confi">
 <meta name="keywords" content="linux,kernel">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux??Kconfig??">
+<meta property="og:title" content="Linux内核Kconfig解读">
 <meta property="og:url" content="http://yoursite.com/2019/07/28/Linux内核Kconfig解读/index.html">
 <meta property="og:site_name" content="个人博客">
-<meta property="og:description" content="???????arch=arm?tisdk_am57xx-evm-rt_defconfig???.config?????????Makefile??.config??????????????Kconfig????arch/arm/Kconfig????Kconfig??????????????????????????? 123Kconfig ---&amp;gt; ?????????????.config">
+<meta property="og:description" content="内核的编译过程arch=arm，tisdk_am57xx-evm-rt_defconfig确定了.config中的配置，主目录的Makefile按照.config文件中的选择遍历所有文件中的Kconfig（首先是arch/arm/Kconfig），按照Kconfig文件中的依赖关系编译文件，再回到顶层目录生成目标文件。  123Kconfig ---&amp;gt; （每个源码目录下）提供选项.confi">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-28T13:48:47.673Z">
+<meta property="og:updated_time" content="2019-07-28T13:50:45.689Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux??Kconfig??">
-<meta name="twitter:description" content="???????arch=arm?tisdk_am57xx-evm-rt_defconfig???.config?????????Makefile??.config??????????????Kconfig????arch/arm/Kconfig????Kconfig??????????????????????????? 123Kconfig ---&amp;gt; ?????????????.config">
+<meta name="twitter:title" content="Linux内核Kconfig解读">
+<meta name="twitter:description" content="内核的编译过程arch=arm，tisdk_am57xx-evm-rt_defconfig确定了.config中的配置，主目录的Makefile按照.config文件中的选择遍历所有文件中的Kconfig（首先是arch/arm/Kconfig），按照Kconfig文件中的依赖关系编译文件，再回到顶层目录生成目标文件。  123Kconfig ---&amp;gt; （每个源码目录下）提供选项.confi">
 
 
 
@@ -140,7 +140,7 @@
 
 
 
-  <title>Linux??Kconfig?? | 个人博客</title>
+  <title>Linux内核Kconfig解读 | 个人博客</title>
   
 
 
@@ -300,7 +300,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Linux??Kconfig??</h1>
+          <h1 class="post-title" itemprop="name headline">Linux内核Kconfig解读</h1>
         
 
         <div class="post-meta">
@@ -335,8 +335,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/" itemprop="url" rel="index">
-                    <span itemprop="name">????</span>
+                  <a href="/categories/操作系统/" itemprop="url" rel="index">
+                    <span itemprop="name">操作系统</span>
                   </a>
                 </span>
 
@@ -372,106 +372,96 @@
       
 
       
-        <h2 id><a href="#" class="headerlink" title="???????"></a>???????</h2><p>arch=arm?tisdk_am57xx-evm-rt_defconfig???<code>.config</code>?????????<code>Makefile</code>??<code>.config</code>??????????????<code>Kconfig</code>????arch/arm/Kconfig????<code>Kconfig</code>???????????????????????????<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Kconfig ---&gt; ?????????????</span><br><span class="line">.config ---&gt; ???????????????</span><br><span class="line">Makefile---&gt; ???????????.config???????????????</span><br></pre></td></tr></table></figure></p>
-<h2 id="–"><a href="#–" class="headerlink" title="????–?????"></a>????–?????</h2><h3 id="Kconfig"><a href="#Kconfig" class="headerlink" title="??Kconfig"></a>??Kconfig</h3><p>?/drivers/test???<code>Kconfig</code>?</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">config TEST</span><br><span class="line">    bool &quot;Test driver&quot;</span><br><span class="line">    help</span><br><span class="line">    This driver is for test kernel making.</span><br></pre></td></tr></table></figure>
+        <h2 id="内核的编译过程"><a href="#内核的编译过程" class="headerlink" title="内核的编译过程"></a>内核的编译过程</h2><p>arch=arm，tisdk_am57xx-evm-rt_defconfig确定了<code>.config</code>中的配置，主目录的<code>Makefile</code>按照<code>.config</code>文件中的选择遍历所有文件中的<code>Kconfig</code>（首先是arch/arm/Kconfig），按照<code>Kconfig</code>文件中的依赖关系编译文件，再回到顶层目录生成目标文件。 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Kconfig ---&gt; （每个源码目录下）提供选项</span><br><span class="line">.config ---&gt; （源码顶层目录下）保存选择结果</span><br><span class="line">Makefile---&gt; （每个源码目录下）根据.config中的内容来告知编译系统如何编译</span><br></pre></td></tr></table></figure>
 
-<p>?????TEST??????.config??<code>CONFIG_TEST</code>?Test driver????menuconfig?????</p>
-<h3 id="Makefile"><a href="#Makefile" class="headerlink" title="??Makefile"></a>??Makefile</h3><p>?????????CONFIG_TEST=y????????????CONFIG_TEST=m????????????</p>
+<h2 id="配置过程–以驱动为例"><a href="#配置过程–以驱动为例" class="headerlink" title="配置过程–以驱动为例"></a>配置过程–以驱动为例</h2><h3 id="新建Kconfig"><a href="#新建Kconfig" class="headerlink" title="新建Kconfig"></a>新建Kconfig</h3><p>在/drivers/test下建立<code>Kconfig</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">config TEST</span><br><span class="line">bool &quot;Test driver&quot;</span><br><span class="line">help</span><br><span class="line">This driver is for test kernel making.</span><br></pre></td></tr></table></figure>
+
+<p>这里定义了TEST选项，也就是.config中的<code>CONFIG_TEST</code>，Test driver是显示在menuconfig中的名称。</p>
+<h3 id="新建Makefile"><a href="#新建Makefile" class="headerlink" title="新建Makefile"></a>新建Makefile</h3><p>建立编译规则，例如CONFIG_TEST=y，目录下源码编译进内核；CONFIG_TEST=m，目录下源码编译为模块。</p>
 <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">obj-<span class="variable">$(CONFIG_TEST)</span> += test.o</span><br></pre></td></tr></table></figure>
 
-<h3 id="Makefile-Kconfig"><a href="#Makefile-Kconfig" class="headerlink" title="????Makefile?Kconfig"></a>????Makefile?Kconfig</h3><p>??Kconfig???test????drivers/Kconfig????</p>
+<h3 id="配置上层Makefile和Kconfig"><a href="#配置上层Makefile和Kconfig" class="headerlink" title="配置上层Makefile和Kconfig"></a>配置上层Makefile和Kconfig</h3><p>修改Kconfig，增加test子项，在drivers/Kconfig中添加：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source &quot;drivers/test/Kconfig&quot;</span><br></pre></td></tr></table></figure>
 
-<p>??Makefile????????</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">obj-y               += test/</span><br></pre></td></tr></table></figure>
+<p>修改Makefile，添加编译规则：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">obj-y += test/</span><br></pre></td></tr></table></figure>
 
-<h2 id="Kconfig-1"><a href="#Kconfig-1" class="headerlink" title="Kconfig????"></a>Kconfig????</h2><h3 id="-1"><a href="#-1" class="headerlink" title="???"></a>???</h3><p>??????</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">config SMP</span><br><span class="line">	bool &quot;Symmetric Multi-Processing&quot;</span><br><span class="line">	depends on CPU_V6K || CPU_V7</span><br><span class="line">	depends on GENERIC_CLOCKEVENTS</span><br><span class="line">	depends on HAVE_SMP</span><br><span class="line">	depends on MMU || ARM_MPU</span><br><span class="line">	select IRQ_WORK</span><br><span class="line">	help</span><br><span class="line">	  This enables support for systems with more than one CPU. If you have</span><br><span class="line">	  a system with only one CPU, say N. If you have a system with more</span><br><span class="line">	  than one CPU, say Y.</span><br><span class="line">      ......</span><br></pre></td></tr></table></figure>
+<h2 id="Kconfig详细语法"><a href="#Kconfig详细语法" class="headerlink" title="Kconfig详细语法"></a>Kconfig详细语法</h2><h3 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h3><p>以下面为例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">config SMP</span><br><span class="line">    bool &quot;Symmetric Multi-Processing&quot;</span><br><span class="line">    depends on CPU_V6K || CPU_V7</span><br><span class="line">    depends on GENERIC_CLOCKEVENTS</span><br><span class="line">    depends on HAVE_SMP</span><br><span class="line">    depends on MMU || ARM_MPU</span><br><span class="line">    select IRQ_WORK</span><br><span class="line">    help</span><br><span class="line">     This enables support for systems with more than one CPU. If you have</span><br><span class="line">     a system with only one CPU, say N. If you have a system with more</span><br><span class="line">     than one CPU, say Y.</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
 
 <table>
 <thead>
 <tr>
-<th>???</th>
-<th>??</th>
+<th>关键词</th>
+<th>功能</th>
 </tr>
 </thead>
 <tbody><tr>
 <td>config</td>
-<td>?????SMP??CONFIG_SMP</td>
+<td>紧跟句柄，SMP即为CONFIG_SMP</td>
 </tr>
 <tr>
 <td>bool</td>
-<td>?????0?1 [Y]</td>
+<td>表示选择，0或1 [Y]</td>
 </tr>
 <tr>
 <td>“name”</td>
-<td>?menuconfig??????????????</td>
+<td>在menuconfig中显示的字符串，没有则不显示</td>
 </tr>
 <tr>
 <td>depends on</td>
-<td>?????????? `</td>
+<td>表示依赖某一项，支持 `</td>
 </tr>
 <tr>
 <td>select</td>
-<td>??????????select?????????????????-Y-??{Y}?</td>
+<td>表示选中后，也会选择select指定的项（被选择的无法取消，符号为-Y-或者{Y}）</td>
 </tr>
 <tr>
 <td>help</td>
-<td>?????menuconfig???shift+???</td>
+<td>打印帮助，menuconfig可以用shift+？查看</td>
 </tr>
 <tr>
 <td>tristate</td>
-<td>?????<m>??<y>??<n>????</n></y></m></td>
+<td>模块选项，<m>或者<y>或者<n>（三态）</n></y></m></td>
 </tr>
 <tr>
 <td>int/hex/string</td>
-<td>?????????????????</td>
+<td>选项值为整型数或十六进制数或字符串</td>
 </tr>
 <tr>
 <td>range</td>
-<td>??????</td>
+<td>整型数的范围</td>
 </tr>
 <tr>
 <td>default</td>
-<td>??????????y/n???????choice????</td>
+<td>默认值，数值或者布尔y/n或者字符串或者choice中的选项</td>
 </tr>
 <tr>
 <td>prompt</td>
-<td>???choice??????</td>
+<td>出现在choice中的菜单文字</td>
 </tr>
 <tr>
 <td>source</td>
-<td>??????Kconfig</td>
+<td>引入子目录的Kconfig</td>
 </tr>
 <tr>
-<td>???</td>
+<td>补充：</td>
 <td></td>
 </tr>
 <tr>
-<td>* ?depends on?default ?y????y????????????????????prompt?</td>
+<td>* 无depends on，default 为y：默认为y，一般用于必须要设置的选项，此时不要设置prompt；</td>
 <td></td>
 </tr>
 </tbody></table>
 <ul>
-<li><p>?depends on?default ?y???????????????y?????????????n?  </p>
+<li><p>有depends on，default 为y：所依赖的条目己设置，则默认为y；所依赖的条目未设置，则为n； </p>
 </li>
-<li><p>?depends�on?default ?n???????????????n?????????????n?  </p>
+<li><p>有depends on，default 为n：所依赖的条目己设置，则默认为n；所依赖的条目未设置，则为n； </p>
 </li>
-<li><p>?depends�on?default ?n?????prompt??????????????????????select??  </p>
-<h3 id="-2"><a href="#-2" class="headerlink" title="????"></a>????</h3><h4 id="if…endif"><a href="#if…endif" class="headerlink" title="if…endif"></a>if…endif</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">if ARCH_S5PC100 ---&gt;??ARCH_S5PC100????????endif??????????</span><br><span class="line">config CPU_S5PC100</span><br><span class="line">    bool &quot;???&quot;</span><br><span class="line">    select S5P_EXT_INT</span><br><span class="line">    select SAMSUNG_DMADEV</span><br><span class="line">    help</span><br><span class="line">      Enable S5PC100 CPU support</span><br><span class="line"></span><br><span class="line">endif</span><br></pre></td></tr></table></figure>
-
+<li><p>无depends on，default 为n：在为设置prompt的情况下</p>
 </li>
-</ul>
-<h4 id="choice…endchoice"><a href="#choice…endchoice" class="headerlink" title="choice…endchoice"></a>choice…endchoice</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">choice      ---&gt;??????</span><br><span class="line">    prompt &quot;Default I/O scheduler&quot;         //?????</span><br><span class="line">    default DEFAULT_CFQ                    //??CFQ</span><br><span class="line">    help</span><br><span class="line">      Select the I/O scheduler which will be used by default for all</span><br><span class="line">      block devices.</span><br><span class="line"></span><br><span class="line">    config DEFAULT_DEADLINE</span><br><span class="line">        bool &quot;Deadline&quot; if IOSCHED_DEADLINE=y </span><br><span class="line"></span><br><span class="line">    config DEFAULT_CFQ</span><br><span class="line">        bool &quot;CFQ&quot; if IOSCHED_CFQ=y</span><br><span class="line"></span><br><span class="line">    config DEFAULT_NOOP</span><br><span class="line">        bool &quot;No-op&quot;</span><br><span class="line"></span><br><span class="line">endchoice</span><br></pre></td></tr></table></figure>
-
-<h4 id="menu"><a href="#menu" class="headerlink" title="menu"></a>menu</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">menu &quot;Boot options&quot;  ----&gt; menu??????`???`????????????????</span><br><span class="line"></span><br><span class="line">config USE_OF</span><br><span class="line">    bool &quot;Flattened Device Tree support&quot;</span><br><span class="line">    select IRQ_DOMAIN</span><br><span class="line">    select OF</span><br><span class="line">    select OF_EARLY_FLATTREE</span><br><span class="line">    help</span><br><span class="line">      Include support for flattened device tree machine descriptions.</span><br><span class="line">....</span><br><span class="line"></span><br><span class="line">endmenu     ----&gt; menu????</span><br></pre></td></tr></table></figure>
-
-<h4 id="menuconfig"><a href="#menuconfig" class="headerlink" title="menuconfig"></a>menuconfig</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">menuconfig TEST ---&gt; menuconfig??TEST???`??`????????CONFIG_TEST</span><br><span class="line">    bool &quot;???&quot;</span><br><span class="line">if TEST</span><br><span class="line">...</span><br><span class="line">endif # TEST</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>menu ? choice ????<br>menu?????choice????</li>
-<li>menuconfig ? menu ????<br>menuconfig?????????menu????????????menuconfig????????????menu???????</li>
 </ul>
 
       
@@ -685,7 +675,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">???????</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#–"><span class="nav-number">2.</span> <span class="nav-text">????–?????</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Kconfig"><span class="nav-number">2.1.</span> <span class="nav-text">??Kconfig</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Makefile"><span class="nav-number">2.2.</span> <span class="nav-text">??Makefile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Makefile-Kconfig"><span class="nav-number">2.3.</span> <span class="nav-text">????Makefile?Kconfig</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kconfig-1"><span class="nav-number">3.</span> <span class="nav-text">Kconfig????</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#-1"><span class="nav-number">3.1.</span> <span class="nav-text">???</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#-2"><span class="nav-number">3.2.</span> <span class="nav-text">????</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#if…endif"><span class="nav-number">3.2.1.</span> <span class="nav-text">if…endif</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#choice…endchoice"><span class="nav-number">3.2.2.</span> <span class="nav-text">choice…endchoice</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#menu"><span class="nav-number">3.2.3.</span> <span class="nav-text">menu</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#menuconfig"><span class="nav-number">3.2.4.</span> <span class="nav-text">menuconfig</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#内核的编译过程"><span class="nav-number">1.</span> <span class="nav-text">内核的编译过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置过程–以驱动为例"><span class="nav-number">2.</span> <span class="nav-text">配置过程–以驱动为例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#新建Kconfig"><span class="nav-number">2.1.</span> <span class="nav-text">新建Kconfig</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新建Makefile"><span class="nav-number">2.2.</span> <span class="nav-text">新建Makefile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置上层Makefile和Kconfig"><span class="nav-number">2.3.</span> <span class="nav-text">配置上层Makefile和Kconfig</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kconfig详细语法"><span class="nav-number">3.</span> <span class="nav-text">Kconfig详细语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关键词"><span class="nav-number">3.1.</span> <span class="nav-text">关键词</span></a></li></ol></li></ol></div>
             
 
           </div>
