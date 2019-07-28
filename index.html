@@ -375,100 +375,15 @@
 
       
         
-          
-            <h2 id="内核的编译过程"><a href="#内核的编译过程" class="headerlink" title="内核的编译过程"></a>内核的编译过程</h2><p>arch=arm，tisdk_am57xx-evm-rt_defconfig确定了<code>.config</code>中的配置，主目录的<code>Makefile</code>按照<code>.config</code>文件中的选择遍历所有文件中的<code>Kconfig</code>（首先是arch/arm/Kconfig），按照<code>Kconfig</code>文件中的依赖关系编译文件，再回到顶层目录生成目标文件。 </p>
+          <h2 id="内核的编译过程"><a href="#内核的编译过程" class="headerlink" title="内核的编译过程"></a>内核的编译过程</h2><p>arch=arm，tisdk_am57xx-evm-rt_defconfig确定了<code>.config</code>中的配置，主目录的<code>Makefile</code>按照<code>.config</code>文件中的选择遍历所有文件中的<code>Kconfig</code>（首先是arch/arm/Kconfig），按照<code>Kconfig</code>文件中的依赖关系编译文件，再回到顶层目录生成目标文件。 </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Kconfig ---&gt; （每个源码目录下）提供选项</span><br><span class="line">.config ---&gt; （源码顶层目录下）保存选择结果</span><br><span class="line">Makefile---&gt; （每个源码目录下）根据.config中的内容来告知编译系统如何编译</span><br></pre></td></tr></table></figure>
-
-<h2 id="配置过程–以驱动为例"><a href="#配置过程–以驱动为例" class="headerlink" title="配置过程–以驱动为例"></a>配置过程–以驱动为例</h2><h3 id="新建Kconfig"><a href="#新建Kconfig" class="headerlink" title="新建Kconfig"></a>新建Kconfig</h3><p>在/drivers/test下建立<code>Kconfig</code>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">config TEST</span><br><span class="line">bool &quot;Test driver&quot;</span><br><span class="line">help</span><br><span class="line">This driver is for test kernel making.</span><br></pre></td></tr></table></figure>
-
-<p>这里定义了TEST选项，也就是.config中的<code>CONFIG_TEST</code>，Test driver是显示在menuconfig中的名称。</p>
-<h3 id="新建Makefile"><a href="#新建Makefile" class="headerlink" title="新建Makefile"></a>新建Makefile</h3><p>建立编译规则，例如CONFIG_TEST=y，目录下源码编译进内核；CONFIG_TEST=m，目录下源码编译为模块。</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">obj-<span class="variable">$(CONFIG_TEST)</span> += test.o</span><br></pre></td></tr></table></figure>
-
-<h3 id="配置上层Makefile和Kconfig"><a href="#配置上层Makefile和Kconfig" class="headerlink" title="配置上层Makefile和Kconfig"></a>配置上层Makefile和Kconfig</h3><p>修改Kconfig，增加test子项，在drivers/Kconfig中添加：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source &quot;drivers/test/Kconfig&quot;</span><br></pre></td></tr></table></figure>
-
-<p>修改Makefile，添加编译规则：</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">obj-y += test/</span><br></pre></td></tr></table></figure>
-
-<h2 id="Kconfig详细语法"><a href="#Kconfig详细语法" class="headerlink" title="Kconfig详细语法"></a>Kconfig详细语法</h2><h3 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h3><p>以下面为例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">config SMP</span><br><span class="line">    bool &quot;Symmetric Multi-Processing&quot;</span><br><span class="line">    depends on CPU_V6K || CPU_V7</span><br><span class="line">    depends on GENERIC_CLOCKEVENTS</span><br><span class="line">    depends on HAVE_SMP</span><br><span class="line">    depends on MMU || ARM_MPU</span><br><span class="line">    select IRQ_WORK</span><br><span class="line">    help</span><br><span class="line">     This enables support for systems with more than one CPU. If you have</span><br><span class="line">     a system with only one CPU, say N. If you have a system with more</span><br><span class="line">     than one CPU, say Y.</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>关键词</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>config</td>
-<td>紧跟句柄，SMP即为CONFIG_SMP</td>
-</tr>
-<tr>
-<td>bool</td>
-<td>表示选择，0或1 [Y]</td>
-</tr>
-<tr>
-<td>“name”</td>
-<td>在menuconfig中显示的字符串，没有则不显示</td>
-</tr>
-<tr>
-<td>depends on</td>
-<td>表示依赖某一项，支持 `</td>
-</tr>
-<tr>
-<td>select</td>
-<td>表示选中后，也会选择select指定的项（被选择的无法取消，符号为-Y-或者{Y}）</td>
-</tr>
-<tr>
-<td>help</td>
-<td>打印帮助，menuconfig可以用shift+？查看</td>
-</tr>
-<tr>
-<td>tristate</td>
-<td>模块选项，<m>或者<y>或者<n>（三态）</n></y></m></td>
-</tr>
-<tr>
-<td>int/hex/string</td>
-<td>选项值为整型数或十六进制数或字符串</td>
-</tr>
-<tr>
-<td>range</td>
-<td>整型数的范围</td>
-</tr>
-<tr>
-<td>default</td>
-<td>默认值，数值或者布尔y/n或者字符串或者choice中的选项</td>
-</tr>
-<tr>
-<td>prompt</td>
-<td>出现在choice中的菜单文字</td>
-</tr>
-<tr>
-<td>source</td>
-<td>引入子目录的Kconfig</td>
-</tr>
-<tr>
-<td>补充：</td>
-<td></td>
-</tr>
-<tr>
-<td>* 无depends on，default 为y：默认为y，一般用于必须要设置的选项，此时不要设置prompt；</td>
-<td></td>
-</tr>
-</tbody></table>
-<ul>
-<li><p>有depends on，default 为y：所依赖的条目己设置，则默认为y；所依赖的条目未设置，则为n； </p>
-</li>
-<li><p>有depends on，default 为n：所依赖的条目己设置，则默认为n；所依赖的条目未设置，则为n； </p>
-</li>
-<li><p>无depends on，default 为n：在为设置prompt的情况下</p>
-</li>
-</ul>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/07/28/Linux内核Kconfig解读/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
