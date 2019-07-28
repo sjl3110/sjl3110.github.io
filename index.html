@@ -449,18 +449,24 @@
 <td>??????Kconfig</td>
 </tr>
 <tr>
-<td>### ????</td>
+<td>???</td>
 <td></td>
 </tr>
 <tr>
-<td>#### if…endif</td>
-<td></td>
-</tr>
-<tr>
-<td><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">if ARCH_S5PC100 ---&gt;??ARCH_S5PC100????????endif??????????</span><br><span class="line">config CPU_S5PC100</span><br><span class="line">    bool &quot;???&quot;</span><br><span class="line">    select S5P_EXT_INT</span><br><span class="line">    select SAMSUNG_DMADEV</span><br><span class="line">    help</span><br><span class="line">      Enable S5PC100 CPU support</span><br><span class="line"></span><br><span class="line">endif</span><br></pre></td></tr></table></figure></td>
+<td>* ?depends on?default ?y????y????????????????????prompt?</td>
 <td></td>
 </tr>
 </tbody></table>
+<ul>
+<li><p>?depends on?default ?y???????????????y?????????????n?  </p>
+</li>
+<li><p>?depends�on?default ?n???????????????n?????????????n?  </p>
+</li>
+<li><p>?depends�on?default ?n?????prompt??????????????????????select??  </p>
+<h3 id="-2"><a href="#-2" class="headerlink" title="????"></a>????</h3><h4 id="if…endif"><a href="#if…endif" class="headerlink" title="if…endif"></a>if…endif</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">if ARCH_S5PC100 ---&gt;??ARCH_S5PC100????????endif??????????</span><br><span class="line">config CPU_S5PC100</span><br><span class="line">    bool &quot;???&quot;</span><br><span class="line">    select S5P_EXT_INT</span><br><span class="line">    select SAMSUNG_DMADEV</span><br><span class="line">    help</span><br><span class="line">      Enable S5PC100 CPU support</span><br><span class="line"></span><br><span class="line">endif</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
 <h4 id="choice…endchoice"><a href="#choice…endchoice" class="headerlink" title="choice…endchoice"></a>choice…endchoice</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">choice      ---&gt;??????</span><br><span class="line">    prompt &quot;Default I/O scheduler&quot;         //?????</span><br><span class="line">    default DEFAULT_CFQ                    //??CFQ</span><br><span class="line">    help</span><br><span class="line">      Select the I/O scheduler which will be used by default for all</span><br><span class="line">      block devices.</span><br><span class="line"></span><br><span class="line">    config DEFAULT_DEADLINE</span><br><span class="line">        bool &quot;Deadline&quot; if IOSCHED_DEADLINE=y </span><br><span class="line"></span><br><span class="line">    config DEFAULT_CFQ</span><br><span class="line">        bool &quot;CFQ&quot; if IOSCHED_CFQ=y</span><br><span class="line"></span><br><span class="line">    config DEFAULT_NOOP</span><br><span class="line">        bool &quot;No-op&quot;</span><br><span class="line"></span><br><span class="line">endchoice</span><br></pre></td></tr></table></figure>
 
 <h4 id="menu"><a href="#menu" class="headerlink" title="menu"></a>menu</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">menu &quot;Boot options&quot;  ----&gt; menu??????`???`????????????????</span><br><span class="line"></span><br><span class="line">config USE_OF</span><br><span class="line">    bool &quot;Flattened Device Tree support&quot;</span><br><span class="line">    select IRQ_DOMAIN</span><br><span class="line">    select OF</span><br><span class="line">    select OF_EARLY_FLATTREE</span><br><span class="line">    help</span><br><span class="line">      Include support for flattened device tree machine descriptions.</span><br><span class="line">....</span><br><span class="line"></span><br><span class="line">endmenu     ----&gt; menu????</span><br></pre></td></tr></table></figure>
