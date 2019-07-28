@@ -102,7 +102,7 @@
 <meta property="og:site_name" content="个人博客">
 <meta property="og:description" content="内核的编译过程arch=arm，tisdk_am57xx-evm-rt_defconfig确定了.config中的配置，主目录的Makefile按照.config文件中的选择遍历所有文件中的Kconfig（首先是arch/arm/Kconfig），按照Kconfig文件中的依赖关系编译文件，再回到顶层目录生成目标文件。  123Kconfig ---&amp;gt; （每个源码目录下）提供选项.confi">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-28T13:54:41.784Z">
+<meta property="og:updated_time" content="2019-07-28T13:56:39.010Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux内核Kconfig解读">
 <meta name="twitter:description" content="内核的编译过程arch=arm，tisdk_am57xx-evm-rt_defconfig确定了.config中的配置，主目录的Makefile按照.config文件中的选择遍历所有文件中的Kconfig（首先是arch/arm/Kconfig），按照Kconfig文件中的依赖关系编译文件，再回到顶层目录生成目标文件。  123Kconfig ---&amp;gt; （每个源码目录下）提供选项.confi">
@@ -377,7 +377,7 @@
 
 <a id="more"></a>  
 <h2 id="配置过程–以驱动为例"><a href="#配置过程–以驱动为例" class="headerlink" title="配置过程–以驱动为例"></a>配置过程–以驱动为例</h2><h3 id="新建Kconfig"><a href="#新建Kconfig" class="headerlink" title="新建Kconfig"></a>新建Kconfig</h3><p>在/drivers/test下建立<code>Kconfig</code>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">config TEST</span><br><span class="line">bool &quot;Test driver&quot;</span><br><span class="line">help</span><br><span class="line">This driver is for test kernel making.</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">config TEST</span><br><span class="line">    bool &quot;Test driver&quot;</span><br><span class="line">    help</span><br><span class="line">    This driver is for test kernel making.</span><br></pre></td></tr></table></figure>
 
 <p>这里定义了TEST选项，也就是.config中的<code>CONFIG_TEST</code>，Test driver是显示在menuconfig中的名称。</p>
 <h3 id="新建Makefile"><a href="#新建Makefile" class="headerlink" title="新建Makefile"></a>新建Makefile</h3><p>建立编译规则，例如CONFIG_TEST=y，目录下源码编译进内核；CONFIG_TEST=m，目录下源码编译为模块。</p>
@@ -447,16 +447,11 @@
 <td>source</td>
 <td>引入子目录的Kconfig</td>
 </tr>
-<tr>
-<td>补充：</td>
-<td></td>
-</tr>
-<tr>
-<td>* 无depends on，default 为y：默认为y，一般用于必须要设置的选项，此时不要设置prompt；</td>
-<td></td>
-</tr>
 </tbody></table>
+<p>补充：</p>
 <ul>
+<li><p>无depends on，default 为y：默认为y，一般用于必须要设置的选项，此时不要设置prompt； </p>
+</li>
 <li><p>有depends on，default 为y：所依赖的条目己设置，则默认为y；所依赖的条目未设置，则为n； </p>
 </li>
 <li><p>有depends on，default 为n：所依赖的条目己设置，则默认为n；所依赖的条目未设置，则为n； </p>
