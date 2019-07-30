@@ -102,7 +102,7 @@
 <meta property="og:site_name" content="个人博客">
 <meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;内核的配置过程依赖Makefile和arch/arm/Kconfig以及其他文件下的Kconfig文件，通过make menuconfig或者桌面环境下的xconfig/gconfig可以手动配置内核所支持的功能。&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nb">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-30T16:00:43.159Z">
+<meta property="og:updated_time" content="2019-07-30T16:07:31.861Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux内核配置--Device drivers">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;内核的配置过程依赖Makefile和arch/arm/Kconfig以及其他文件下的Kconfig文件，通过make menuconfig或者桌面环境下的xconfig/gconfig可以手动配置内核所支持的功能。&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nb">
@@ -374,11 +374,10 @@
       
         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;内核的配置过程依赖Makefile和arch/arm/Kconfig以及其他文件下的Kconfig文件，通过make menuconfig或者桌面环境下的xconfig/gconfig可以手动配置内核所支持的功能。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以下为Device drivers启动设置的配置。  </p>
 <a id="more"></a>  
-<p>Generic Driver Options —&gt;</p>
 <details>
 <summary>Generic Driver Options ---></summary>  
 
-<p>参考：/drivers/base/Kconfig  </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：/drivers/base/Kconfig  </p>
 <ul>
 <li><code>[Y] Support for uevent helper</code><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;支持uevent（例如热插拔）事件。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;早年的内核(切换到基于netlink机制之前),在发生uevent事件(通常是热插拔)时,需要调用用户空间程序(通常是”/sbin/hotplug”),以帮助完成uevent事件的处理.此选项就是用于开启此功能.由于目前的发行版都已不再需要此帮助程序,所以请选”N”.此外,如果你使用了systemd或udev则必须选”N”.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The uevent helper program is forked by the kernel for every uevent. Before the switch to the netlink-based uevent source, this was used to hook hotplug scripts into kernel device events. It usually pointed to a shell script at /sbin/hotplug. This should not be used today, because usual systems create many events at bootup or device discovery in a very short time frame. One forked process per event can create so many processes that it creates a high system load, or on smaller systems it is known to create out-of-memory situations during bootup.  <ul>
 <li><code>( ) path to uevent helper</code><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To disable user space helper program execution at by default specify an empty string here. This setting can still be altered via /proc/sys/kernel/hotplug or via /sys/kernel/uevent_helper later at runtime.  </li>
@@ -412,7 +411,18 @@
 </ul>
 </details>  
 
-<h2 id="Bus-Devices-—-gt"><a href="#Bus-Devices-—-gt" class="headerlink" title="Bus Devices —&gt;"></a>Bus Devices —&gt;</h2><p>参考：/drivers/bus/Kconfig<br>总线设备.此类设备仅出现在ARM平台。下列是勾选的：<br><y> OMAP INTERCONNECT DRIVER<br>支持TI的omap开放式多媒体应用平台<br><y> OMAP OCP2SCP DRIVER<br>ocp/scp协议<br><y> Simple Power-Managed Bus Driver<br>电源管理总线</y></y></y></p>
+<details>
+<summary>Bus Devices ---></summary>  
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：/drivers/bus/Kconfig<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;总线设备.此类设备仅出现在ARM平台。下列是勾选的：  </p>
+<ul>
+<li><code>&lt;Y&gt; OMAP INTERCONNECT DRIVER</code><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;支持TI的omap开放式多媒体应用平台  </li>
+<li><code>&lt;Y&gt; OMAP OCP2SCP DRIVER</code><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ocp/scp协议  </li>
+<li><code>&lt;Y&gt; Simple Power-Managed Bus Driver</code><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;电源管理总线  </li>
+</ul>
+</details>  
+
+
 <h2 id="Connector-unified-userspace-lt-gt-kernelspace-linker"><a href="#Connector-unified-userspace-lt-gt-kernelspace-linker" class="headerlink" title=" Connector - unified userspace &lt;-&gt; kernelspace linker"></a><n> Connector - unified userspace &lt;-&gt; kernelspace linker</n></h2><p>连接器是一种新的用户态与内核态的通信方式，它使用起来非常方便。本质上，连接器是一种netlink，它的netlink协议号为 NETLINK_CONNECTOR，与一般的 netlink 相比，它提供了更容易的使用接口，使用起来更方便。<br>The Connector driver makes it easy to connect various agents using a netlink based network. One must register a callback and an identifier. When the driver receives a special netlink message with the appropriate identifier, the appropriate callback will be called.</p>
 <h2 id="Memory-Technology-Device-MTD-support-—-gt"><a href="#Memory-Technology-Device-MTD-support-—-gt" class="headerlink" title=" Memory Technology Device (MTD) support —&gt;"></a><y> Memory Technology Device (MTD) support —&gt;</y></h2><p>详细参考/drivers/mtd/Kconfig。<br>MTD子系统是一个闪存转换层。其主要目的是提供一个介于闪存硬件驱动程序与高级应用程序之间的抽象层，以简化闪存设备的驱动。注意：MTD常用于嵌入式系统，而我们常见的U盘/MMC卡/SD卡/CF卡等移动存储设备以及固态硬盘(SSD)，虽然也叫”flash”，但它们并不是使用MTD技术的存储器。仅在你需要使用主设备号为31的MTD块设备(/dev/romX、/dev/rromX、/dev/flashX、/dev/rflashX)，或者主设备号为90的MTD字符设备(/dev/mtdX、/dev/mtdrX)时选”Y”，否则选”N”。<br>Memory Technology Devices are flash, RAM and similar chips, often used for solid state file systems on embedded devices. This option will provide the generic support for MTD drivers to register themselves with the kernel and for potential users of MTD devices to enumerate the devices which are present and obtain a handle on them. It will also allow you to select individual drivers for particular hardware and users of MTD devices. If unsure, say N.</p>
 <h2 id="Y-Device-Tree-and-Open-Firmware-support-—-gt"><a href="#Y-Device-Tree-and-Open-Firmware-support-—-gt" class="headerlink" title="-Y- Device Tree and Open Firmware support —&gt;"></a>-Y- Device Tree and Open Firmware support —&gt;</h2><p>参考：/drivers/mtd/Kconfig。<br>Device Tree基础架构与Open Firmware支持，主要用于嵌入式环境。不确定的选”N”。内核中若有其它选项依赖于它，则会自动选中此项。<br>This option enables the device tree infrastructure. It is automatically selected by platforms that need it or can be enabled manually for unit tests, overlays or compile-coverage.</p>
@@ -630,7 +640,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Bus-Devices-—-gt"><span class="nav-number">1.</span> <span class="nav-text">Bus Devices —&gt;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Connector-unified-userspace-lt-gt-kernelspace-linker"><span class="nav-number">2.</span> <span class="nav-text"> Connector - unified userspace &lt;-&gt; kernelspace linker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Memory-Technology-Device-MTD-support-—-gt"><span class="nav-number">3.</span> <span class="nav-text"> Memory Technology Device (MTD) support —&gt;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Y-Device-Tree-and-Open-Firmware-support-—-gt"><span class="nav-number">4.</span> <span class="nav-text">-Y- Device Tree and Open Firmware support —&gt;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Parallel-port-support-—–"><span class="nav-number">5.</span> <span class="nav-text"> Parallel port support —–</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Y-Block-devices"><span class="nav-number">6.</span> <span class="nav-text">[Y] Block devices</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Connector-unified-userspace-lt-gt-kernelspace-linker"><span class="nav-number">1.</span> <span class="nav-text"> Connector - unified userspace &lt;-&gt; kernelspace linker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Memory-Technology-Device-MTD-support-—-gt"><span class="nav-number">2.</span> <span class="nav-text"> Memory Technology Device (MTD) support —&gt;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Y-Device-Tree-and-Open-Firmware-support-—-gt"><span class="nav-number">3.</span> <span class="nav-text">-Y- Device Tree and Open Firmware support —&gt;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Parallel-port-support-—–"><span class="nav-number">4.</span> <span class="nav-text"> Parallel port support —–</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Y-Block-devices"><span class="nav-number">5.</span> <span class="nav-text">[Y] Block devices</span></a></li></ol></div>
             
 
           </div>
