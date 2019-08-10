@@ -94,18 +94,20 @@
 
 
 
-<meta name="description" content="WSL Ubuntu的界面比较简陋，推荐使用cmder改良一下终端。   下载安装cmder下载完整版，直接运行即可。   进入wsl ubuntu在setting &amp;gt; start up中添加 %windir%\system32\wsl.exe ~   -cur_console:p5，进入linux子系统。-cur_console:p5是最新的为解决vim中无法使用方向键的补丁。">
+<meta name="description" content="WSL Ubuntu的界面比较简陋，推荐使用cmder改良一下终端。">
 <meta name="keywords" content="linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="cmder美化wsl ubuntu">
 <meta property="og:url" content="http://yoursite.com/2019/08/10/cmder美化wsl-ubuntu/index.html">
 <meta property="og:site_name" content="个人博客">
-<meta property="og:description" content="WSL Ubuntu的界面比较简陋，推荐使用cmder改良一下终端。   下载安装cmder下载完整版，直接运行即可。   进入wsl ubuntu在setting &amp;gt; start up中添加 %windir%\system32\wsl.exe ~   -cur_console:p5，进入linux子系统。-cur_console:p5是最新的为解决vim中无法使用方向键的补丁。">
+<meta property="og:description" content="WSL Ubuntu的界面比较简陋，推荐使用cmder改良一下终端。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-10T06:37:47.639Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/sjl3110/pictures-for-hexo/master/cmder_wsl_ubuntu.JPG">
+<meta property="og:updated_time" content="2019-08-10T06:48:00.443Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cmder美化wsl ubuntu">
-<meta name="twitter:description" content="WSL Ubuntu的界面比较简陋，推荐使用cmder改良一下终端。   下载安装cmder下载完整版，直接运行即可。   进入wsl ubuntu在setting &amp;gt; start up中添加 %windir%\system32\wsl.exe ~   -cur_console:p5，进入linux子系统。-cur_console:p5是最新的为解决vim中无法使用方向键的补丁。">
+<meta name="twitter:description" content="WSL Ubuntu的界面比较简陋，推荐使用cmder改良一下终端。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/sjl3110/pictures-for-hexo/master/cmder_wsl_ubuntu.JPG">
 
 
 
@@ -372,10 +374,10 @@
       
 
       
-        <p>WSL Ubuntu的界面比较简陋，推荐使用cmder改良一下终端。  </p>
-<h2 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h2><p><a href="https://cmder.net/" target="_blank" rel="noopener">cmder</a><br>下载完整版，直接运行即可。  </p>
-<h2 id="进入wsl-ubuntu"><a href="#进入wsl-ubuntu" class="headerlink" title="进入wsl ubuntu"></a>进入wsl ubuntu</h2><p>在setting &gt; start up中添加 <code>%windir%\system32\wsl.exe ~   -cur_console:p5</code>，进入linux子系统。<br><code>-cur_console:p5</code>是最新的为解决vim中无法使用方向键的补丁。  </p>
+        <p>WSL Ubuntu的界面比较简陋，推荐使用cmder改良一下终端。<br><img src="https://raw.githubusercontent.com/sjl3110/pictures-for-hexo/master/cmder_wsl_ubuntu.JPG" alt="avatar">  </p>
 <a id="more"></a>  
+<h2 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h2><p><a href="https://cmder.net/" target="_blank" rel="noopener">cmder</a>，下载完整版，直接运行即可。  </p>
+<h2 id="进入wsl-ubuntu"><a href="#进入wsl-ubuntu" class="headerlink" title="进入wsl ubuntu"></a>进入wsl ubuntu</h2><p>在setting &gt; start up中添加 <code>%windir%\system32\wsl.exe ~   -cur_console:p5</code>，进入linux子系统。<br><code>-cur_console:p5</code>是最新的为解决vim中无法使用方向键的补丁。  </p>
 <h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>大多数配置依照个人习惯，分屏快捷键可以搜索split。  </p>
 <h2 id="修改ubutnu文件夹底色"><a href="#修改ubutnu文件夹底色" class="headerlink" title="修改ubutnu文件夹底色"></a>修改ubutnu文件夹底色</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line">dircolors -p &gt; .dircolors</span><br><span class="line">vi .dircolors</span><br><span class="line">修改DIR的颜色，找到下面这段（编辑器中有配色预览和注释）</span><br><span class="line"></span><br><span class="line">RESET 0 <span class="comment"># reset to "normal" color                                        </span></span><br><span class="line">DIR 04;36 <span class="comment"># directory                                                    </span></span><br><span class="line">LINK 01;36 <span class="comment"># symbolic link. (If you set this to 'target' instead of a    </span></span><br><span class="line"> <span class="comment"># numerical value, the color is as for the file pointed to.)            </span></span><br><span class="line">MULTIHARDLINK 00 <span class="comment"># regular file with more than one link                  </span></span><br><span class="line">FIFO 40;33 <span class="comment"># pipe                                                        </span></span><br><span class="line">SOCK 01;35 <span class="comment"># socket                                                      </span></span><br><span class="line">DOOR 01;35 <span class="comment"># door                                                        </span></span><br><span class="line">BLK 40;33;01 <span class="comment"># block device driver                                       </span></span><br><span class="line">CHR 40;33;01 <span class="comment"># character device driver                                   </span></span><br><span class="line">ORPHAN 40;31;01 <span class="comment"># symlink to nonexistent file, or non-stat'able file ... </span></span><br><span class="line">MISSING 00 <span class="comment"># ... and the files they point to                             </span></span><br><span class="line">SETUID 37;41 <span class="comment"># file that is setuid (u+s)                                 </span></span><br><span class="line">SETGID 30;43 <span class="comment"># file that is setgid (g+s)</span></span><br><span class="line">CAPABILITY 30;41 <span class="comment"># file with capability</span></span><br><span class="line">STICKY_OTHER_WRITABLE 04;36 <span class="comment"># dir that is sticky and other-writable (+t,o+w)</span></span><br><span class="line">OTHER_WRITABLE 04;36 <span class="comment"># dir that is other-writable (o+w) and not sticky</span></span><br><span class="line">STICKY 37;44 <span class="comment"># dir with the sticky bit set (+t) and not other-writable</span></span><br><span class="line"><span class="comment"># This is for files with execute permission:</span></span><br><span class="line">EXEC 01;32</span><br></pre></td></tr></table></figure>
 
