@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
 
 
-  <meta name="keywords" content="arm,linux,">
+  <meta name="keywords" content="linux,">
 
 
 
@@ -94,20 +94,18 @@
 
 
 
-<meta name="description" content="Win10可以支持Ubuntu子系统，再也不需要虚拟机！   安装系统系统要求：最新版win10，打开应用商店安装Ubuntu应用软件，需要系统开启虚拟机功能以及LINUX子系统功能。安装完成后如下：">
-<meta name="keywords" content="arm,linux">
+<meta name="description" content="WSL Ubuntu的界面比较简陋，推荐使用cmder改良一下终端。   下载安装cmder下载完整版，直接运行即可。   进入wsl ubuntu在setting &amp;gt; start up中添加 %windir%\system32\wsl.exe ~   -cur_console:p5，进入linux子系统。-cur_console:p5是最新的为解决vim中无法使用方向键的补丁。">
+<meta name="keywords" content="linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Windows系统配置Linux子系统开发ARM">
-<meta property="og:url" content="http://yoursite.com/2019/07/19/Windows系统配置Linux子系统开发ARM/index.html">
+<meta property="og:title" content="cmder美化wsl ubuntu">
+<meta property="og:url" content="http://yoursite.com/2019/08/10/cmder美化wsl-ubuntu/index.html">
 <meta property="og:site_name" content="个人博客">
-<meta property="og:description" content="Win10可以支持Ubuntu子系统，再也不需要虚拟机！   安装系统系统要求：最新版win10，打开应用商店安装Ubuntu应用软件，需要系统开启虚拟机功能以及LINUX子系统功能。安装完成后如下：">
+<meta property="og:description" content="WSL Ubuntu的界面比较简陋，推荐使用cmder改良一下终端。   下载安装cmder下载完整版，直接运行即可。   进入wsl ubuntu在setting &amp;gt; start up中添加 %windir%\system32\wsl.exe ~   -cur_console:p5，进入linux子系统。-cur_console:p5是最新的为解决vim中无法使用方向键的补丁。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://github.com/sjl3110/pictures-for-hexo/blob/master/wsl_ubuntu.JPG?raw=true">
-<meta property="og:updated_time" content="2019-07-23T07:14:34.386Z">
+<meta property="og:updated_time" content="2019-08-10T06:37:47.639Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Windows系统配置Linux子系统开发ARM">
-<meta name="twitter:description" content="Win10可以支持Ubuntu子系统，再也不需要虚拟机！   安装系统系统要求：最新版win10，打开应用商店安装Ubuntu应用软件，需要系统开启虚拟机功能以及LINUX子系统功能。安装完成后如下：">
-<meta name="twitter:image" content="https://github.com/sjl3110/pictures-for-hexo/blob/master/wsl_ubuntu.JPG?raw=true">
+<meta name="twitter:title" content="cmder美化wsl ubuntu">
+<meta name="twitter:description" content="WSL Ubuntu的界面比较简陋，推荐使用cmder改良一下终端。   下载安装cmder下载完整版，直接运行即可。   进入wsl ubuntu在setting &amp;gt; start up中添加 %windir%\system32\wsl.exe ~   -cur_console:p5，进入linux子系统。-cur_console:p5是最新的为解决vim中无法使用方向键的补丁。">
 
 
 
@@ -136,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/07/19/Windows系统配置Linux子系统开发ARM/">
+  <link rel="canonical" href="http://yoursite.com/2019/08/10/cmder美化wsl-ubuntu/">
 
 
 
 
 
-  <title>Windows系统配置Linux子系统开发ARM | 个人博客</title>
+  <title>cmder美化wsl ubuntu | 个人博客</title>
   
 
 
@@ -285,7 +283,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/19/Windows系统配置Linux子系统开发ARM/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/10/cmder美化wsl-ubuntu/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="沈建谅">
@@ -302,7 +300,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Windows系统配置Linux子系统开发ARM</h1>
+          <h1 class="post-title" itemprop="name headline">cmder美化wsl ubuntu</h1>
         
 
         <div class="post-meta">
@@ -314,8 +312,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-19T19:42:09+08:00">
-                2019-07-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-10T14:06:52+08:00">
+                2019-08-10
               </time>
             
 
@@ -374,25 +372,17 @@
       
 
       
-        <p>Win10可以支持Ubuntu子系统，再也不需要虚拟机！  </p>
-<h2 id="安装系统"><a href="#安装系统" class="headerlink" title="安装系统"></a>安装系统</h2><p>系统要求：最新版win10，打开应用商店安装Ubuntu应用软件，需要系统开启虚拟机功能以及LINUX子系统功能。<br>安装完成后如下：<br><img src="https://github.com/sjl3110/pictures-for-hexo/blob/master/wsl_ubuntu.JPG?raw=true" alt="avatar"></p>
-<a id="more"></a>
-<h3 id="配置-Ubuntu"><a href="#配置-Ubuntu" class="headerlink" title="配置 Ubuntu"></a>配置 Ubuntu</h3><p>换源等操作。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /etc/apt</span><br><span class="line">$ sudo cp sources.list sources.list.bak</span><br><span class="line">$ sudo vi sources.list</span><br><span class="line">$ add </span><br><span class="line">  deb http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse</span><br><span class="line">  deb http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse</span><br><span class="line">  deb http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse</span><br><span class="line">  deb http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse</span><br><span class="line">  deb http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse</span><br><span class="line">  deb-src http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse</span><br><span class="line">  deb-src http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse</span><br><span class="line">  deb-src http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse</span><br><span class="line">  deb-src http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse</span><br><span class="line">  deb-src http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse</span><br><span class="line">$ sudo apt-get update</span><br><span class="line">$ sudo apt-get upgrade</span><br></pre></td></tr></table></figure>
+        <p>WSL Ubuntu的界面比较简陋，推荐使用cmder改良一下终端。  </p>
+<h2 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h2><p><a href="https://cmder.net/" target="_blank" rel="noopener">cmder</a><br>下载完整版，直接运行即可。  </p>
+<h2 id="进入wsl-ubuntu"><a href="#进入wsl-ubuntu" class="headerlink" title="进入wsl ubuntu"></a>进入wsl ubuntu</h2><p>在setting &gt; start up中添加 <code>%windir%\system32\wsl.exe ~   -cur_console:p5</code>，进入linux子系统。<br><code>-cur_console:p5</code>是最新的为解决vim中无法使用方向键的补丁。  </p>
+<a id="more"></a>  
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>大多数配置依照个人习惯，分屏快捷键可以搜索split。  </p>
+<h2 id="修改ubutnu文件夹底色"><a href="#修改ubutnu文件夹底色" class="headerlink" title="修改ubutnu文件夹底色"></a>修改ubutnu文件夹底色</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line">dircolors -p &gt; .dircolors</span><br><span class="line">vi .dircolors</span><br><span class="line">修改DIR的颜色，找到下面这段（编辑器中有配色预览和注释）</span><br><span class="line"></span><br><span class="line">RESET 0 <span class="comment"># reset to "normal" color                                        </span></span><br><span class="line">DIR 04;36 <span class="comment"># directory                                                    </span></span><br><span class="line">LINK 01;36 <span class="comment"># symbolic link. (If you set this to 'target' instead of a    </span></span><br><span class="line"> <span class="comment"># numerical value, the color is as for the file pointed to.)            </span></span><br><span class="line">MULTIHARDLINK 00 <span class="comment"># regular file with more than one link                  </span></span><br><span class="line">FIFO 40;33 <span class="comment"># pipe                                                        </span></span><br><span class="line">SOCK 01;35 <span class="comment"># socket                                                      </span></span><br><span class="line">DOOR 01;35 <span class="comment"># door                                                        </span></span><br><span class="line">BLK 40;33;01 <span class="comment"># block device driver                                       </span></span><br><span class="line">CHR 40;33;01 <span class="comment"># character device driver                                   </span></span><br><span class="line">ORPHAN 40;31;01 <span class="comment"># symlink to nonexistent file, or non-stat'able file ... </span></span><br><span class="line">MISSING 00 <span class="comment"># ... and the files they point to                             </span></span><br><span class="line">SETUID 37;41 <span class="comment"># file that is setuid (u+s)                                 </span></span><br><span class="line">SETGID 30;43 <span class="comment"># file that is setgid (g+s)</span></span><br><span class="line">CAPABILITY 30;41 <span class="comment"># file with capability</span></span><br><span class="line">STICKY_OTHER_WRITABLE 04;36 <span class="comment"># dir that is sticky and other-writable (+t,o+w)</span></span><br><span class="line">OTHER_WRITABLE 04;36 <span class="comment"># dir that is other-writable (o+w) and not sticky</span></span><br><span class="line">STICKY 37;44 <span class="comment"># dir with the sticky bit set (+t) and not other-writable</span></span><br><span class="line"><span class="comment"># This is for files with execute permission:</span></span><br><span class="line">EXEC 01;32</span><br></pre></td></tr></table></figure>
 
-<h3 id="安装-gcc-交叉编译工具"><a href="#安装-gcc-交叉编译工具" class="headerlink" title="安装 gcc 交叉编译工具"></a>安装 gcc 交叉编译工具</h3><h4 id="命名规则"><a href="#命名规则" class="headerlink" title="命名规则"></a>命名规则</h4><p>交叉编译工具链的命名规则为：<code>arch [-vendor] [-os] [-(gnu)eabi]</code></p>
-<ul>
-<li>arch - 体系架构，如ARM，MIPS</li>
-<li>vendor - 工具链提供商</li>
-<li>os - 目标操作系统</li>
-<li>eabi - 嵌入式应用二进制接口（Embedded ApplicationBinary Interface）  </li>
-</ul>
-<p>根据对操作系统的支持与否，ARM  GCC可分为支持和不支持操作系统，如<br>arm-none-eabi：这个是没有操作系统的，自然不可能支持那些跟操作系统关系密切的函数，比如fork()。使用的是newlib这个专用于嵌入式系统的C库。<br>arm-none-linux-eabi：用于Linux的，使用Glibc。<br>比如:<br>arm-none-eabi-gcc：用于编译 ARM 架构的裸机系统（包括 ARM Linux 的 boot、kernel，不适用编译 Linux 应用 Application）。<br>arm-none-linux-gnueabi-gcc：主要用于基于 ARM 架构的 Linux 系统，可用于编译 ARM 架构的 u-boot、Linux内核、Linux应用等。<br>arm-eabi-gcc：Android ARM 编译器。<br>armcc ARM：公司推出的编译工具，功能和 arm-none-eabi 类似。<br>arm-none-uclinuxeabi-gcc：用于uCLinux，使用Glibc。<br>arm-none-symbianelf-gcc：用于symbian。<br>下载链接: <a href="https://releases.linaro.org/components/toolchain/binaries/7.2-2017.11/arm-linux-gnueabihf/" target="_blank" rel="noopener">gcc-toolchain</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ tar xvf gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabihf.tar.xz -C /usr/<span class="built_in">local</span>/arm_gcc</span><br><span class="line">$ sudo vim /etc/profile</span><br><span class="line">$ <span class="built_in">export</span> PATH=/usr/<span class="built_in">local</span>/arm_gcc/bin/:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
+<p>修改bashrc或者zshrc，在bashrc中有如下内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> [ -x /usr/bin/dircolors ]; <span class="keyword">then</span>                                                        </span><br><span class="line">    <span class="built_in">test</span> -r ~/.dircolors &amp;&amp; <span class="built_in">eval</span> <span class="string">"<span class="variable">$(dircolors -b ~/.dircolors)</span>"</span> || <span class="built_in">eval</span> <span class="string">"<span class="variable">$(dircolors -b)</span>"</span> </span><br><span class="line">    <span class="built_in">alias</span> ls=<span class="string">'ls --color=auto'</span>                                                            </span><br><span class="line">    <span class="comment">#alias dir='dir --color=auto'                                                         </span></span><br><span class="line">    <span class="comment">#alias vdir='vdir --color=auto'                                                       </span></span><br><span class="line">                                                                                          </span><br><span class="line">    <span class="built_in">alias</span> grep=<span class="string">'grep --color=auto'</span>                                                        </span><br><span class="line">    <span class="built_in">alias</span> fgrep=<span class="string">'fgrep --color=auto'</span>                                                      </span><br><span class="line">    <span class="built_in">alias</span> egrep=<span class="string">'egrep --color=auto'</span>                                                      </span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="安装-Minicom"><a href="#安装-Minicom" class="headerlink" title="安装 Minicom"></a>安装 Minicom</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apr-get install minicom</span><br><span class="line">$ sudo minicom -D /dev/ttySx</span><br></pre></td></tr></table></figure>
-
-<h3 id="编译代码"><a href="#编译代码" class="headerlink" title="编译代码"></a>编译代码</h3><p>需要在CMakelists.txt中set gcc和g++路径，其余与Linux正常。</p>
+<p>拷贝至zsh中，重新启动终端，ubutnu显示的文件夹再也不是亮瞎人的绿色。</p>
 
       
     </div>
@@ -409,8 +399,6 @@
     <footer class="post-footer">
       
         <div class="post-tags">
-          
-            <a href="/tags/arm/" rel="tag"># arm</a>
           
             <a href="/tags/linux/" rel="tag"># linux</a>
           
@@ -435,15 +423,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2019/08/10/跟老男孩学Linux运维/" rel="next" title="跟老男孩学Linux运维">
+                <i class="fa fa-chevron-left"></i> 跟老男孩学Linux运维
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/19/基于TCP-IP网络socket通信/" rel="prev" title="基于TCP/IP网络socket通信">
-                基于TCP/IP网络socket通信 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -605,7 +593,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装系统"><span class="nav-number">1.</span> <span class="nav-text">安装系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置-Ubuntu"><span class="nav-number">1.1.</span> <span class="nav-text">配置 Ubuntu</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-gcc-交叉编译工具"><span class="nav-number">1.2.</span> <span class="nav-text">安装 gcc 交叉编译工具</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#命名规则"><span class="nav-number">1.2.1.</span> <span class="nav-text">命名规则</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-Minicom"><span class="nav-number">1.3.</span> <span class="nav-text">安装 Minicom</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译代码"><span class="nav-number">1.4.</span> <span class="nav-text">编译代码</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#下载安装"><span class="nav-number">1.</span> <span class="nav-text">下载安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进入wsl-ubuntu"><span class="nav-number">2.</span> <span class="nav-text">进入wsl ubuntu</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">3.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改ubutnu文件夹底色"><span class="nav-number">4.</span> <span class="nav-text">修改ubutnu文件夹底色</span></a></li></ol></div>
             
 
           </div>
