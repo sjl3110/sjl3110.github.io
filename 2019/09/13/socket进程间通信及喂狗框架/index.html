@@ -101,7 +101,7 @@
 <meta property="og:site_name" content="个人博客">
 <meta property="og:description" content="简单的服务器完成以下功能：  与客户端创建连接建立握手 转发客户端的消息，发向指定客户端 完成客户端喂狗信号的处理">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-14T08:04:21.344Z">
+<meta property="og:updated_time" content="2019-09-14T09:04:09.811Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="socket进程间通信及喂狗框架">
 <meta name="twitter:description" content="简单的服务器完成以下功能：  与客户端创建连接建立握手 转发客户端的消息，发向指定客户端 完成客户端喂狗信号的处理">
@@ -479,7 +479,93 @@
 <li>对fd进行扫描时是线性扫描，fd剧增后，IO效率降低，每次调用都对fd进行线性扫描遍历，随着fd的增加会造成遍历速度慢的问题。  </li>
 <li>select函数超时参数在返回时也是未定义的，考虑到可移植性，每次超时之后进入下一个select之前都要重新设置超时参数。  </li>
 </ol>
-<h3 id="pthread-create"><a href="#pthread-create" class="headerlink" title="pthread_create()"></a>pthread_create()</h3><h2 id="自定义函数及功能"><a href="#自定义函数及功能" class="headerlink" title="自定义函数及功能"></a>自定义函数及功能</h2><h2 id="守护脚本"><a href="#守护脚本" class="headerlink" title="守护脚本"></a>守护脚本</h2><h2 id="实现结果"><a href="#实现结果" class="headerlink" title="实现结果"></a>实现结果</h2>
+<h3 id="pthread-create"><a href="#pthread-create" class="headerlink" title="pthread_create()"></a>pthread_create()</h3><h4 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h4><ol>
+<li>是操作系统能够进行调度的最小单位；  </li>
+<li>线程被包含在进程之中，是进程中的实际运作单位；  </li>
+<li>一个线程指的是进程中一个单一顺序的控制流；  </li>
+<li>一个进程可以并发多个线程，每个线程执行不同的任务。  </li>
+</ol>
+<blockquote>
+<ul>
+<li><strong>优点</strong>  </li>
+</ul>
+<ol>
+<li>创建一个新的线程的代价要比创建一个新进程的代价小得多；</li>
+<li>与进程之间的切换相比，线程之间的切换需要操作系统做的工作要少很多；</li>
+<li>线程占有的资源要比进程少；</li>
+<li>线程之间共享数据更容易（线程是在一个房间中，所以相互通信比较容易，而进程之间通话需要跑到另一个房间）。</li>
+</ol>
+</blockquote>
+<blockquote>
+<ul>
+<li><strong>缺点</strong>  </li>
+</ul>
+<ol>
+<li>编码/调试难度提高，因为线程之间谁先执行不确定，在一个是共享资源的问题。  </li>
+<li>缺乏访问控制，一个线程崩溃，会导致整个进程都异常终止，一个线程中调用某些函数，会影响整个进程。  </li>
+</ol>
+</blockquote>
+<h4 id="线程与进程"><a href="#线程与进程" class="headerlink" title="线程与进程"></a>线程与进程</h4><ol>
+<li>进程：进程（或者任务）是资源分配的基本单位</li>
+<li>线程：线程（或者轻量级进程）是调度/执行的基本单位</li>
+<li>线程运行在进程中</li>
+<li>一个进程至少都有一个线程  </li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>进程</th>
+<th>线程</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>fork</td>
+<td>pthread_create</td>
+<td>新建控制流</td>
+</tr>
+<tr>
+<td>waitpid</td>
+<td>pthread_join</td>
+<td>等待控制流，从当前控制流得到退出状态</td>
+</tr>
+<tr>
+<td>exit</td>
+<td>pthread_exit</td>
+<td>从当前控制流中退出</td>
+</tr>
+<tr>
+<td>getpid</td>
+<td>pthread_self</td>
+<td>获取当前控制流的ID</td>
+</tr>
+<tr>
+<td>abort</td>
+<td>pthread_cancel</td>
+<td>使指定的控制流异常退出</td>
+</tr>
+<tr>
+<td>#### 线程创建与使用</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> * <span class="title">thread_test</span><span class="params">(<span class="keyword">void</span> *arg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//test</span></span><br><span class="line">    pthread(<span class="literal">NULL</span>); <span class="comment">//退出，也可以return</span></span><br><span class="line">    <span class="comment">//return (void *)1;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">pthread_t</span> thread1;</span><br><span class="line">    pthread_create(&amp;thread1,<span class="literal">NULL</span>,thread_test,<span class="literal">NULL</span>);</span><br><span class="line">    <span class="comment">//pthread_cancel(thread1); //关闭线程</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> wait_thread_end;</span><br><span class="line">    <span class="comment">//void *thread1_return;</span></span><br><span class="line">    <span class="comment">//wait_thread_end = pthread_join(thread1, &amp;thread1_return);</span></span><br><span class="line">    <span class="comment">//等待线程的返回，并获取返回值</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="线程传参"><a href="#线程传参" class="headerlink" title="线程传参"></a>线程传参</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//存储客户端sock_cli的结构体</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> sock_cli[<span class="number">10</span>];</span><br><span class="line">    <span class="keyword">int</span> num;</span><br><span class="line">&#125; SERVER_SOC;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">wdt_thread</span><span class="params">(<span class="keyword">void</span> *arg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    SERVER_SOC *wdt_sockfd;         <span class="comment">//新建一个SERVER_SOC结构体指针</span></span><br><span class="line">    wdt_sockfd = (SERVER_SOC *)arg; <span class="comment">//接收传递来的参数结构体</span></span><br><span class="line">    <span class="comment">//对wdt_sockfd-&gt;元素操作</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//return (void *)1; //退出线程</span></span><br><span class="line">    pthread_exit(<span class="number">0</span>); <span class="comment">//退出线程</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    pthread_create(&amp;thread2, <span class="literal">NULL</span>, wdt_thread, (<span class="keyword">void</span> *)sockfd);</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="线程局部变量"><a href="#线程局部变量" class="headerlink" title="线程局部变量"></a>线程局部变量</h4><p>当一个线程多次创建时，线程内定义的变量需要设置为局部变量，一种利用键值的demo如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">pthread_key_t</span> key_msg;    <span class="comment">//声明一个线程局部变量的共享键值</span></span><br><span class="line"><span class="keyword">pthread_key_t</span> key_buffer; <span class="comment">//声明一个线程局部变量的共享键值</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">recv_func</span><span class="params">(<span class="keyword">int</span> sock_cli)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    MSG_STRUCT *recv_msg = pthread_getspecific(key_msg); <span class="comment">//从键值中获取局部变量</span></span><br><span class="line">    <span class="keyword">char</span> *buffer = pthread_getspecific(key_buffer);      <span class="comment">//从键值中获取局部变量</span></span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">msg_thread</span><span class="params">(<span class="keyword">void</span> *arg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    SERVER_SOC *msg_sockfd;                                          <span class="comment">//新建一个SERVER_SOC结构体指针</span></span><br><span class="line">    msg_sockfd = (SERVER_SOC *)arg;                                  <span class="comment">//接收传递来的参数结构体</span></span><br><span class="line">    MSG_STRUCT *recv_msg = (MSG_STRUCT *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(MSG_STRUCT)); <span class="comment">//分配消息结构体指针</span></span><br><span class="line">    <span class="keyword">char</span> *buffer = (<span class="keyword">char</span> *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(MSG_STRUCT));               <span class="comment">//新建一个接收的缓存区域</span></span><br><span class="line">    pthread_setspecific(key_msg, recv_msg);                          <span class="comment">//将recv_msg与key_msg键值绑定</span></span><br><span class="line">    pthread_setspecific(key_buffer, buffer);                         <span class="comment">//将buffer与key_buffer键值绑定</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"线程ID为%lu\n"</span>, pthread_self());</span><br><span class="line">    recv_func(msg_sockfd-&gt;sock_cli[msg_sockfd-&gt;num]); <span class="comment">//接收服务端发来是信号</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//return (void *)1; //退出线程</span></span><br><span class="line">    pthread_exit(<span class="number">0</span>); <span class="comment">//退出线程</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    pthread_key_create(&amp;key_msg, <span class="literal">NULL</span>);</span><br><span class="line">    pthread_key_create(&amp;key_buffer, <span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        pthread_create(&amp;thread1, <span class="literal">NULL</span>, msg_thread, (<span class="keyword">void</span> *)sockfd); <span class="comment">//传参</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    pthread_key_delete(key_msg);    <span class="comment">//销毁键值</span></span><br><span class="line">    pthread_key_delete(key_buffer); <span class="comment">//销毁键值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="线程编译"><a href="#线程编译" class="headerlink" title="线程编译"></a>线程编译</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -o pthread -lpthread pthread.c  <span class="comment">#-lpthread调用libpthread库</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># cmake中添加链接库</span></span><br><span class="line">LINK_LIBRARIES(pthread)     <span class="comment">#添加链接库，gcc里面需要添加 -lpthread</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="自定义函数及功能"><a href="#自定义函数及功能" class="headerlink" title="自定义函数及功能"></a>自定义函数及功能</h2><h2 id="守护脚本"><a href="#守护脚本" class="headerlink" title="守护脚本"></a>守护脚本</h2><h2 id="实现结果"><a href="#实现结果" class="headerlink" title="实现结果"></a>实现结果</h2>
       
     </div>
     
@@ -683,7 +769,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#库函数"><span class="nav-number">1.</span> <span class="nav-text">库函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#socket"><span class="nav-number">1.1.</span> <span class="nav-text">socket</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#tcpsocket-实现"><span class="nav-number">1.1.1.</span> <span class="nav-text">tcpsocket 实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#socket-1"><span class="nav-number">1.1.2.</span> <span class="nav-text">socket()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bind"><span class="nav-number">1.1.3.</span> <span class="nav-text">bind()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#listen"><span class="nav-number">1.1.4.</span> <span class="nav-text">listen()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#accept"><span class="nav-number">1.1.5.</span> <span class="nav-text">accept()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#connect"><span class="nav-number">1.1.6.</span> <span class="nav-text">connect()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#send-和recv"><span class="nav-number">1.1.7.</span> <span class="nav-text">send()和recv()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#select"><span class="nav-number">1.2.</span> <span class="nav-text">select()</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#select-相关API"><span class="nav-number">1.2.1.</span> <span class="nav-text">select()相关API</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用范例"><span class="nav-number">1.2.2.</span> <span class="nav-text">使用范例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#深入理解select"><span class="nav-number">1.2.3.</span> <span class="nav-text">深入理解select</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#select的优缺点"><span class="nav-number">1.2.4.</span> <span class="nav-text">select的优缺点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pthread-create"><span class="nav-number">1.3.</span> <span class="nav-text">pthread_create()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义函数及功能"><span class="nav-number">2.</span> <span class="nav-text">自定义函数及功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#守护脚本"><span class="nav-number">3.</span> <span class="nav-text">守护脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现结果"><span class="nav-number">4.</span> <span class="nav-text">实现结果</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#库函数"><span class="nav-number">1.</span> <span class="nav-text">库函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#socket"><span class="nav-number">1.1.</span> <span class="nav-text">socket</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#tcpsocket-实现"><span class="nav-number">1.1.1.</span> <span class="nav-text">tcpsocket 实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#socket-1"><span class="nav-number">1.1.2.</span> <span class="nav-text">socket()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bind"><span class="nav-number">1.1.3.</span> <span class="nav-text">bind()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#listen"><span class="nav-number">1.1.4.</span> <span class="nav-text">listen()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#accept"><span class="nav-number">1.1.5.</span> <span class="nav-text">accept()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#connect"><span class="nav-number">1.1.6.</span> <span class="nav-text">connect()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#send-和recv"><span class="nav-number">1.1.7.</span> <span class="nav-text">send()和recv()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#select"><span class="nav-number">1.2.</span> <span class="nav-text">select()</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#select-相关API"><span class="nav-number">1.2.1.</span> <span class="nav-text">select()相关API</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用范例"><span class="nav-number">1.2.2.</span> <span class="nav-text">使用范例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#深入理解select"><span class="nav-number">1.2.3.</span> <span class="nav-text">深入理解select</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#select的优缺点"><span class="nav-number">1.2.4.</span> <span class="nav-text">select的优缺点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pthread-create"><span class="nav-number">1.3.</span> <span class="nav-text">pthread_create()</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#线程"><span class="nav-number">1.3.1.</span> <span class="nav-text">线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#线程与进程"><span class="nav-number">1.3.2.</span> <span class="nav-text">线程与进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#线程传参"><span class="nav-number">1.3.3.</span> <span class="nav-text">线程传参</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#线程局部变量"><span class="nav-number">1.3.4.</span> <span class="nav-text">线程局部变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#线程编译"><span class="nav-number">1.3.5.</span> <span class="nav-text">线程编译</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义函数及功能"><span class="nav-number">2.</span> <span class="nav-text">自定义函数及功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#守护脚本"><span class="nav-number">3.</span> <span class="nav-text">守护脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现结果"><span class="nav-number">4.</span> <span class="nav-text">实现结果</span></a></li></ol></div>
             
 
           </div>
