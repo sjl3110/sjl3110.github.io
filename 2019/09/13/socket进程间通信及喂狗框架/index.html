@@ -94,17 +94,17 @@
 
 
 
-<meta name="description" content="简单的服务器完成以下功能：  与客户端创建连接建立握手 转发客户端的消息，发向指定客户端 完成客户端喂狗信号的处理  库函数socket&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;参考：socket编程以及select、epoll、poll示例详解&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;n">
+<meta name="description" content="简单的服务器完成以下功能：  与客户端创建连接建立握手 转发客户端的消息，发向指定客户端 完成客户端喂狗信号的处理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="socket进程间通信及喂狗框架">
 <meta property="og:url" content="http://yoursite.com/2019/09/13/socket进程间通信及喂狗框架/index.html">
 <meta property="og:site_name" content="个人博客">
-<meta property="og:description" content="简单的服务器完成以下功能：  与客户端创建连接建立握手 转发客户端的消息，发向指定客户端 完成客户端喂狗信号的处理  库函数socket&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;参考：socket编程以及select、epoll、poll示例详解&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;n">
+<meta property="og:description" content="简单的服务器完成以下功能：  与客户端创建连接建立握手 转发客户端的消息，发向指定客户端 完成客户端喂狗信号的处理">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-14T06:13:20.089Z">
+<meta property="og:updated_time" content="2019-09-14T08:04:21.344Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="socket进程间通信及喂狗框架">
-<meta name="twitter:description" content="简单的服务器完成以下功能：  与客户端创建连接建立握手 转发客户端的消息，发向指定客户端 完成客户端喂狗信号的处理  库函数socket&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;参考：socket编程以及select、epoll、poll示例详解&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;n">
+<meta name="twitter:description" content="简单的服务器完成以下功能：  与客户端创建连接建立握手 转发客户端的消息，发向指定客户端 完成客户端喂狗信号的处理">
 
 
 
@@ -375,14 +375,11 @@
 <ol>
 <li>与客户端创建连接建立握手</li>
 <li>转发客户端的消息，发向指定客户端</li>
-<li>完成客户端喂狗信号的处理</li>
-</ol>
-<h2 id="库函数"><a href="#库函数" class="headerlink" title="库函数"></a>库函数</h2><h3 id="socket"><a href="#socket" class="headerlink" title="socket"></a>socket</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：<a href="https://blog.csdn.net/jyy305/article/details/73012706" target="_blank" rel="noopener">socket编程以及select、epoll、poll示例详解</a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;socket这个词可以表示很多概念，在TCP/IP协议中“IP地址 + TCP或UDP端口号”唯一标识网络通讯中的一个进程，“IP + 端口号”就称为socket。在TCP协议中，建立连接的两个进程各自有一个socket来标识，那么两个socket组成的socket pair就唯一标识一个连接。  </p>
-<blockquote>
+<li>完成客户端喂狗信号的处理<a id="more"></a>  
+<h2 id="库函数"><a href="#库函数" class="headerlink" title="库函数"></a>库函数</h2><h3 id="socket"><a href="#socket" class="headerlink" title="socket"></a>socket</h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：<a href="https://blog.csdn.net/jyy305/article/details/73012706" target="_blank" rel="noopener">socket编程以及select、epoll、poll示例详解</a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;socket这个词可以表示很多概念，在TCP/IP协议中“IP地址 + TCP或UDP端口号”唯一标识网络通讯中的一个进程，“IP + 端口号”就称为socket。在TCP协议中，建立连接的两个进程各自有一个socket来标识，那么两个socket组成的socket pair就唯一标识一个连接。  <blockquote>
 <p>网络字节序：内存中多字节数据相对于内存地址有大端小端之分，磁盘文件中的多字节数据相对于文件中的偏移地址也有大端小端之分。网络数据流同样有大端小端之分，所以发送主机通常将发送缓冲区中的数据按内存地址从低到高的顺序发出，接收主机把从网络上接收到的字节按内存从低到高的顺序保存，因此网络数据流的地址应该规定：<code>先发出的数据是低地址，后发出的数据是高地址</code>。TCP/IP协议规定网络数据流应该采用大端字节序，即低地址高字节。所以发送主机和接收主机是小段字节序的在发送和接收之前需要做字节序的转换。  </p>
 </blockquote>
-<h4 id="tcpsocket-实现"><a href="#tcpsocket-实现" class="headerlink" title="tcpsocket 实现"></a>tcpsocket 实现</h4><p>实现模型：</p>
-<ol>
+<h4 id="tcpsocket-实现"><a href="#tcpsocket-实现" class="headerlink" title="tcpsocket 实现"></a>tcpsocket 实现</h4>实现模型：</li>
 <li><strong>服务器端</strong>： socket -&gt; bind -&gt; listen -&gt; accept(阻塞,三次握手)-&gt; send。  </li>
 <li><strong>客户端</strong>： socket -&gt; connect(阻塞,三次握手)-&gt; recv。  </li>
 </ol>
@@ -466,6 +463,22 @@
 <blockquote>
 <p>注意：select在设置定时时，检测系统调用中的<code>SIGALARM</code>信号，会与其他的定时函数，例如alarm()、settimer()等函数。</p>
 </blockquote>
+<h4 id="select的优缺点"><a href="#select的优缺点" class="headerlink" title="select的优缺点"></a>select的优缺点</h4><ul>
+<li><strong>优点：</strong>   </li>
+</ul>
+<ol>
+<li>select的可移植性好，在某些unix下不支持poll.  </li>
+<li>select对超时值提供了很好的精度，精确到微秒，而poll式毫秒。  </li>
+</ol>
+<ul>
+<li><strong>缺点：</strong>    </li>
+</ul>
+<ol>
+<li>单个进程可监视的fd数量被限制，默认是1024。  </li>
+<li>需要维护一个用来存放大量fd的数据结构，这样会使得用户空间和内核空间在传递该结构时复制开销大。  </li>
+<li>对fd进行扫描时是线性扫描，fd剧增后，IO效率降低，每次调用都对fd进行线性扫描遍历，随着fd的增加会造成遍历速度慢的问题。  </li>
+<li>select函数超时参数在返回时也是未定义的，考虑到可移植性，每次超时之后进入下一个select之前都要重新设置超时参数。  </li>
+</ol>
 <h3 id="pthread-create"><a href="#pthread-create" class="headerlink" title="pthread_create()"></a>pthread_create()</h3><h2 id="自定义函数及功能"><a href="#自定义函数及功能" class="headerlink" title="自定义函数及功能"></a>自定义函数及功能</h2><h2 id="守护脚本"><a href="#守护脚本" class="headerlink" title="守护脚本"></a>守护脚本</h2><h2 id="实现结果"><a href="#实现结果" class="headerlink" title="实现结果"></a>实现结果</h2>
       
     </div>
@@ -670,7 +683,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#库函数"><span class="nav-number">1.</span> <span class="nav-text">库函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#socket"><span class="nav-number">1.1.</span> <span class="nav-text">socket</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#tcpsocket-实现"><span class="nav-number">1.1.1.</span> <span class="nav-text">tcpsocket 实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#socket-1"><span class="nav-number">1.1.2.</span> <span class="nav-text">socket()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bind"><span class="nav-number">1.1.3.</span> <span class="nav-text">bind()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#listen"><span class="nav-number">1.1.4.</span> <span class="nav-text">listen()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#accept"><span class="nav-number">1.1.5.</span> <span class="nav-text">accept()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#connect"><span class="nav-number">1.1.6.</span> <span class="nav-text">connect()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#send-和recv"><span class="nav-number">1.1.7.</span> <span class="nav-text">send()和recv()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#select"><span class="nav-number">1.2.</span> <span class="nav-text">select()</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#select-相关API"><span class="nav-number">1.2.1.</span> <span class="nav-text">select()相关API</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用范例"><span class="nav-number">1.2.2.</span> <span class="nav-text">使用范例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#深入理解select"><span class="nav-number">1.2.3.</span> <span class="nav-text">深入理解select</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pthread-create"><span class="nav-number">1.3.</span> <span class="nav-text">pthread_create()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义函数及功能"><span class="nav-number">2.</span> <span class="nav-text">自定义函数及功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#守护脚本"><span class="nav-number">3.</span> <span class="nav-text">守护脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现结果"><span class="nav-number">4.</span> <span class="nav-text">实现结果</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#库函数"><span class="nav-number">1.</span> <span class="nav-text">库函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#socket"><span class="nav-number">1.1.</span> <span class="nav-text">socket</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#tcpsocket-实现"><span class="nav-number">1.1.1.</span> <span class="nav-text">tcpsocket 实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#socket-1"><span class="nav-number">1.1.2.</span> <span class="nav-text">socket()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bind"><span class="nav-number">1.1.3.</span> <span class="nav-text">bind()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#listen"><span class="nav-number">1.1.4.</span> <span class="nav-text">listen()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#accept"><span class="nav-number">1.1.5.</span> <span class="nav-text">accept()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#connect"><span class="nav-number">1.1.6.</span> <span class="nav-text">connect()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#send-和recv"><span class="nav-number">1.1.7.</span> <span class="nav-text">send()和recv()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#select"><span class="nav-number">1.2.</span> <span class="nav-text">select()</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#select-相关API"><span class="nav-number">1.2.1.</span> <span class="nav-text">select()相关API</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用范例"><span class="nav-number">1.2.2.</span> <span class="nav-text">使用范例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#深入理解select"><span class="nav-number">1.2.3.</span> <span class="nav-text">深入理解select</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#select的优缺点"><span class="nav-number">1.2.4.</span> <span class="nav-text">select的优缺点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pthread-create"><span class="nav-number">1.3.</span> <span class="nav-text">pthread_create()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义函数及功能"><span class="nav-number">2.</span> <span class="nav-text">自定义函数及功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#守护脚本"><span class="nav-number">3.</span> <span class="nav-text">守护脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现结果"><span class="nav-number">4.</span> <span class="nav-text">实现结果</span></a></li></ol></div>
             
 
           </div>
