@@ -388,17 +388,39 @@
 </blockquote>
 <h4 id="tcpsocket-实现"><a href="#tcpsocket-实现" class="headerlink" title="tcpsocket 实现"></a>tcpsocket 实现</h4><p>实现模型：</p>
 <ol>
-<li>服务器端 socket -&gt; bind -&gt; listen -&gt; accept(阻塞,三次握手)-&gt; send。</li>
-<li>客户端 socket -&gt; connect(阻塞,三次握手)-&gt; recv。<h4 id="socket-1"><a href="#socket-1" class="headerlink" title="socket()"></a>socket()</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">socket</span><span class="params">(<span class="keyword">int</span> family, <span class="keyword">int</span> type, <span class="keyword">int</span> protocol)</span></span></span><br><span class="line">```  </span><br><span class="line">* family：指定协议的类型本次选择AF_INET（IPv4协议）；   </span><br><span class="line">* type：网络数据类型，TCP是面向字节流的—SOCK_STREAM；   </span><br><span class="line">* protocol：前两个参数一般确定了协议类型通常传<span class="number">0</span>；   </span><br><span class="line">* 返回值：成功返回套接字符；失败返回<span class="number">-1</span>设置相关错误码。   </span><br><span class="line">###<span class="meta"># bind()</span></span><br><span class="line">``` C</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bind</span><span class="params">(<span class="keyword">int</span> sockfd, <span class="keyword">const</span> struct sockaddr *servaddr, <span class="keyword">socklen_t</span> addrlen)</span></span></span><br></pre></td></tr></table></figure>
-</li>
+<li>服务器端 socket -&gt; bind -&gt; listen -&gt; accept(阻塞,三次握手)-&gt; send。  </li>
+<li>客户端 socket -&gt; connect(阻塞,三次握手)-&gt; recv。  </li>
 </ol>
+<h4 id="socket-1"><a href="#socket-1" class="headerlink" title="socket()"></a>socket()</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">socket</span><span class="params">(<span class="keyword">int</span> family, <span class="keyword">int</span> type, <span class="keyword">int</span> protocol)</span></span></span><br></pre></td></tr></table></figure>
+
+
 <ul>
-<li>sockfd：socket函数成功时候返回的套接字描述符；</li>
-<li>servaddr：服务器的IP和端口；</li>
-<li>addrlen： 长度（sizeof(servaddr)）；</li>
-<li>返回值：成功返回0；失败返回-1，并设置相关错误码。</li>
+<li>family：指定协议的类型本次选择AF_INET（IPv4协议）；   </li>
+<li>type：网络数据类型，TCP是面向字节流的—SOCK_STREAM；   </li>
+<li>protocol：前两个参数一般确定了协议类型通常传0；   </li>
+<li>返回值：成功返回套接字符；失败返回-1设置相关错误码。   <h4 id="bind"><a href="#bind" class="headerlink" title="bind()"></a>bind()</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bind</span><span class="params">(<span class="keyword">int</span> sockfd, <span class="keyword">const</span> struct sockaddr *servaddr, <span class="keyword">socklen_t</span> addrlen)</span></span></span><br></pre></td></tr></table></figure>
+
+
+</li>
 </ul>
-<h3 id="select"><a href="#select" class="headerlink" title="select()"></a>select()</h3><h3 id="pthread-create"><a href="#pthread-create" class="headerlink" title="pthread_create()"></a>pthread_create()</h3><h2 id="自定义函数及功能"><a href="#自定义函数及功能" class="headerlink" title="自定义函数及功能"></a>自定义函数及功能</h2><h2 id="守护脚本"><a href="#守护脚本" class="headerlink" title="守护脚本"></a>守护脚本</h2><h2 id="实现结果"><a href="#实现结果" class="headerlink" title="实现结果"></a>实现结果</h2>
+<ul>
+<li><p>sockfd：socket函数成功时候返回的套接字描述符；  </p>
+</li>
+<li><p>servaddr：服务器的IP和端口；  </p>
+</li>
+<li><p>addrlen： 长度（sizeof(servaddr)）；  </p>
+</li>
+<li><p>返回值：成功返回0；失败返回-1，并设置相关错误码。  </p>
+<h4 id="listen"><a href="#listen" class="headerlink" title="listen()"></a>listen()</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">listen</span><span class="params">(<span class="keyword">int</span> sockfd, <span class="keyword">int</span> backlog)</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>sockfd：socket函数成功时候返回的套接字描述符；</p>
+</li>
+<li><p>backlog：内核中套接字排队的最大个数；</p>
+</li>
+<li><p>返回值：成功返回0；失败返回-1，并设置相关错误码。</p>
+<h3 id="select"><a href="#select" class="headerlink" title="select()"></a>select()</h3><h3 id="pthread-create"><a href="#pthread-create" class="headerlink" title="pthread_create()"></a>pthread_create()</h3></li>
+</ul>
+<h2 id="自定义函数及功能"><a href="#自定义函数及功能" class="headerlink" title="自定义函数及功能"></a>自定义函数及功能</h2><h2 id="守护脚本"><a href="#守护脚本" class="headerlink" title="守护脚本"></a>守护脚本</h2><h2 id="实现结果"><a href="#实现结果" class="headerlink" title="实现结果"></a>实现结果</h2>
           
         
       

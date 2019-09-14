@@ -101,7 +101,7 @@
 <meta property="og:site_name" content="个人博客">
 <meta property="og:description" content="简单的服务器完成以下功能：  与客户端创建连接建立握手 转发客户端的消息，发向指定客户端 完成客户端喂狗信号的处理  库函数socketsocket这个词可以表示很多概念，在TCP/IP协议中“IP地址 + TCP或UDP端口号”唯一标识网络通讯中的一个进程，“IP + 端口号”就称为socket。在TCP协议中，建立连接的两个进程各自有一个socket来标识，那么两个socket组成的socke">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-14T05:31:56.808Z">
+<meta property="og:updated_time" content="2019-09-14T05:34:12.282Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="socket进程间通信及喂狗框架">
 <meta name="twitter:description" content="简单的服务器完成以下功能：  与客户端创建连接建立握手 转发客户端的消息，发向指定客户端 完成客户端喂狗信号的处理  库函数socketsocket这个词可以表示很多概念，在TCP/IP协议中“IP地址 + TCP或UDP端口号”唯一标识网络通讯中的一个进程，“IP + 端口号”就称为socket。在TCP协议中，建立连接的两个进程各自有一个socket来标识，那么两个socket组成的socke">
@@ -383,17 +383,39 @@
 </blockquote>
 <h4 id="tcpsocket-实现"><a href="#tcpsocket-实现" class="headerlink" title="tcpsocket 实现"></a>tcpsocket 实现</h4><p>实现模型：</p>
 <ol>
-<li>服务器端 socket -&gt; bind -&gt; listen -&gt; accept(阻塞,三次握手)-&gt; send。</li>
-<li>客户端 socket -&gt; connect(阻塞,三次握手)-&gt; recv。<h4 id="socket-1"><a href="#socket-1" class="headerlink" title="socket()"></a>socket()</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">socket</span><span class="params">(<span class="keyword">int</span> family, <span class="keyword">int</span> type, <span class="keyword">int</span> protocol)</span></span></span><br><span class="line">```  </span><br><span class="line">* family：指定协议的类型本次选择AF_INET（IPv4协议）；   </span><br><span class="line">* type：网络数据类型，TCP是面向字节流的—SOCK_STREAM；   </span><br><span class="line">* protocol：前两个参数一般确定了协议类型通常传<span class="number">0</span>；   </span><br><span class="line">* 返回值：成功返回套接字符；失败返回<span class="number">-1</span>设置相关错误码。   </span><br><span class="line">###<span class="meta"># bind()</span></span><br><span class="line">``` C</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bind</span><span class="params">(<span class="keyword">int</span> sockfd, <span class="keyword">const</span> struct sockaddr *servaddr, <span class="keyword">socklen_t</span> addrlen)</span></span></span><br></pre></td></tr></table></figure>
-</li>
+<li>服务器端 socket -&gt; bind -&gt; listen -&gt; accept(阻塞,三次握手)-&gt; send。  </li>
+<li>客户端 socket -&gt; connect(阻塞,三次握手)-&gt; recv。  </li>
 </ol>
+<h4 id="socket-1"><a href="#socket-1" class="headerlink" title="socket()"></a>socket()</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">socket</span><span class="params">(<span class="keyword">int</span> family, <span class="keyword">int</span> type, <span class="keyword">int</span> protocol)</span></span></span><br></pre></td></tr></table></figure>
+
+
 <ul>
-<li>sockfd：socket函数成功时候返回的套接字描述符；</li>
-<li>servaddr：服务器的IP和端口；</li>
-<li>addrlen： 长度（sizeof(servaddr)）；</li>
-<li>返回值：成功返回0；失败返回-1，并设置相关错误码。</li>
+<li>family：指定协议的类型本次选择AF_INET（IPv4协议）；   </li>
+<li>type：网络数据类型，TCP是面向字节流的—SOCK_STREAM；   </li>
+<li>protocol：前两个参数一般确定了协议类型通常传0；   </li>
+<li>返回值：成功返回套接字符；失败返回-1设置相关错误码。   <h4 id="bind"><a href="#bind" class="headerlink" title="bind()"></a>bind()</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bind</span><span class="params">(<span class="keyword">int</span> sockfd, <span class="keyword">const</span> struct sockaddr *servaddr, <span class="keyword">socklen_t</span> addrlen)</span></span></span><br></pre></td></tr></table></figure>
+
+
+</li>
 </ul>
-<h3 id="select"><a href="#select" class="headerlink" title="select()"></a>select()</h3><h3 id="pthread-create"><a href="#pthread-create" class="headerlink" title="pthread_create()"></a>pthread_create()</h3><h2 id="自定义函数及功能"><a href="#自定义函数及功能" class="headerlink" title="自定义函数及功能"></a>自定义函数及功能</h2><h2 id="守护脚本"><a href="#守护脚本" class="headerlink" title="守护脚本"></a>守护脚本</h2><h2 id="实现结果"><a href="#实现结果" class="headerlink" title="实现结果"></a>实现结果</h2>
+<ul>
+<li><p>sockfd：socket函数成功时候返回的套接字描述符；  </p>
+</li>
+<li><p>servaddr：服务器的IP和端口；  </p>
+</li>
+<li><p>addrlen： 长度（sizeof(servaddr)）；  </p>
+</li>
+<li><p>返回值：成功返回0；失败返回-1，并设置相关错误码。  </p>
+<h4 id="listen"><a href="#listen" class="headerlink" title="listen()"></a>listen()</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">listen</span><span class="params">(<span class="keyword">int</span> sockfd, <span class="keyword">int</span> backlog)</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>sockfd：socket函数成功时候返回的套接字描述符；</p>
+</li>
+<li><p>backlog：内核中套接字排队的最大个数；</p>
+</li>
+<li><p>返回值：成功返回0；失败返回-1，并设置相关错误码。</p>
+<h3 id="select"><a href="#select" class="headerlink" title="select()"></a>select()</h3><h3 id="pthread-create"><a href="#pthread-create" class="headerlink" title="pthread_create()"></a>pthread_create()</h3></li>
+</ul>
+<h2 id="自定义函数及功能"><a href="#自定义函数及功能" class="headerlink" title="自定义函数及功能"></a>自定义函数及功能</h2><h2 id="守护脚本"><a href="#守护脚本" class="headerlink" title="守护脚本"></a>守护脚本</h2><h2 id="实现结果"><a href="#实现结果" class="headerlink" title="实现结果"></a>实现结果</h2>
       
     </div>
     
@@ -597,7 +619,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#库函数"><span class="nav-number">1.</span> <span class="nav-text">库函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#socket"><span class="nav-number">1.1.</span> <span class="nav-text">socket</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#tcpsocket-实现"><span class="nav-number">1.1.1.</span> <span class="nav-text">tcpsocket 实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#socket-1"><span class="nav-number">1.1.2.</span> <span class="nav-text">socket()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#select"><span class="nav-number">1.2.</span> <span class="nav-text">select()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pthread-create"><span class="nav-number">1.3.</span> <span class="nav-text">pthread_create()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义函数及功能"><span class="nav-number">2.</span> <span class="nav-text">自定义函数及功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#守护脚本"><span class="nav-number">3.</span> <span class="nav-text">守护脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现结果"><span class="nav-number">4.</span> <span class="nav-text">实现结果</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#库函数"><span class="nav-number">1.</span> <span class="nav-text">库函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#socket"><span class="nav-number">1.1.</span> <span class="nav-text">socket</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#tcpsocket-实现"><span class="nav-number">1.1.1.</span> <span class="nav-text">tcpsocket 实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#socket-1"><span class="nav-number">1.1.2.</span> <span class="nav-text">socket()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bind"><span class="nav-number">1.1.3.</span> <span class="nav-text">bind()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#listen"><span class="nav-number">1.1.4.</span> <span class="nav-text">listen()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#select"><span class="nav-number">1.2.</span> <span class="nav-text">select()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pthread-create"><span class="nav-number">1.3.</span> <span class="nav-text">pthread_create()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义函数及功能"><span class="nav-number">2.</span> <span class="nav-text">自定义函数及功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#守护脚本"><span class="nav-number">3.</span> <span class="nav-text">守护脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现结果"><span class="nav-number">4.</span> <span class="nav-text">实现结果</span></a></li></ol></div>
             
 
           </div>
