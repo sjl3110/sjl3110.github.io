@@ -102,7 +102,7 @@
 <meta property="og:site_name" content="个人博客">
 <meta property="og:description" content="VS2015编译按ctrl+F5网页地址菜鸟教程">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-17T11:10:05.383Z">
+<meta property="og:updated_time" content="2019-09-17T12:36:59.728Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++学习笔记--菜鸟教程">
 <meta name="twitter:description" content="VS2015编译按ctrl+F5网页地址菜鸟教程">
@@ -641,6 +641,122 @@
 </ol>
 </blockquote>
 <hr>
+<h2 id="C-运算符"><a href="#C-运算符" class="headerlink" title="C++运算符"></a>C++运算符</h2><h3 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h3><p>A =10, B =20.<br>|运算符|描述|实例|<br>|—|—|—|<br>|+|把两个操作数相加|A + B 将得到 30|<br>|-|从第一个操作数中减去第二个操作数|A - B 将得到 -10|<br>|* |把两个操作数相乘|A * B 将得到 200|<br>|/|分子除以分母|B / A 将得到 2|<br>|%|取模运算符，整除后的余数|B % A 将得到 0|<br>|++|自增运算符，整数值增加 1|A++ 将得到 11|<br>|–|自减运算符，整数值减少 1|A– 将得到 9|</p>
+<hr>
+<blockquote>
+<p>++d 是先加，先对 d 的值加 1，再使用 d 的值执行该行命令。<br>d++ 是后加，先使用 d 的值执行该行命令，执行完后再对 d 的值加 1。</p>
+</blockquote>
+<hr>
+<h3 id="关系运算符"><a href="#关系运算符" class="headerlink" title="关系运算符"></a>关系运算符</h3><p>A =10, B =20.<br>|运算符|描述|实例|<br>|—|—|—|<br>| == | 检查两个操作数的值是否相等，如果相等则条件为真。 | (A == B) 不为真。 |<br>| != | 检查两个操作数的值是否相等，如果不相等则条件为真。 | (A != B) 为真。 |<br>| &gt; | 检查左操作数的值是否大于右操作数的值，如果是则条件为真。 | (A &gt; B) 不为真。 |<br>| &lt; | 检查左操作数的值是否小于右操作数的值，如果是则条件为真。 | (A &lt; B) 为真。 |<br>| &gt;= | 检查左操作数的值是否大于或等于右操作数的值，如果是则条件为真。 | (A &gt;= B) 不为真。 |<br>| &lt;= | 检查左操作数的值是否小于或等于右操作数的值，如果是则条件为真。 | (A &lt;= B) 为真。 |</p>
+<h3 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h3><p>A =1, B =0.<br>|运算符|描述|实例|<br>|—|—|—|<br>| &amp;&amp; | 称为逻辑与运算符。如果两个操作数都非零，则条件为真。 | (A &amp;&amp; B) 为假。 |<br>| || | 称为逻辑或运算符。如果两个操作数中有任意一个非零，则条件为真。 | (A || B) 为真。 |<br>| ! | 称为逻辑非运算符。用来逆转操作数的逻辑状态。如果条件为真则逻辑非运算符将使其为假。 | !(A &amp;&amp; B) 为真。 |</p>
+<h3 id="位运算符"><a href="#位运算符" class="headerlink" title="位运算符"></a>位运算符</h3><p>A = 60 = (0011 1100)<br>B = 13 = (0000 1101)<br>|运算符|描述|实例|<br>|—|—|—|<br>| &amp; | 如果同时存在于两个操作数中，二进制 AND 运算符复制一位到结果中。 | (A &amp; B) 将得到 12，即为 0000 1100 |<br>| | | 如果存在于任一操作数中，二进制 OR 运算符复制一位到结果中。 | (A | B) 将得到 61，即为 0011 1101 |<br>| ^ | 如果存在于其中一个操作数中但不同时存在于两个操作数中，二进制异或运算符复制一位到结果中。 | (A ^ B) 将得到 49，即为 0011 0001 |<br>| ~ | 二进制补码运算符是一元运算符，具有”翻转”位效果，即0变成1，1变成0。 | (~A ) 将得到 -61，即为 1100 0011 |<br>| &lt;&lt; | 二进制左移运算符。左操作数的值向左移动右操作数指定的位数。 | A &lt;&lt; 2 将得到 240，即为 1111 0000 |<br>| &gt;&gt; | 二进制右移运算符。左操作数的值向右移动右操作数指定的位数。 | A &gt;&gt; 2 将得到 15，即为 0000 1111 |</p>
+<h3 id="赋值运算符"><a href="#赋值运算符" class="headerlink" title="赋值运算符"></a>赋值运算符</h3><table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>描述</th>
+<th>实例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>=</td>
+<td>简单的赋值运算符，把右边操作数的值赋给左边操作数</td>
+<td>C = A + B 将把 A + B 的值赋给 C</td>
+</tr>
+<tr>
+<td>+=</td>
+<td>加且赋值运算符，把右边操作数加上左边操作数的结果赋值给左边操作数</td>
+<td>C += A 相当于 C = C + A</td>
+</tr>
+<tr>
+<td>-=</td>
+<td>减且赋值运算符，把左边操作数减去右边操作数的结果赋值给左边操作数</td>
+<td>C -= A 相当于 C = C - A</td>
+</tr>
+<tr>
+<td>*=</td>
+<td>乘且赋值运算符，把右边操作数乘以左边操作数的结果赋值给左边操作数</td>
+<td>C *= A 相当于 C = C * A</td>
+</tr>
+<tr>
+<td>/=</td>
+<td>除且赋值运算符，把左边操作数除以右边操作数的结果赋值给左边操作数</td>
+<td>C /= A 相当于 C = C / A</td>
+</tr>
+<tr>
+<td>%=</td>
+<td>求模且赋值运算符，求两个操作数的模赋值给左边操作数</td>
+<td>C %= A 相当于 C = C % A</td>
+</tr>
+<tr>
+<td>&lt;&lt;=</td>
+<td>左移且赋值运算符</td>
+<td>C &lt;&lt;= 2 等同于 C = C &lt;&lt; 2</td>
+</tr>
+<tr>
+<td>&gt;&gt;=</td>
+<td>右移且赋值运算符</td>
+<td>C &gt;&gt;= 2 等同于 C = C &gt;&gt; 2</td>
+</tr>
+<tr>
+<td>&amp;=</td>
+<td>按位与且赋值运算符</td>
+<td>C &amp;= 2 等同于 C = C &amp; 2</td>
+</tr>
+<tr>
+<td>^=</td>
+<td>按位异或且赋值运算符</td>
+<td>C ^= 2 等同于 C = C ^ 2</td>
+</tr>
+<tr>
+<td>|=</td>
+<td>按位或且赋值运算符</td>
+<td>C |= 2 等同于 C = C | 2</td>
+</tr>
+</tbody></table>
+<h3 id="杂项运算符"><a href="#杂项运算符" class="headerlink" title="杂项运算符"></a>杂项运算符</h3><table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sizeof</td>
+<td>sizeof 运算符返回变量的大小。例如，sizeof(a) 将返回 4，其中 a 是整数。</td>
+</tr>
+<tr>
+<td>Condition ? X : Y</td>
+<td>条件运算符。如果 Condition 为真 ? 则值为 X : 否则值为 Y。</td>
+</tr>
+<tr>
+<td>,</td>
+<td>逗号运算符会顺序执行一系列运算。整个逗号表达式的值是以逗号分隔的列表中的最后一个表达式的值。</td>
+</tr>
+<tr>
+<td>.（点）和 -&gt;（箭头）</td>
+<td>成员运算符用于引用类、结构和共用体的成员。</td>
+</tr>
+<tr>
+<td>Cast</td>
+<td>强制转换运算符把一种数据类型转换为另一种数据类型。例如，int(2.2000) 将返回 2。</td>
+</tr>
+<tr>
+<td>&amp;</td>
+<td>指针运算符 &amp; 返回变量的地址。例如 &a; 将给出变量的实际地址。</td>
+</tr>
+<tr>
+<td>*</td>
+<td>指针运算符 * 指向一个变量。例如，*var; 将指向变量 var。</td>
+</tr>
+<tr>
+<td>### 运算优先级</td>
+<td></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>条件 ?: 从右到左</p>
+</blockquote>
 <h2 id="C-类与对象"><a href="#C-类与对象" class="headerlink" title="C++类与对象"></a>C++类与对象</h2><h3 id="定义类"><a href="#定义类" class="headerlink" title="定义类"></a>定义类</h3><p>C++ 在 C 语言的基础上增加了面向对象编程，C++ 支持面向对象程序设计。类是 C++ 的核心特性，通常被称为用户定义的类型。<br>类用于指定对象的形式，它包含了数据表示法和用于处理数据的方法。类中的数据和方法称为类的成员。函数在一个类中被称为类的成员。<br>类定义是以关键字 class 开头，后跟类的名称。类的主体是包含在一对花括号中。类定义后必须跟着一个分号或一个声明列表。例如，我们使用关键字 class 定义 Box 数据类型，如下所示：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Box</span> </span></span><br><span class="line"><span class="class">&#123;</span> </span><br><span class="line">    <span class="keyword">public</span>: </span><br><span class="line">        <span class="keyword">double</span> length; <span class="comment">// 盒子的长度 </span></span><br><span class="line">        <span class="keyword">double</span> breadth; <span class="comment">// 盒子的宽度 </span></span><br><span class="line">        <span class="keyword">double</span> height; <span class="comment">// 盒子的高度 </span></span><br><span class="line"> &#125;;</span><br></pre></td></tr></table></figure>
 
@@ -857,7 +973,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#helloworld"><span class="nav-number">1.</span> <span class="nav-text">helloworld</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-基本语法"><span class="nav-number">2.</span> <span class="nav-text">C++基本语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-注释"><span class="nav-number">3.</span> <span class="nav-text">C++注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-数据类型"><span class="nav-number">4.</span> <span class="nav-text">C++数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#长度"><span class="nav-number">4.1.</span> <span class="nav-text">长度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#枚举类型"><span class="nav-number">4.2.</span> <span class="nav-text">枚举类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-变量类型"><span class="nav-number">5.</span> <span class="nav-text">C++变量类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-作用域"><span class="nav-number">6.</span> <span class="nav-text">C++作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#全局变量默认初始值"><span class="nav-number">6.1.</span> <span class="nav-text">全局变量默认初始值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-常量"><span class="nav-number">7.</span> <span class="nav-text">C++常量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-修饰符类型"><span class="nav-number">8.</span> <span class="nav-text">C++修饰符类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-存储类"><span class="nav-number">9.</span> <span class="nav-text">C++ 存储类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-类与对象"><span class="nav-number">10.</span> <span class="nav-text">C++类与对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义类"><span class="nav-number">10.1.</span> <span class="nav-text">定义类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例化对象"><span class="nav-number">10.2.</span> <span class="nav-text">实例化对象</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#helloworld"><span class="nav-number">1.</span> <span class="nav-text">helloworld</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-基本语法"><span class="nav-number">2.</span> <span class="nav-text">C++基本语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-注释"><span class="nav-number">3.</span> <span class="nav-text">C++注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-数据类型"><span class="nav-number">4.</span> <span class="nav-text">C++数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#长度"><span class="nav-number">4.1.</span> <span class="nav-text">长度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#枚举类型"><span class="nav-number">4.2.</span> <span class="nav-text">枚举类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-变量类型"><span class="nav-number">5.</span> <span class="nav-text">C++变量类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-作用域"><span class="nav-number">6.</span> <span class="nav-text">C++作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#全局变量默认初始值"><span class="nav-number">6.1.</span> <span class="nav-text">全局变量默认初始值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-常量"><span class="nav-number">7.</span> <span class="nav-text">C++常量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-修饰符类型"><span class="nav-number">8.</span> <span class="nav-text">C++修饰符类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-存储类"><span class="nav-number">9.</span> <span class="nav-text">C++ 存储类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-运算符"><span class="nav-number">10.</span> <span class="nav-text">C++运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算术运算符"><span class="nav-number">10.1.</span> <span class="nav-text">算术运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关系运算符"><span class="nav-number">10.2.</span> <span class="nav-text">关系运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#逻辑运算符"><span class="nav-number">10.3.</span> <span class="nav-text">逻辑运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#位运算符"><span class="nav-number">10.4.</span> <span class="nav-text">位运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#赋值运算符"><span class="nav-number">10.5.</span> <span class="nav-text">赋值运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#杂项运算符"><span class="nav-number">10.6.</span> <span class="nav-text">杂项运算符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-类与对象"><span class="nav-number">11.</span> <span class="nav-text">C++类与对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义类"><span class="nav-number">11.1.</span> <span class="nav-text">定义类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例化对象"><span class="nav-number">11.2.</span> <span class="nav-text">实例化对象</span></a></li></ol></li></ol></div>
             
 
           </div>
