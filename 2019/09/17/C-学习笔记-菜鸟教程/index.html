@@ -102,7 +102,7 @@
 <meta property="og:site_name" content="个人博客">
 <meta property="og:description" content="VS2015编译按ctrl+F5网页地址菜鸟教程">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-17T11:05:29.307Z">
+<meta property="og:updated_time" content="2019-09-17T11:07:55.291Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++学习笔记--菜鸟教程">
 <meta name="twitter:description" content="VS2015编译按ctrl+F5网页地址菜鸟教程">
@@ -476,10 +476,10 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> color &#123; red, green=<span class="number">5</span>, blue &#125;;</span><br></pre></td></tr></table></figure>
 
 <p>在这里，blue 的值为 6，因为默认情况下，每个名称都会比它前面一个名称大 1，但 red 的值依然为 0。</p>
-<h2 id="C-变量类型"><a href="#C-变量类型" class="headerlink" title="C++变量类型"></a>C++变量类型</h2><p>bool char int float double void wchar_t 枚举 指针 数组 数据结构 类<br>可以使用 extern 关键字在任何地方<code>声明</code>一个变量。虽然您可以在 C++ 程序中多次声明一个变量，但变量只能在某个文件、函数或代码块中被定义一次。<br>同样的，在函数声明时，提供一个函数名，而函数的实际定义则可以在任何地方进行。<br><strong>定义包含了声明，但是声明不包含定义。</strong></p>
+<h2 id="C-变量类型"><a href="#C-变量类型" class="headerlink" title="C++变量类型"></a>C++变量类型</h2><p><strong>bool char int float double void wchar_t 枚举 指针 数组 数据结构 类</strong><br>可以使用 extern 关键字在任何地方<code>声明</code>一个变量。虽然您可以在 C++ 程序中多次声明一个变量，但变量只能在某个文件、函数或代码块中被定义一次。<br>同样的，在函数声明时，提供一个函数名，而函数的实际定义则可以在任何地方进行。<strong>定义包含了声明，但是声明不包含定义。</strong></p>
 <hr>
 <blockquote>
-<p>C/C++ 编译 cpp 文件是从上往下编译，所以 main 函数里面调用其他函数时，如果其他函数在 main 函数的下面，则要在 main 函数上面先声明这个函数。<br>或者把 main 函数放在最下面，这个不仅限于 main 函数，其他函数的调用都是如此。被调用的函数要在调用的函数之前声明。</p>
+<p>C/C++ 编译 cpp 文件是从上往下编译，所以 main 函数里面调用其他函数时，如果其他函数在 main 函数的下面，则要在 main 函数上面先声明这个函数。或者把 main 函数放在最下面，这个不仅限于 main 函数，其他函数的调用都是如此。被调用的函数要在调用的函数之前声明。</p>
 </blockquote>
 <hr>
 <blockquote>
