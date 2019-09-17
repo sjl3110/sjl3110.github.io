@@ -102,7 +102,7 @@
 <meta property="og:site_name" content="个人博客">
 <meta property="og:description" content="VS2015编译按ctrl+F5网页地址菜鸟教程">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-17T11:08:43.218Z">
+<meta property="og:updated_time" content="2019-09-17T11:10:05.383Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++学习笔记--菜鸟教程">
 <meta name="twitter:description" content="VS2015编译按ctrl+F5网页地址菜鸟教程">
@@ -385,7 +385,17 @@
 <blockquote>
 <p>相当于:</p>
 </blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span> &lt;&lt; <span class="built_in">std</span>::flush;</span><br><span class="line">或者</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>; <span class="built_in">std</span>::fflush(<span class="built_in">stdout</span>);</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">&gt;由于流操作符 &lt;&lt; 的重载，对于 <span class="string">'\n'</span> 和 <span class="string">"\n"</span>，输出效果相同。对于有输出缓冲的流（例如<span class="built_in">cout</span>、<span class="built_in">clog</span>），如果不手动进行缓冲区刷新操作，将在缓冲区满后自动刷新输出。不过对于 <span class="built_in">cout</span> 来说（相对于文件输出流等），缓冲一般体现得并不明显。但是必要情况下使用 <span class="built_in">endl</span> 代替 <span class="string">'\n'</span> 一般是个好习惯。</span><br><span class="line">&gt;对于无缓冲的流（例如标准错误输出流<span class="built_in">cerr</span>），刷新是不必要的，可以直接使用 <span class="string">'\n'</span>。</span><br><span class="line">&gt;真正的开发过程中， 尽量避免使用 <span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>; 等直接引入整个命名空间，否则会因为命名空间污染导致很多不必要的问题， 比如自己写的某个函数，名称正好和 <span class="built_in">std</span> 中的一样， 编译器会不知道使用哪一个， 引起编译报错， 建议使用:</span><br><span class="line">``` cpp</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Hello World"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span> &lt;&lt; <span class="built_in">std</span>::flush;</span><br><span class="line">或者</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>; <span class="built_in">std</span>::fflush(<span class="built_in">stdout</span>);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<blockquote>
+<p>由于流操作符 &lt;&lt; 的重载，对于 ‘\n’ 和 “\n”，输出效果相同。对于有输出缓冲的流（例如cout、clog），如果不手动进行缓冲区刷新操作，将在缓冲区满后自动刷新输出。不过对于 cout 来说（相对于文件输出流等），缓冲一般体现得并不明显。但是必要情况下使用 endl 代替 ‘\n’ 一般是个好习惯。<br>对于无缓冲的流（例如标准错误输出流cerr），刷新是不必要的，可以直接使用 ‘\n’。</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>真正的开发过程中， 尽量避免使用 using namespace std; 等直接引入整个命名空间，否则会因为命名空间污染导致很多不必要的问题， 比如自己写的某个函数，名称正好和 std 中的一样， 编译器会不知道使用哪一个， 引起编译报错， 建议使用:</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Hello World"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
 
 
 <blockquote>
