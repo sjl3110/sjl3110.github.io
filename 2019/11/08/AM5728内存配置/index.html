@@ -106,7 +106,7 @@
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2019/png/291611/1573191983828-5404393f-a212-4495-8873-782d41650e88.png?x-oss-process=image/resize,w_747">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2019/png/291611/1573191991095-65719886-eeb8-4158-a847-0c145284a414.png">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2019/png/291611/1573191994187-8f80fbe3-188b-4c56-b8d6-6e347258e9d2.png">
-<meta property="og:updated_time" content="2019-11-08T06:07:20.415Z">
+<meta property="og:updated_time" content="2019-11-08T06:37:16.763Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AM5728配置DMM_LISA_MAP修改内存工作模式">
 <meta name="twitter:description" content="在测试AM5728时发现，ARM读完SD card中的MLO文件后没有后续操作，推断是由于我们的硬件更改导致的内存加载出错，研究TI给出的《AM572x Technical Reference Manual》，需要配置相关的寄存器。 硬件更改原TI AM5728使用EMIF0接口和EMIF1接口，使用interleaving模式配置2GB的内存，每个EMIF接口连接两个512MB的内存芯片。为降低">
@@ -400,14 +400,49 @@
 <td>/</td>
 <td>128MB</td>
 </tr>
+<tr>
+<td><a id="more"></a></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>### 寄存器详解</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>根据TRM 15.2.3.5.1.2所述，在系统启动时，需要合理更改DDR的寄存器配置，主要有以下四种：</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>* DMM_LISA_MAP_3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>* DMM_LISA_MAP_2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>* DMM_LISA_MAP_1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>* DMM_LISA_MAP_0</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
 </tbody></table>
-<h3 id="寄存器详解"><a href="#寄存器详解" class="headerlink" title="寄存器详解"></a>寄存器详解</h3><p>根据TRM 15.2.3.5.1.2所述，在系统启动时，需要合理更改DDR的寄存器配置，主要有以下四种：</p>
-<ul>
-<li>DMM_LISA_MAP_3</li>
-<li>DMM_LISA_MAP_2</li>
-<li>DMM_LISA_MAP_1</li>
-<li>DMM_LISA_MAP_0</li>
-</ul>
 <p>参考DMM_LISA_MAP_i的寄存器表格可以重置DDR的启动功能和映射大小。<br><img src="https://cdn.nlark.com/yuque/0/2019/png/291611/1573191981268-343a5467-aebe-45af-9171-7a15daf9a55c.png?x-oss-process=image/resize,w_747" alt="avatar"></p>
 <p>上图为寄存器的内容，SYS_SIZE为配置的内存总大小，SDRC_MAP为interleaving的配置方式，可选只使用EMIF1、只使用EMIF2、或者EMIF1和EMIF2交叉存取的方式，如果工作在非交叉存取的模式，SDRC_INTL不需要配置。  </p>
 <p><img src="https://cdn.nlark.com/yuque/0/2019/png/291611/1573191983828-5404393f-a212-4495-8873-782d41650e88.png?x-oss-process=image/resize,w_747" alt="avatar"></p>
@@ -631,7 +666,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#硬件更改"><span class="nav-number">1.</span> <span class="nav-text">硬件更改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#寄存器详解"><span class="nav-number">2.</span> <span class="nav-text">寄存器详解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#U-BOOT配置寄存器"><span class="nav-number">3.</span> <span class="nav-text">U-BOOT配置寄存器</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#硬件更改"><span class="nav-number">1.</span> <span class="nav-text">硬件更改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#U-BOOT配置寄存器"><span class="nav-number">2.</span> <span class="nav-text">U-BOOT配置寄存器</span></a></li></ol></div>
             
 
           </div>
