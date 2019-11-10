@@ -1840,7 +1840,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #b10afb;
+  background: #a8b994;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2919,7 +2919,6 @@ pre .javascript .function {
 }
 .links-of-author-item {
   margin: 5px 0 0;
-  width: 50%;
 }
 .links-of-author-item a {
   box-sizing: border-box;
@@ -2967,7 +2966,6 @@ pre .javascript .function {
 }
 .links-of-blogroll-inline .links-of-blogroll-item {
   margin: 5px 0 0;
-  width: 50%;
 }
 .links-of-blogroll-inline .links-of-blogroll-item a {
   box-sizing: border-box;
@@ -3011,7 +3009,7 @@ pre .javascript .function {
 }
 @media screen and (min-width: 1200px) {
   body {
-    background: url("/images/background.jpg");
+    background: url("https://cdn.nlark.com/yuque/0/2019/jpeg/291611/1573360053526-5e499a17-0139-4e53-a6f2-8a93dd2e9855.jpeg");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
