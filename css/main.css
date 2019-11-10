@@ -1840,7 +1840,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #d56cee;
+  background: #b10afb;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3011,7 +3011,7 @@ pre .javascript .function {
 }
 @media screen and (min-width: 1200px) {
   body {
-    background: url("https://raw.githubusercontent.com/sjl3110/pictures-for-hexo/master/background.jpg");
+    background: url("/images/background.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -3024,4 +3024,28 @@ pre .javascript .function {
   .header-inner {
     opacity: 0.9;
   }
+}
+.headband {
+  height: 2px;
+  background: #003;
+}
+.site-meta {
+  padding: 15px 0;
+  color: #fff;
+  background: #003;
+}
+.site-subtitle {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #fff;
+}
+.btn {
+  color: #003;
+  background: #fff;
+  border: 3px solid #003;
+}
+.btn:hover {
+  border-color: #003;
+  color: #fff;
+  background: #003;
 }
