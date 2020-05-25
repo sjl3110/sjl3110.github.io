@@ -98,11 +98,11 @@
 <meta name="keywords" content="linux,kernel">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux内核配置--Device drivers">
-<meta property="og:url" content="http://yoursite.com/2019/07/30/linux内核配置-Device-drivers/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/05/25/linux内核配置-Device-drivers/index.html">
 <meta property="og:site_name" content="沈建谅的BLOG">
 <meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;内核的配置过程依赖Makefile和arch/arm/Kconfig以及其他文件下的Kconfig文件，通过make menuconfig或者桌面环境下的xconfig/gconfig可以手动配置内核所支持的功能。&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nb">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-05-25T05:17:09.766Z">
+<meta property="og:updated_time" content="2020-05-25T05:38:58.867Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux内核配置--Device drivers">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;内核的配置过程依赖Makefile和arch/arm/Kconfig以及其他文件下的Kconfig文件，通过make menuconfig或者桌面环境下的xconfig/gconfig可以手动配置内核所支持的功能。&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nb">
@@ -134,7 +134,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/07/30/linux内核配置-Device-drivers/">
+  <link rel="canonical" href="http://yoursite.com/2019/05/25/linux内核配置-Device-drivers/">
 
 
 
@@ -283,7 +283,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/30/linux内核配置-Device-drivers/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/25/linux内核配置-Device-drivers/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jianliang·S">
@@ -312,8 +312,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-30T23:20:57+08:00">
-                2019-07-30
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-25T13:20:57+08:00">
+                2019-05-25
               </time>
             
 
@@ -742,753 +742,494 @@
 </details>
 
 <details>
-<summary>SCSI device support ---></summary>  
-## Sonics Silicon Backplane  --->  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SSB(Sonics Silicon Backplane)是一种仅在嵌入式环境中使用的总线。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/ssb/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Support for the Sonics Silicon Backplane bus. You only need to enable this option, if you are configuring a kernel for an embedded system with this bus.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;It will be auto-selected if needed in other environments.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The module will be called ssb.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If unsure, say N.  
+<summary>Sonics Silicon Backplane  ---></summary>  
 
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SSB(Sonics Silicon Backplane)是一种仅在嵌入式环境中使用的总线。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/ssb/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Support for the Sonics Silicon Backplane bus. You only need to enable this option, if you are configuring a kernel for an embedded system with this bus.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;It will be auto-selected if needed in other environments.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The module will be called ssb.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If unsure, say N.  </p>
 </details>
 
 <details>
-<summary>SCSI device support ---></summary>  
-## {Y} Broadcom specific AMBA --->  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Broadcom特有的AMBA(Advanced Microcontroller Bus Architecture)总线支持，仅用于嵌入式环境。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/bcma/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bus driver for Broadcom specific Advanced Microcontroller Bus Architecture.  
+<summary>{Y} Broadcom specific AMBA ---></summary>  
 
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Broadcom特有的AMBA(Advanced Microcontroller Bus Architecture)总线支持，仅用于嵌入式环境。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/bcma/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bus driver for Broadcom specific Advanced Microcontroller Bus Architecture.  </p>
 </details>
 
 <details>
-<summary>SCSI device support ---></summary>  
-## [Y] ChipCommon-attached serial flash support  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/bcma/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Some cheap devices have serial flash connected to the ChipCommon instead of independent SPI controller. It requires using a separated driver that implements ChipCommon specific interface communication.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Enabling this symbol will let bcma recognize serial flash and register it as platform device.  
+<summary>[Y] ChipCommon-attached serial flash support</summary>  
 
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/bcma/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Some cheap devices have serial flash connected to the ChipCommon instead of independent SPI controller. It requires using a separated driver that implements ChipCommon specific interface communication.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Enabling this symbol will let bcma recognize serial flash and register it as platform device.  </p>
 </details>
 
 <details>
-<summary>SCSI device support ---></summary>  
-## [Y] BCMA Broadcom GBIT MAC COMMON core driver  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/bcma/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Driver for the Broadcom GBIT MAC COMMON core attached to Broadcom specific Advanced Microcontroller Bus.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If unsure, say N  
+<summary>[Y] BCMA Broadcom GBIT MAC COMMON core driver</summary>  
 
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/bcma/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Driver for the Broadcom GBIT MAC COMMON core attached to Broadcom specific Advanced Microcontroller Bus.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If unsure, say N  </p>
 </details>
 
 <details>
-<summary>SCSI device support ---></summary>  
-## [Y] BCMA GPIO driver  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/bcma/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Driver to provide access to the GPIO pins of the bcma bus.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If unsure, say N  
+<summary>[Y] BCMA GPIO driver</summary>  
 
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/bcma/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Driver to provide access to the GPIO pins of the bcma bus.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If unsure, say N  </p>
 </details>
 
 <details>
-<summary>SCSI device support ---></summary>  
-## [N] BCMA debugging  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/bcma/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This turns on additional debugging messages.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If unsure, say N  
+<summary>[N] BCMA debugging</summary>  
 
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/bcma/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This turns on additional debugging messages.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If unsure, say N  </p>
 </details>
 
 <details>
-<summary>SCSI device support ---></summary>  
-## Multifunction device drivers --->  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MFD(多功能设备)的含义是"在单个芯片上集成多个功能(GPIO、触摸屏、键盘、电流调节、电源管理...)"。此种芯片通常通过一个或多个IRQ线和低速数据总线(SPI/I2C/GPIO)与主CPU进行通信。对于主系统来说，它们通过数据总线显示为一个单独的MFD设备。但透过MFD框架，又可以拥有多个相互独立的子设备(子功能)。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/mfd/Kconfig。  
+<summary>Multifunction device drivers ---></summary>  
 
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MFD(多功能设备)的含义是”在单个芯片上集成多个功能(GPIO、触摸屏、键盘、电流调节、电源管理…)”。此种芯片通常通过一个或多个IRQ线和低速数据总线(SPI/I2C/GPIO)与主CPU进行通信。对于主系统来说，它们通过数据总线显示为一个单独的MFD设备。但透过MFD框架，又可以拥有多个相互独立的子设备(子功能)。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/mfd/Kconfig。  </p>
 </details>
 
 <details>
-<summary>SCSI device support ---></summary>  
-## -Y- Voltage and Current Regulator Support --->  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通用的电压与电流调节器框架，除了提供通用的电压与电流调节接口外，还能通过sysfs向用户空间提供电压与电流的状态信息。目的在于通过动态调节电压和电流，降低能耗，延长电池寿命。主要用于嵌入式环境。一般由其他项选中。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/regulator/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generic Voltage and Current Regulator support.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This framework is designed to provide a generic interface to voltage and current regulators within the Linux kernel. It's intended to provide voltage and current control to client or consumer drivers and also provide status information to user space applications through a sysfs interface.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The intention is to allow systems to dynamically control regulator output in order to save power and prolong battery life. This applies to both voltage regulators (where voltage output is controllable) and current sinks (where current output is controllable).  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This framework safely compiles out if not selected so that client drivers can still be used in systems with no software controllable regulators.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If unsure, say no.  
+<summary>-Y- Voltage and Current Regulator Support ---></summary>  
 
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通用的电压与电流调节器框架，除了提供通用的电压与电流调节接口外，还能通过sysfs向用户空间提供电压与电流的状态信息。目的在于通过动态调节电压和电流，降低能耗，延长电池寿命。主要用于嵌入式环境。一般由其他项选中。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/regulator/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generic Voltage and Current Regulator support.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This framework is designed to provide a generic interface to voltage and current regulators within the Linux kernel. It’s intended to provide voltage and current control to client or consumer drivers and also provide status information to user space applications through a sysfs interface.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The intention is to allow systems to dynamically control regulator output in order to save power and prolong battery life. This applies to both voltage regulators (where voltage output is controllable) and current sinks (where current output is controllable).<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This framework safely compiles out if not selected so that client drivers can still be used in systems with no software controllable regulators.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If unsure, say no.  </p>
 </details>
 
 <details>
-<summary>SCSI device support ---></summary>  
-## <y> Remote Controller support --->  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/media/rc/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Enable support for Remote Controllers on Linux. This is needed in order to support several video capture adapters, standalone IR receivers/transmitters, and RF receivers.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Enable this option if you have a video capture board even if you don't need IR, as otherwise, you may not be able to compile the driver for your adapter.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Say Y when you have a TV or an IR device.  
+<summary><y> Remote Controller support ---> </y></summary>  
 
-</y></details>
-
-<details>
-<summary>SCSI device support ---></summary>  
-## <y> Multimedia support --->  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;多媒体设备：摄像头、视频采集、模拟电视、数字电视、机顶盒、收音机、遥控器、数字视频广播(DVB)...内核多媒体子系统由LinuxTV项目负责维护。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/media/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If you want to use Webcams, Video grabber devices and/or TV devices enable this option and other options below. Additional info and docs are available on the web at <https: linuxtv.org>  
-
-</https:></y></details>
-
-<details>
-<summary>SCSI device support ---></summary>  
-## Graphics support --->  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;图形设备/显卡支持，对于不需要使用图形界面的服务器环境来说，必须的最小选项集取决于平台(BIOS/UEFI)和引导程序(GRUB/LILO/GRUB4DOS)的设置(全选"N"则屏幕将无任何显示)。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/gpu。  
-
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/media/rc/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Enable support for Remote Controllers on Linux. This is needed in order to support several video capture adapters, standalone IR receivers/transmitters, and RF receivers.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Enable this option if you have a video capture board even if you don’t need IR, as otherwise, you may not be able to compile the driver for your adapter.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Say Y when you have a TV or an IR device.  </p>
 </details>
 
 <details>
-<summary>SCSI device support ---></summary>  
-## <y> Sound card support --->  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;声卡支持。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：sound/Kconfig  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If you have a sound card in your computer, i.e. if it can say more than an occasional beep, say Y.  Be sure to have all the information about your sound card and its configuration down (I/O port, interrupt and DMA channel), because you will be asked for it.You want to read the Sound-HOWTO, available from <http: www.tldp.org docs.html#howto>.   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;General information about the modular sound system is contained in the files <file:documentation sound oss introduction>.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The file <file:documentation sound oss readme.oss> contains some slightly outdated but still useful information as well.  Newer sound driver documentation is found in <file:documentation sound alsa *>.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If you have a PnP sound card and you want to configure it at boot time using the ISA PnP tools (read <http: www.roestock.demon.co.uk isapnptools>), then you need to compile the sound card support as a module and load that module after the PnP configuration is finished.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To do this, choose M here and read <file:documentation sound oss readme.modules>; the module will be called soundcore.  
+<summary><y> Multimedia support ---></y></summary>  
 
-</file:documentation></http:></file:documentation></file:documentation></file:documentation></http:></y></details>
-
-<details>
-<summary>SCSI device support ---></summary>  
-## HID support --->  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HID(人机接口设备)是一种定义计算机如何与人类交互的规范，常与USB或蓝牙搭配使用，常见的设备有：键盘、鼠标、触摸板、游戏杆、遥控器、蓝牙耳机、游戏手柄、手写板等等。不过HID设备不一定要有人机接口，只要符合HID规范，就是HID设备。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/hid/Kconfig  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A human interface device (HID) is a type of computer device that interacts directly with and takes input from humans. The term "HID" most commonly used to refer to the USB-HID specification, but other devices (such as, but not strictly limited to, Bluetooth) are designed using HID specification (this involves certain keyboards, mice, tablets, etc). This option adds the HID bus to the kernel, together with generic HID layer code. The HID devices are added and removed from the HID bus by the transport-layer drivers, such as usbhid (USB_HID) and hidp (BT_HIDP).  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For docs and specs, see http://www.usb.org/developers/hidpage/  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If unsure, say Y.  
-
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;多媒体设备：摄像头、视频采集、模拟电视、数字电视、机顶盒、收音机、遥控器、数字视频广播(DVB)…内核多媒体子系统由LinuxTV项目负责维护。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/media/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If you want to use Webcams, Video grabber devices and/or TV devices enable this option and other options below. Additional info and docs are available on the web at <a href="https://linuxtv.org" target="_blank" rel="noopener">https://linuxtv.org</a>  </p>
 </details>
 
 <details>
-<summary>SCSI device support ---></summary>  
-## [Y] USB support --->  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通用串行总线(Universal Serial Bus)的目标是统一电脑的外设接口，目前几乎找不到没有USB接口的电脑，而且各种智能设备也大多带有USB接口。不要犹豫，选"Y"。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/usb/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This option adds core support for Universal Serial Bus (USB). You will also need drivers from the following menu to make use of it.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下列为勾选项：  
-* `<m> Support for Host-side USB`  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;主机端(Host-side)USB支持。通用串行总线(USB)是一个串行总线子系统规范，它比传统的串口速度更快并且特性更丰富(供电、热插拔、最多可接127个设备等)，其目标是统一PC外设接口。USB总体上呈现一种树型结构，USB的"Host"(主设备)被称为"根"(也可以理解为是主板上的USB控制器)，USB的"Slave"(从设备)被称为"叶子"，而内部的节点则称为"hub"(集线器)。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Universal Serial Bus (USB) is a specification for a serial bus subsystem which offers higher speeds and more features than the traditional PC serial port.  The bus supplies power to peripherals and allows for hot swapping.  Up to 127 USB peripherals can be connected to a single USB host in a tree structure.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The USB host is the root of the tree, the peripherals are the leaves and the inner nodes are special USB devices called hubs. Most PCs now have USB host ports, used to connect peripherals such as scanners, keyboards, mice, modems, cameras, disks, flash memory, network links, and printers to the PC.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Say Y here if your computer has a host-side USB port and you want to use USB devices.  You then need to say Y to at least one of the Host Controller Driver (HCD) options below.  Choose a USB 1.1 controller, such as "UHCI HCD support" or "OHCI HCD support", and "EHCI HCD (USB 2.0) support" except for older systems that do not have USB 2.0 support.  It doesn't normally hurt to select them all if you are not certain.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If your system has a device-side USB port, used in the peripheral side of the USB protocol, see the "USB Gadget" framework instead.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;After choosing your HCD, then select drivers for the USB peripherals you'll be using.  You may want to check out the information provided in <file:documentation usb> and especially the links given in <file:documentation usb usb-help.txt>.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To compile this driver as a module, choose M here: the module will be called usbcore.  
-* `[Y] PCI based USB host interface`  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A lot of embeded system SOC (e.g. freescale T2080) have both PCI and USB modules. But USB module is controlled by registers directly, it have no relationship with PCI module.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When say N here it will not build PCI related code in USB driver.  
-* `[Y] USB announce new devices`  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在syslog中记录每个新接入系统的USB设备的详细标识信息，主要用于系统调试.不确定的选"N"。  
-* `[Y] Enable USB persist by default`  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;根据USB规范，当USB总线被挂起(休眠)后，它必须继续提供挂起电流(1-5毫安)，以确保USB设备能保持其内部状态，并且USB集线器(HUB)能够检测连接变化(设备插入和拔出)。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这在技术上被称为"电力会话"(power session)。如果一个USB设备的电力会话被中断，那么系统必须按照该设备已经被拔出进行处理，这是一种保守的做法。因为没有挂起电流，计算机不可能知道外围设备究竟发生了什么变化：也许依然保持连接，也许已经被拔出并在同一端口上插入了一个新设备。系统必须做最坏的打算，默认情况下，Linux的行为符合USB规范的要求。当整个电脑进入休眠状态(例如挂起到硬盘)时，包括USB总线在内所有总线都将掉电，然后当系统被唤醒，所有USB设备都会被当做在休眠前就已经被拔出来处理。这样做始终是安全的，并且也是"官方正确"的做法。对于大多数USB设备来说，这样做没有任何问题，但是对于USB存储设备(例如移动硬盘/U盘)来说，如果在休眠前有尚未卸载的文件系统(特别是根文件系统)，当系统被唤醒之后，由于无法访问该文件系统，系统可能会立即崩溃！其实不只有掉电，只要"power session"被中断(例如BIOS在唤醒过程中重置了USB控制器)，都会导致这种故障。此选项(USB-persist)就是为了解决这个问题而设置的，虽然解决的不甚完美(参见"Documentation/usb/persist.txt")，但是依然推荐选"Y"，除非你确实有选"N"的理由。当然，最保险的做法是在休眠之前先卸载所有USB设备上的文件系统，而如果根文件系统位于USB设备上，就根本不使用任何休眠功能(不论是挂起到硬盘还是挂起到内存)。  
-* `<m> xHCI HCD (USB 3.0) support`  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xHCI(eXtensible Host Controller Interface)就是当下大红大紫的USB3.0主机控制器规范。  
-* `<m> EHCI HCD (USB 2.0) support`  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EHCI(Enhanced Host Controller Interface)就是渐成昨日黄花的USB2.0(HighSpeed USB)主机控制器规范。  
-* `<m> OHCI HCD (USB 1.1) support`  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OHCI(Open Host Controller Interface)是主要用于嵌入式环境的USB1.1(主机控制器规范，但也存在于某些老旧的SiS芯片组的PC上。  
-* `<m> USB Modem (CDC ACM) support`  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;USB接口的猫或ISDN适配器，基本没人用的东西。  
-* `<m> USB Mass Storage support`  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;USB存储设备(U盘、USB硬盘、USB软盘、USB光盘、USB磁带、记忆棒、数码相机、读卡器[包括某些笔记本内置的SD卡读卡器]等等)。该选项依赖于CONFIG_SCSI和CONFIG_BLK_DEV_SD选项。选"Y"，除非你确实知道自己在干什么。  
+<summary>Graphics support ---></summary>  
 
-</m></m></m></m></m></file:documentation></file:documentation></m></details>
-
-<details>
-<summary>SCSI device support ---></summary>  
-## <n> Ultra Wideband devices ----  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UWB(Ultra Wideband)是一种高带宽，低能耗，点对点,抗干扰性能强的无载波通信技术。UWB在较宽的频谱(3.1-10.6GHz)上，使用极低的功率(约为蓝牙的1/20)，以时间间隔极短(小于1ns)的脉冲信号进行通信。UWB主要应用于室内通信(2米范围内实现480Mbps速率，10米范围内实现110Mbps速率)，例如作为WUSB(Wireless USB)协议的传输层。如果你有UWB无线控制器，可以选"Y"，不确定的选"N"。详见"Documentation/usb/WUSB-Design-overview.txt"文档。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：/drivers/uwb/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UWB is a high-bandwidth, low-power, point-to-point radio technology using a wide spectrum (3.1-10.6GHz). It is optimized for in-room use (480Mbps at 2 meters, 110Mbps at 10m). It serves as the transport layer for other protocols, such as Wireless USB (WUSB).  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The topology is peer to peer; however, higher level protocols (such as WUSB) might impose a master/slave relationship.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Say Y here if your computer has UWB radio controllers (USB or PCI) based. You will need to enable the radio controllers below.  It is ok to select all of them, no harm done.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For more help check the UWB and WUSB related files in <file:documentation usb>.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To compile the UWB stack as a module, choose M here.  
-
-</file:documentation></n></details>
-
-<details>
-<summary>SCSI device support ---></summary>  
-## <y> MMC/SD/SDIO card support --->  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MMC(MultiMediaCard)/SD(Secure Digital)/SDIO(Secure Digital I/O)主机控制器。[提示]虽然许多笔记本上有SD卡插槽,但其实它们大多使用的是CONFIG_USB_STORAGE驱动,而不是这里的驱动。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：/drivers/mmc/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This selects MultiMediaCard, Secure Digital and Secure Digital I/O support.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If you want MMC/SD/SDIO support, you should say Y here and also to your specific host controller driver.  
-
-</y></details>
-
-<details>
-<summary>SCSI device support ---></summary>  
-## <n> Sony MemoryStick card support ----  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sony记忆棒是一种Sony专用的存储设备。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/memstick/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sony MemoryStick is a proprietary storage/extension card protocol.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If you want MemoryStick support, you should say Y here and also to the specific driver for your MemoryStick interface.  
-
-</n></details>
-
-<details>
-<summary>SCSI device support ---></summary>  
-## [Y] LED Support --->  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发光二级管(LED)支持.[提示]标准键盘上的LED灯不在此列(由input子系统控制)。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/leds/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Say Y to enable Linux LED support.  This allows control of supported LEDs from both userspace and optionally, by kernel events (triggers).  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下列为勾选项：  
-* `<y> LED Class Support`  
-* `<y> LED Support for GPIO connected LEDs`  
-* `<y> PWM driven LED Support`  
-* `<y> LED driver for TLC59108 and TLC59116 controllers`  
-
-</y></y></y></y></details>
-
-<details>
-<summary>SCSI device support ---></summary>  
-## [N] Accessibility support ----  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;无障碍(Accessibility)支持。各种帮助残疾人使用计算机的软硬件技术，例如：盲文设备、语音合成、键盘映射等等。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/accessibility/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Accessibility handles all special kinds of hardware devices or software adapters which help people with disabilities (e.g. blindness) to use computers.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;That includes braille devices, speech synthesis, keyboard remapping, etc.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Say Y here to get to see options for accessibility.This option alone does not add any kernel code.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If you say N, all options in this submenu will be skipped and disabled.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If unsure, say N.  
-
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;图形设备/显卡支持，对于不需要使用图形界面的服务器环境来说，必须的最小选项集取决于平台(BIOS/UEFI)和引导程序(GRUB/LILO/GRUB4DOS)的设置(全选”N”则屏幕将无任何显示)。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/gpu。  </p>
 </details>
 
 <details>
-<summary>SCSI device support ---></summary>  
-## <n> InfiniBand support ----  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;InfiniBand是一种低延迟/高带宽数据中心互联架构，采用远程直接内存存取(RDMA)实现高性能处理器间通信(IPC)，同时对虚拟化技术也提供了良好的支持。主要用于服务器集群与高性能计算(HPC)领域。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/infiniband/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Core support for InfiniBand (IB).  Make sure to also select any protocols you wish to use as well as drivers for your InfiniBand hardware.  
+<summary><y> Sound card support ---></y></summary>  
 
-</n></details>
-
-<details>
-<summary>SCSI device support ---></summary>  
-## <y> EDAC (Error Detection And Correction) reporting --->  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在电磁环境比较恶劣的情况下，一些大规模集成电路常常会受到干扰，特别是像RAM这种利用双稳态进行存储的器件，往往会在强干扰下发生翻转，使原来存储的"0"变为"1"，或者"1"变为"0"，造成严重的后果(例如控制程序跑飞，关键数据出错)。随着芯片集成度的增加，发生错误的可能性也在增大，这已经成为一个不能忽视的问题。错误检测与纠正(EDAC)技术的目标就是发现并报告甚至纠正在计算机系统中发生的错误，这些错误是由CPU或芯片组报告的底层错误(内存错误/缓存错误/PCI错误/温度过高等等)，建议选"Y"。如果这些代码报告了一个错误，请到http://bluesmoke.sourceforge.net/和http://buttersideup.com/edacwiki查看更多信息。详见"Documentation/edac.txt"文档。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/edac/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EDAC is a subsystem along with hardware-specific drivers designed to report hardware errors. These are low-level errors that are reported in the CPU or supporting chipset or other subsystems: memory errors, cache errors, PCI errors, thermal throttling, etc..  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If unsure, select 'Y'.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The mailing list for the EDAC project is linux-edac@vger.kernel.org.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下列为勾选项：  
-* `[Y] EDAC legacy sysfs`  
-* `<m> Texas Instruments DDR3 ECC Controller`  
-
-</m></y></details>
-
-<details>
-<summary>SCSI device support ---></summary>  
-## [Y] Real Time Clock --->  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通用RTC(实时时钟)类支持。所有的PC机主板都包含一个电池动力的实时时钟芯片，以便在断电后仍然能够继续保持时间，RTC通常与CMOS集成在一起，因此BIOS可以从中读取当前时间(精度一般是秒级)。选中此项后你就可以在操作系统中使用一个或多个RTC设备(你还必须从下面启用一个或多个RTC接口)。[注意]Clock与Timer没有任何关系，Timer是定时器(用于计量时长)，Clock是时钟(用于记录当前的时刻"年-月-日 时：分：秒")。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/rtc/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generic RTC class support. If you say yes here, you will be allowed to plug one or more RTCs to your system. You will probably want to enable one or more of the interfaces below.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下列为主要勾选项：  
-* `[Y] Set system time from RTC on startup and resume`  
-* `[Y] Set the RTC time based on NTP synchronization`  
-* `[Y] RTC debug support`  
-* `[Y] RTC non volatile storage support`  
-* `[Y] /sys/class/rtc/rtcN (sysfs)`  
-* `[Y] /proc/driver/rtc (procfs for rtcN)`  
-* `[Y] /dev/rtcN (character devices)`  
-* `<m> Dallas/Maxim DS1307/37/38/39/40/41, ST M41T00, EPSON RX-8025, ISL12057`  
-* `<m> TI Palmas RTC driver`  
-* `<m> TI TPS6586X RTC driver`  
-* `<m> TI TPS65910 RTC driver`  
-* `<m> EFI RTC`  
-* `<m> TI OMAP Real Time Clock`  
-
-</m></m></m></m></m></m></details>
-
-<details>
-<summary>SCSI device support ---></summary>  
-## [Y] DMA Engine support --->  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DMA引擎(DMA Engine)可以看做是传统DMA控制器(DMA controller)的新生。在DMA引擎的协助下，CPU只需初始化一个传输动作，其余的动作就可以由DMA引擎独立完成(完成后以中断的方式通知CPU)，这对于高速传输大量数据以及"分散-收集"操作大有益处，可以节约大量的CPU资源(有时也可节约大量的内存操作)。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;目前，DMA引擎有两个用途：(1)卸载高速网络栈中的内存COPY操作，(2)加速CONFIG_MD_RAID456驱动中的RAID操作。"DMA引擎"只是一个统称，在不同场合对应着不同的技术，例如Intel I/OAT(PC平台)和AHB(嵌入式)。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/dma/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DMA engines can do asynchronous data transfers without involving the host CPU.  Currently, this framework can be used to offload memory copies in the network stack and RAID operations in the MD driver.  This menu only presents DMA Device drivers supported by the configured arch, it may be empty in some cases.  
-
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;声卡支持。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：sound/Kconfig<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If you have a sound card in your computer, i.e. if it can say more than an occasional beep, say Y.  Be sure to have all the information about your sound card and its configuration down (I/O port, interrupt and DMA channel), because you will be asked for it.You want to read the Sound-HOWTO, available from <a href="http://www.tldp.org/docs.html#howto" target="_blank" rel="noopener">http://www.tldp.org/docs.html#howto</a>.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;General information about the modular sound system is contained in the files <a href="file:Documentation/sound/oss/Introduction" target="_blank" rel="noopener">file:Documentation/sound/oss/Introduction</a>.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The file <a href="file:Documentation/sound/oss/README.OSS" target="_blank" rel="noopener">file:Documentation/sound/oss/README.OSS</a> contains some slightly outdated but still useful information as well.  Newer sound driver documentation is found in <a href="file:Documentation/sound/alsa/*" target="_blank" rel="noopener">file:Documentation/sound/alsa/*</a>.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If you have a PnP sound card and you want to configure it at boot time using the ISA PnP tools (read <a href="http://www.roestock.demon.co.uk/isapnptools/" target="_blank" rel="noopener">http://www.roestock.demon.co.uk/isapnptools/</a>), then you need to compile the sound card support as a module and load that module after the PnP configuration is finished.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To do this, choose M here and read <a href="file:Documentation/sound/oss/README.modules" target="_blank" rel="noopener">file:Documentation/sound/oss/README.modules</a>; the module will be called soundcore.  </p>
 </details>
 
 <details>
-<summary>SCSI device support ---></summary>  
-## DMABUF options --->  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以下为勾选项：  
-* `-Y- Explicit Synchronization Framework`  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/dma-buf/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Sync File Framework adds explicit syncronization via userspace. It enables send/receive 'struct dma_fence' objects to/from userspace via Sync File fds for synchronization between drivers via userspace components. It has been ported from Android.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The first and main user for this is graphics in which a fence is associated with a buffer. When a job is submitted to the GPU a fence is attached to the buffer and is transferred via userspace, using Sync Files fds, to the DRM driver for example. More details at Documentation/sync_file.txt.  
+<summary>HID support ---></summary>  
 
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HID(人机接口设备)是一种定义计算机如何与人类交互的规范，常与USB或蓝牙搭配使用，常见的设备有：键盘、鼠标、触摸板、游戏杆、遥控器、蓝牙耳机、游戏手柄、手写板等等。不过HID设备不一定要有人机接口，只要符合HID规范，就是HID设备。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/hid/Kconfig<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A human interface device (HID) is a type of computer device that interacts directly with and takes input from humans. The term “HID” most commonly used to refer to the USB-HID specification, but other devices (such as, but not strictly limited to, Bluetooth) are designed using HID specification (this involves certain keyboards, mice, tablets, etc). This option adds the HID bus to the kernel, together with generic HID layer code. The HID devices are added and removed from the HID bus by the transport-layer drivers, such as usbhid (USB_HID) and hidp (BT_HIDP).<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For docs and specs, see <a href="http://www.usb.org/developers/hidpage/" target="_blank" rel="noopener">http://www.usb.org/developers/hidpage/</a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If unsure, say Y.  </p>
 </details>
 
 <details>
-<summary>SCSI device support ---></summary>  
-## [N] Auxiliary Display support ----  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;辅助显示设备。例如基于KS0108控制器的Crystalfontz CFAG12864B单色液晶屏(分辨率:128x64)。仅用于嵌入式系统。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/auxdisplay/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Say Y here to get to see options for auxiliary display drivers. This option alone does not add any kernel code.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If you say N, all options in this submenu will be skipped and disabled.  
+<summary>[Y] USB support ---></summary>  
 
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通用串行总线(Universal Serial Bus)的目标是统一电脑的外设接口，目前几乎找不到没有USB接口的电脑，而且各种智能设备也大多带有USB接口。不要犹豫，选”Y”。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/usb/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This option adds core support for Universal Serial Bus (USB). You will also need drivers from the following menu to make use of it.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下列为勾选项：  </p>
+<ul>
+<li><code>&lt;M&gt; Support for Host-side USB</code><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;主机端(Host-side)USB支持。通用串行总线(USB)是一个串行总线子系统规范，它比传统的串口速度更快并且特性更丰富(供电、热插拔、最多可接127个设备等)，其目标是统一PC外设接口。USB总体上呈现一种树型结构，USB的”Host”(主设备)被称为”根”(也可以理解为是主板上的USB控制器)，USB的”Slave”(从设备)被称为”叶子”，而内部的节点则称为”hub”(集线器)。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Universal Serial Bus (USB) is a specification for a serial bus subsystem which offers higher speeds and more features than the traditional PC serial port.  The bus supplies power to peripherals and allows for hot swapping.  Up to 127 USB peripherals can be connected to a single USB host in a tree structure.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The USB host is the root of the tree, the peripherals are the leaves and the inner nodes are special USB devices called hubs. Most PCs now have USB host ports, used to connect peripherals such as scanners, keyboards, mice, modems, cameras, disks, flash memory, network links, and printers to the PC.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Say Y here if your computer has a host-side USB port and you want to use USB devices.  You then need to say Y to at least one of the Host Controller Driver (HCD) options below.  Choose a USB 1.1 controller, such as “UHCI HCD support” or “OHCI HCD support”, and “EHCI HCD (USB 2.0) support” except for older systems that do not have USB 2.0 support.  It doesn’t normally hurt to select them all if you are not certain.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If your system has a device-side USB port, used in the peripheral side of the USB protocol, see the “USB Gadget” framework instead.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;After choosing your HCD, then select drivers for the USB peripherals you’ll be using.  You may want to check out the information provided in <a href="file:Documentation/usb/" target="_blank" rel="noopener">file:Documentation/usb/</a> and especially the links given in <a href="file:Documentation/usb/usb-help.txt" target="_blank" rel="noopener">file:Documentation/usb/usb-help.txt</a>.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To compile this driver as a module, choose M here: the module will be called usbcore.  </li>
+<li><code>[Y] PCI based USB host interface</code><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A lot of embeded system SOC (e.g. freescale T2080) have both PCI and USB modules. But USB module is controlled by registers directly, it have no relationship with PCI module.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When say N here it will not build PCI related code in USB driver.  </li>
+<li><code>[Y] USB announce new devices</code><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在syslog中记录每个新接入系统的USB设备的详细标识信息，主要用于系统调试.不确定的选”N”。  </li>
+<li><code>[Y] Enable USB persist by default</code><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;根据USB规范，当USB总线被挂起(休眠)后，它必须继续提供挂起电流(1-5毫安)，以确保USB设备能保持其内部状态，并且USB集线器(HUB)能够检测连接变化(设备插入和拔出)。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这在技术上被称为”电力会话”(power session)。如果一个USB设备的电力会话被中断，那么系统必须按照该设备已经被拔出进行处理，这是一种保守的做法。因为没有挂起电流，计算机不可能知道外围设备究竟发生了什么变化：也许依然保持连接，也许已经被拔出并在同一端口上插入了一个新设备。系统必须做最坏的打算，默认情况下，Linux的行为符合USB规范的要求。当整个电脑进入休眠状态(例如挂起到硬盘)时，包括USB总线在内所有总线都将掉电，然后当系统被唤醒，所有USB设备都会被当做在休眠前就已经被拔出来处理。这样做始终是安全的，并且也是”官方正确”的做法。对于大多数USB设备来说，这样做没有任何问题，但是对于USB存储设备(例如移动硬盘/U盘)来说，如果在休眠前有尚未卸载的文件系统(特别是根文件系统)，当系统被唤醒之后，由于无法访问该文件系统，系统可能会立即崩溃！其实不只有掉电，只要”power session”被中断(例如BIOS在唤醒过程中重置了USB控制器)，都会导致这种故障。此选项(USB-persist)就是为了解决这个问题而设置的，虽然解决的不甚完美(参见”Documentation/usb/persist.txt”)，但是依然推荐选”Y”，除非你确实有选”N”的理由。当然，最保险的做法是在休眠之前先卸载所有USB设备上的文件系统，而如果根文件系统位于USB设备上，就根本不使用任何休眠功能(不论是挂起到硬盘还是挂起到内存)。  </li>
+<li><code>&lt;M&gt; xHCI HCD (USB 3.0) support</code><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xHCI(eXtensible Host Controller Interface)就是当下大红大紫的USB3.0主机控制器规范。  </li>
+<li><code>&lt;M&gt; EHCI HCD (USB 2.0) support</code><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EHCI(Enhanced Host Controller Interface)就是渐成昨日黄花的USB2.0(HighSpeed USB)主机控制器规范。  </li>
+<li><code>&lt;M&gt; OHCI HCD (USB 1.1) support</code><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OHCI(Open Host Controller Interface)是主要用于嵌入式环境的USB1.1(主机控制器规范，但也存在于某些老旧的SiS芯片组的PC上。  </li>
+<li><code>&lt;M&gt; USB Modem (CDC ACM) support</code><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;USB接口的猫或ISDN适配器，基本没人用的东西。  </li>
+<li><code>&lt;M&gt; USB Mass Storage support</code><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;USB存储设备(U盘、USB硬盘、USB软盘、USB光盘、USB磁带、记忆棒、数码相机、读卡器[包括某些笔记本内置的SD卡读卡器]等等)。该选项依赖于CONFIG_SCSI和CONFIG_BLK_DEV_SD选项。选”Y”，除非你确实知道自己在干什么。  </li>
+</ul>
 </details>
 
 <details>
-<summary>SCSI device support ---></summary>  
-## <m> Userspace I/O drivers--->  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UIO(Userspace I/O)是运行在用户空间的I/O技术，它为开发用户空间的驱动提供了一个简单的架构(/dev/uioN)。使用uio的设备一般都属于嵌入式系统，不确定的选"N"。[提示]lsuio工具可以列出所有UIO的模块和其映射的内存地址。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/uio/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Enable this to allow the userspace driver core code to be built.  This code allows userspace programs easy access to kernel interrupts and memory locations, allowing some drivers to be written in userspace.  Note that a small kernel driver is also required for interrupt handling to work properly.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If you don't know what to do here, say N.  
+<summary><n> Ultra Wideband devices ----</n></summary>  
 
-</m></details>
-
-<details>
-<summary>SCSI device support ---></summary>  
-## <n> VFIO Non-Privileged userspace driver framework ----  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VFIO是一套无特权用户空间I/O驱动框架，需要有IOMMU虚拟化硬件支持(AMD-Vi/Intel VT-d)。此选项仅用于宿主机内核，VFIO的目标是在IOMMU硬件的帮助下，取代CONFIG_UIO和CONFIG_KVM_DEVICE_ASSIGNMENT。VFIO主要用于编写高效的用户态驱动，以及在虚拟化环境的属主机中高效的实现设备直通(passthrough)且无须root特权，可用于详见"Documentation/vfio.txt"文档。[提示]QEMU 1.3以上版本才能利用VFIO特性。不玩KVM虚拟化的选"N"。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/vfio/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VFIO provides a framework for secure userspace device drivers. See Documentation/vfio.txt for more details.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If you don't know what to do here, say N.  
-
-</n></details>
-
-<details>
-<summary>SCSI device support ---></summary>  
-## [N] Virtualization drivers ----  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这个选项仅对PowerPC架构有意义。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/virt/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Say Y here to get to see options for device drivers that support virtualization environments.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If you say N, all options in this submenu will be skipped and disabled.  
-
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UWB(Ultra Wideband)是一种高带宽，低能耗，点对点,抗干扰性能强的无载波通信技术。UWB在较宽的频谱(3.1-10.6GHz)上，使用极低的功率(约为蓝牙的1/20)，以时间间隔极短(小于1ns)的脉冲信号进行通信。UWB主要应用于室内通信(2米范围内实现480Mbps速率，10米范围内实现110Mbps速率)，例如作为WUSB(Wireless USB)协议的传输层。如果你有UWB无线控制器，可以选”Y”，不确定的选”N”。详见”Documentation/usb/WUSB-Design-overview.txt”文档。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：/drivers/uwb/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UWB is a high-bandwidth, low-power, point-to-point radio technology using a wide spectrum (3.1-10.6GHz). It is optimized for in-room use (480Mbps at 2 meters, 110Mbps at 10m). It serves as the transport layer for other protocols, such as Wireless USB (WUSB).<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The topology is peer to peer; however, higher level protocols (such as WUSB) might impose a master/slave relationship.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Say Y here if your computer has UWB radio controllers (USB or PCI) based. You will need to enable the radio controllers below.  It is ok to select all of them, no harm done.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For more help check the UWB and WUSB related files in <a href="file:Documentation/usb/" target="_blank" rel="noopener">file:Documentation/usb/</a>.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To compile the UWB stack as a module, choose M here.  </p>
 </details>
 
 <details>
-<summary>SCSI device support ---></summary>  
-## Virtio drivers --->  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;仅可用于客户机内核的Virtio驱动。Virtio的目标是为各种半虚拟化的虚拟机管理程序(特别是KVM)提供一组通用的模拟设备,目前已实现：network/block/balloon/console/hw_random，未来还会实现更多。下列驱动仅可用在基于lguest或QEMU的半虚拟化客户机中(一般是KVM或XEN)。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/virtio/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This option is selected by any driver which implements the virtio bus, such as  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CONFIG_VIRTIO_PCI,   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CONFIG_VIRTIO_MMIO,   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CONFIG_RPMSG,  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CONFIG_S390_GUEST.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下列为勾选项：  
-* `<y> PCI driver for virtio devices`  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;半虚拟化PCI设备驱动，VMM(虚拟机管理程序)必须要有相应的"PCI virtio backend"。基于QEMU的VMM(KVM,Xen)一般都支持该驱动。[提示]由于目前的ABI尚不稳定,建议使用时注意版本匹配。  
-* `<y> Platform bus driver for memory mapped virtio devices`  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;支持使用内存映射机制的virtio设备驱动。  
+<summary><y> MMC/SD/SDIO card support ---></y></summary>  
 
-</y></y></details>
-
-<details>
-<summary>SCSI device support ---></summary>  
-## Microsoft Hyper-V guest support ----  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;仅在将此Linux内核作为微软Hyper-V虚拟机的来宾操作系统运行时，才需要开启这里的选项。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：/drivers/hv/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Select this option to run Linux as a Hyper-V client operating system.  
-
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MMC(MultiMediaCard)/SD(Secure Digital)/SDIO(Secure Digital I/O)主机控制器。[提示]虽然许多笔记本上有SD卡插槽,但其实它们大多使用的是CONFIG_USB_STORAGE驱动,而不是这里的驱动。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：/drivers/mmc/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This selects MultiMediaCard, Secure Digital and Secure Digital I/O support.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If you want MMC/SD/SDIO support, you should say Y here and also to your specific host controller driver.  </p>
 </details>
 
 <details>
-<summary>SCSI device support ---></summary>  
-## [N] Staging drivers ----  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;尚在开发中或尚未完成的，目前尚不完善的驱动，切勿用于生产环境。仅供测试人员或者开发者试用。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/staging/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This option allows you to select a number of drivers that are not of the "normal" Linux kernel quality level.  These drivers are placed here in order to get a wider audience to make use of them.  Please note that these drivers are under heavy development, may or may not work, and may contain userspace interfaces that most likely will be changed in the near future.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Using any of these drivers will taint your kernel which might affect support options from both the community, and various commercial support organizations.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If you wish to work on these drivers, to help improve them, or to report problems you have with them, please see the driver_name.README file in the drivers/staging/ directory to see what needs to be worked on, and who to contact.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If in doubt, say N here.  
+<summary><n> Sony MemoryStick card support ----</n></summary>  
 
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sony记忆棒是一种Sony专用的存储设备。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/memstick/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sony MemoryStick is a proprietary storage/extension card protocol.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If you want MemoryStick support, you should say Y here and also to the specific driver for your MemoryStick interface.  </p>
 </details>
 
 <details>
-<summary>SCSI device support ---></summary>  
-## [N] Platform support for Goldfish virtual devices ----  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/platform/goldfish/Kconfig  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Say Y here to get to see options for the Goldfish virtual platform.This option alone does not add any kernel code. Unless you are building for the Android Goldfish emulator say N here.  
+<summary>[Y] LED Support ---></summary>  
 
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发光二级管(LED)支持.[提示]标准键盘上的LED灯不在此列(由input子系统控制)。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/leds/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Say Y to enable Linux LED support.  This allows control of supported LEDs from both userspace and optionally, by kernel events (triggers).<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下列为勾选项：  </p>
+<ul>
+<li><code>&lt;Y&gt; LED Class Support</code>  </li>
+<li><code>&lt;Y&gt; LED Support for GPIO connected LEDs</code>  </li>
+<li><code>&lt;Y&gt; PWM driven LED Support</code>  </li>
+<li><code>&lt;Y&gt; LED driver for TLC59108 and TLC59116 controllers</code>  </li>
+</ul>
 </details>
 
 <details>
-<summary>SCSI device support ---></summary>  
-## [N] Platform support for Chrome hardware ----  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;专用于Google公司的Chromebook笔记本/Chromebox迷你机的设备驱动。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/platform/chrome/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Say Y here to get to see options for platform support for various Chromebooks and Chromeboxes. This option alone does not add any kernel code.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If you say N, all options in this submenu will be skipped and disabled.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Common Clock Framework --->  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CCF(Common Clock Framework)是从3.4内核开始引入的新时钟框架，用于取代原有的"Clock Framework"。详见"Documentation/clk.txt"文档。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/clk/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The common clock framework is a single definition of struct clk, useful across many platforms, as well as an implementation of the clock API in include/linux/clk.h. Architectures utilizing the common struct clk should select this option.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下列为勾选项：  
-* `<y> Clock driver for TI Palmas devices`  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This driver supports TI Palmas devices 32KHz output KG and KG_AUDIO using common clock framework.  
+<summary>[N] Accessibility support ----</summary>  
 
-</y></details>
-
-<details>
-<summary>SCSI device support ---></summary>  
-## [Y] Hardware Spinlock drivers --->  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;硬件自旋锁驱动。目前仅出现在嵌入式处理器上，自旋锁是保护共享资源的一种锁机制，与互斥锁比较类似，都是为了解决对某项资源的互斥使用。无论是互斥锁，还是自旋锁，在任何时刻，最多只能有一个持有者。也就是说，在任何时刻最多只能有一个执行单元获得锁。但是两者在调度机制上略有不同，对于互斥锁，如果资源已经被占用，资源申请者只能进入睡眠状态。但是自旋锁不会引起申请者睡眠，如果自旋锁已经被别的执行单元保持，调用者就一直在循环中"忙等"(占用CPU但无事可做)，直到该自旋锁被释放。"自旋"一词就是因此而得名。自旋锁的使用非常方便，但仅适用于需要极短时间锁定的场合(例如1毫秒)，以避免消耗太多的CPU空等时间。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/hwspinlock/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下列为勾选项：  
-* `<y> OMAP Hardware Spinlock device`  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Say y here to support the OMAP Hardware Spinlock device (firstly introduced in OMAP4).  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If unsure, say N.  
-
-</y></details>
-
-<details>
-<summary>SCSI device support ---></summary>  
-## Clock Source drivers --->  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"时钟源"驱动，主要面向嵌入式设备。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/clocksource/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下列为勾选项：  
-* `[Y] Enable ARM architected timer event stream generation by default`  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This option enables support by default for event stream generation based on the ARM architected timer. It is used for waking up CPUs executing the wfe instruction at a frequency represented as a power-of-2 divisor of the clock rate. The behaviour can also be overridden on the command line using the clocksource.arm_arch_timer.evtstream parameter. The main use of the event stream is wfe-based timeouts of userspace locking implementations. It might also be useful for imposing timeout on wfe to safeguard against any programming errors in case an expected event is not generated.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This must be disabled for hardware validation purposes to detect any hardware anomalies of missing events.  
-
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;无障碍(Accessibility)支持。各种帮助残疾人使用计算机的软硬件技术，例如：盲文设备、语音合成、键盘映射等等。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/accessibility/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Accessibility handles all special kinds of hardware devices or software adapters which help people with disabilities (e.g. blindness) to use computers.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;That includes braille devices, speech synthesis, keyboard remapping, etc.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Say Y here to get to see options for accessibility.This option alone does not add any kernel code.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If you say N, all options in this submenu will be skipped and disabled.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If unsure, say N.  </p>
 </details>
 
 <details>
-<summary>SCSI device support ---></summary>  
-## -Y- Mailbox Hardware Support --->  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mailbox硬件支持。这里的"Mailbox"是一个框架，通过消息队列和中断驱动信号，控制芯片上的多个处理器之间的通信。仅用于嵌入式环境。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/mailbox/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mailbox is a framework to control hardware communication between on-chip processors through queued messages and interrupt driven signals. Say Y if your platform supports hardware mailboxes.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下列为勾选项：  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{Y} OMAP2+ Mailbox framework support  
-* `(256) Mailbox kfifo default buffer size (bytes)`  
+<summary><n> InfiniBand support ----</n></summary>  
 
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;InfiniBand是一种低延迟/高带宽数据中心互联架构，采用远程直接内存存取(RDMA)实现高性能处理器间通信(IPC)，同时对虚拟化技术也提供了良好的支持。主要用于服务器集群与高性能计算(HPC)领域。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/infiniband/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Core support for InfiniBand (IB).  Make sure to also select any protocols you wish to use as well as drivers for your InfiniBand hardware.  </p>
 </details>
 
 <details>
-<summary>SCSI device support ---></summary>  
-## [Y] IOMMU Hardware Support --->  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IOMMU硬件主要出现在带有I/O虚拟化技术的硬件上，例如带有AMD-Vi或VT-d技术的芯片。IOMMU主要作用：(1)内存地址转换(例如DMA地址转换，scatter-gather)，(2)中断重映射，(3)对设备读取和写入的进行权限检查。这对于提高虚拟化性能和安全性，以及在64位系统上更好的使用32位设备，意义重大。[提示]此选项仅对宿主机有意义，如果此内核要作为来宾操作系统运行，请选"N"。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/iommu/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Say Y here if you want to compile device drivers for IO Memory Management Units into the kernel. These devices usually allow to remap DMA requests and/or remap interrupts from other devices on the system.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下列为勾选项：  
-* `[Y] OMAP IOMMU Support`  
-* `[Y] Export OMAP IOMMU internals in DebugFS`  
+<summary><y> EDAC (Error Detection And Correction) reporting ---></y></summary>  
 
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在电磁环境比较恶劣的情况下，一些大规模集成电路常常会受到干扰，特别是像RAM这种利用双稳态进行存储的器件，往往会在强干扰下发生翻转，使原来存储的”0”变为”1”，或者”1”变为”0”，造成严重的后果(例如控制程序跑飞，关键数据出错)。随着芯片集成度的增加，发生错误的可能性也在增大，这已经成为一个不能忽视的问题。错误检测与纠正(EDAC)技术的目标就是发现并报告甚至纠正在计算机系统中发生的错误，这些错误是由CPU或芯片组报告的底层错误(内存错误/缓存错误/PCI错误/温度过高等等)，建议选”Y”。如果这些代码报告了一个错误，请到<a href="http://bluesmoke.sourceforge.net/和http://buttersideup.com/edacwiki查看更多信息。详见&quot;Documentation/edac.txt&quot;文档。" target="_blank" rel="noopener">http://bluesmoke.sourceforge.net/和http://buttersideup.com/edacwiki查看更多信息。详见&quot;Documentation/edac.txt&quot;文档。</a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/edac/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EDAC is a subsystem along with hardware-specific drivers designed to report hardware errors. These are low-level errors that are reported in the CPU or supporting chipset or other subsystems: memory errors, cache errors, PCI errors, thermal throttling, etc..<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If unsure, select ‘Y’.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The mailing list for the EDAC project is <a href="mailto:linux-edac@vger.kernel.org" target="_blank" rel="noopener">linux-edac@vger.kernel.org</a>.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下列为勾选项：  </p>
+<ul>
+<li><code>[Y] EDAC legacy sysfs</code>  </li>
+<li><code>&lt;M&gt; Texas Instruments DDR3 ECC Controller</code>  </li>
+</ul>
 </details>
 
 <details>
-<summary>SCSI device support ---></summary>  
-## Remoteproc drivers --->  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;现代的SoC芯片一般都会以AMP(非对称多处理器)方式集成多个不同的处理器(例如OMAP5432就在单个芯片上集成了2个Cortex-A15处理器，2个Cortex-M4处理器，1个C64x DSP)，这样就可在不同的处理器上分别运行多个不同的操作系统实例(例如，在2个Cortex-A9处理器上以SMP(对称多处理器)方式运行Linux，在2个Cortex-M3和1个C64x上分别运行不同的实时操作系统)。而Remoteproc驱动对此种场合下的处理器间通信非常有用，详见"Documentation/remoteproc.txt"和"Documentation/rpmsg.txt"文档。目前仅对嵌入式系统有意义，不确定的选"N"。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/remoteproc/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下列为勾选项：  
-* `<m> Support for Remote Processor subsystem`  
-* `<m> OMAP remoteproc support`  
-* `<m> TI PRUSS remoteproc support`  
+<summary>[Y] Real Time Clock ---></summary>  
 
-</m></m></m></details>
-
-<details>
-<summary>SCSI device support ---></summary>  
-## Rpmsg drivers --->  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;此项和上面的Remoteproc紧密相关。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/rpmsg/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下列为勾选项：  
-* `<m> Virtio RPMSG bus driver`  
-* `<m> rpmsg Remote Procedure Call driver`  
-* `<m> PRU RPMsg Communication driver`  
-
-</m></m></m></details>
-
-<details>
-<summary>SCSI device support ---></summary>  
-## SOC (System On Chip) specific Drivers --->  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;专用于单片机的设备驱动，皆为嵌入式系统。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下列为勾选项：  
-* `[Y] TI SOC drivers support`  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/soc/ti/Kconfig  
-
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通用RTC(实时时钟)类支持。所有的PC机主板都包含一个电池动力的实时时钟芯片，以便在断电后仍然能够继续保持时间，RTC通常与CMOS集成在一起，因此BIOS可以从中读取当前时间(精度一般是秒级)。选中此项后你就可以在操作系统中使用一个或多个RTC设备(你还必须从下面启用一个或多个RTC接口)。[注意]Clock与Timer没有任何关系，Timer是定时器(用于计量时长)，Clock是时钟(用于记录当前的时刻”年-月-日 时：分：秒”)。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/rtc/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generic RTC class support. If you say yes here, you will be allowed to plug one or more RTCs to your system. You will probably want to enable one or more of the interfaces below.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下列为主要勾选项：  </p>
+<ul>
+<li><code>[Y] Set system time from RTC on startup and resume</code>  </li>
+<li><code>[Y] Set the RTC time based on NTP synchronization</code>  </li>
+<li><code>[Y] RTC debug support</code>  </li>
+<li><code>[Y] RTC non volatile storage support</code>  </li>
+<li><code>[Y] /sys/class/rtc/rtcN (sysfs)</code>  </li>
+<li><code>[Y] /proc/driver/rtc (procfs for rtcN)</code>  </li>
+<li><code>[Y] /dev/rtcN (character devices)</code>  </li>
+<li><code>&lt;M&gt; Dallas/Maxim DS1307/37/38/39/40/41, ST M41T00, EPSON RX-8025, ISL12057</code>  </li>
+<li><code>&lt;M&gt; TI Palmas RTC driver</code>  </li>
+<li><code>&lt;M&gt; TI TPS6586X RTC driver</code>  </li>
+<li><code>&lt;M&gt; TI TPS65910 RTC driver</code>  </li>
+<li><code>&lt;M&gt; EFI RTC</code>  </li>
+<li><code>&lt;M&gt; TI OMAP Real Time Clock</code>  </li>
+</ul>
 </details>
 
 <details>
-<summary>SCSI device support ---></summary>  
-## [N] Generic Dynamic Voltage and Frequency Scaling (DVFS) support ----  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DVFS(动态电压与频率调整)可以根据系统负载动态调节设备的运行频率和电压(对于同一芯片，频率越高，需要的电压也越高)，从而达到节能目的。此选项提供了一个类似CPUfreq(CONFIG_CPU_FREQ)的通用DVFS框架(devfreq)。目前DVFS技术进在嵌入式设备(例如Exynos4/Exynos5)上普遍存在，不确定的选"N"。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/devfreq/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A device may have a list of frequencies and voltages available. devfreq, a generic DVFS framework can be registered for a device in order to let the governor provided to devfreq choose an operating frequency based on the device driver's policy.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Each device may have its own governor and policy. Devfreq can reevaluate the device state periodically and/or based on the notification to "nb", a notifier block, of devfreq.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Like some CPUs with CPUfreq, a device may have multiple clocks. However, because the clock frequencies of a single device are determined by the single device's state, an instance of devfreq is attached to a single device and returns a "representative" clock frequency of the device, which is also attached to a device by 1-to-1. The device registering devfreq takes the responsibility to "interpret" the representative frequency and to set its every clock accordingly with the "target" callback given to devfreq.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When OPP is used with the devfreq device, it is recommended to register devfreq's nb to the OPP's notifier head.  If OPP is used with the devfreq device, you may use OPP helper functions defined in devfreq.h.  
+<summary>[Y] DMA Engine support --->  </summary>  
 
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DMA引擎(DMA Engine)可以看做是传统DMA控制器(DMA controller)的新生。在DMA引擎的协助下，CPU只需初始化一个传输动作，其余的动作就可以由DMA引擎独立完成(完成后以中断的方式通知CPU)，这对于高速传输大量数据以及”分散-收集”操作大有益处，可以节约大量的CPU资源(有时也可节约大量的内存操作)。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;目前，DMA引擎有两个用途：(1)卸载高速网络栈中的内存COPY操作，(2)加速CONFIG_MD_RAID456驱动中的RAID操作。”DMA引擎”只是一个统称，在不同场合对应着不同的技术，例如Intel I/OAT(PC平台)和AHB(嵌入式)。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/dma/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DMA engines can do asynchronous data transfers without involving the host CPU.  Currently, this framework can be used to offload memory copies in the network stack and RAID operations in the MD driver.  This menu only presents DMA Device drivers supported by the configured arch, it may be empty in some cases.  </p>
 </details>
 
 <details>
-<summary>SCSI device support ---></summary>  
-## -Y- External Connector Class (extcon) support  --->  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extcon(外部连接器类)允许用户空间通过sysfs和uevent监控外部连接器，同时也支持多状态外部连接器(也就是拥有多个连接线缆的外部连接器)。例如，一端连接到主机USB端口的多状态外部连接器，一端可以同时连接一条HDMI线缆和一个AC适配器。30针的PDMI连接器也是多状态外部连接器的常见例子。不确定的选"N"。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/extcon/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Say Y here to enable external connector class (extcon) support. This allows monitoring external connectors by userspace via sysfs and uevent and supports external connectors with multiple states; i.e., an extcon that may have multiple cables attached. For example, an external connector of a device may be used to connect an HDMI cable and a AC adaptor, and to host USB ports. Many of 30-pin connectors including PDMI are also good examples.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下列为勾选项：  
-* `<m> Palmas USB EXTCON support`  
-* `<m> USB GPIO extcon support`  
+<summary>DMABUF options --->  </summary>  
 
-</m></m></details>
-
-<details>
-<summary>SCSI device support ---></summary>  
-## -Y- Memory Controller drivers --->  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;内存控制器驱动。这里所说的"内存控制器"仅指嵌入式SoC系统中的各种控制器，不确定的选"N"。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/memory/Kconfig。  
-
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以下为勾选项：  </p>
+<ul>
+<li><code>-Y- Explicit Synchronization Framework</code><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/dma-buf/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Sync File Framework adds explicit syncronization via userspace. It enables send/receive ‘struct dma_fence’ objects to/from userspace via Sync File fds for synchronization between drivers via userspace components. It has been ported from Android.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The first and main user for this is graphics in which a fence is associated with a buffer. When a job is submitted to the GPU a fence is attached to the buffer and is transferred via userspace, using Sync Files fds, to the DRM driver for example. More details at Documentation/sync_file.txt.  </li>
+</ul>
 </details>
 
 <details>
-<summary>SCSI device support ---></summary>  
-## <y> Industrial I/O support --->  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IIO子系统为各种不同总线(i2c、spi等)的嵌入式传感器驱动提供了一个统一的框架。例如：(1)模数转换器，(2)加速度传感器，(3)陀螺仪，(4)惯性测量仪，(5)电容-数字转换器，(6)压力/温度/光线传感器等等。主要用于工业领域和嵌入式领域，不确定的选"N"。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：Industrial I/O support rivers。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The industrial I/O subsystem provides a unified framework for drivers for many different types of embedded sensors using a number of different physical interfaces (i2c, spi, etc).  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下列为主要勾选项：  
-* `-Y- Enable buffer support within IIO`  
-* `-Y- Industrial I/O buffering based on kfifo`  
-* `-Y- Enable IIO configuration via configfs`  
-* `-Y- Enable triggered sampling support`  
-* `<y> Enable software triggers support`  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其他勾选项以各类芯片为主。  
+<summary>[N] Auxiliary Display support ----  </summary>  
 
-</y></y></details>
-
-<details>
-<summary>SCSI device support ---></summary>  
-## <n> Non-Transparent Bridge support ----  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PCI-E非透明桥是一个点对点PCI-E总线，用于连接两条对等的PCI-E总线。例如英特尔 Atom S1200处理器， Xeon C5500/C3500 嵌入式处理器等。具体支持的设备号(PCI_DEVICE_ID)可以查看"drivers/ntb/ntb_hw.h"文件或NTB驱动数据库，不确定的选"N"。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/ntb/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The PCI-E Non-transparent bridge hardware is a point-to-point PCI-E busconnecting 2 systems. When configured, writes to the device's PCImapped memory will be mirrored to a buffer on the remote system.  Thentb Linux driver uses this point-to-point communication as a method totransfer data from one system to the other.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If unsure, say N.  
-
-</n></details>
-
-<details>
-<summary>SCSI device support ---></summary>  
-## [N] VME bridge support ----  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VME(VersaModule Eurocard)总线是一种通用的计算机总线，主要用于工业控制/军用系统/航空航天/交通运输/医疗等嵌入式领域。而VME桥则是其他总线(例如PCI/PCI-E)到VME总线之间的转换芯片，不确定的选"N"。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/vme/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If you say Y here you get support for the VME bridge Framework.  
-
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;辅助显示设备。例如基于KS0108控制器的Crystalfontz CFAG12864B单色液晶屏(分辨率:128x64)。仅用于嵌入式系统。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/auxdisplay/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Say Y here to get to see options for auxiliary display drivers. This option alone does not add any kernel code.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If you say N, all options in this submenu will be skipped and disabled.  </p>
 </details>
 
 <details>
-<summary>SCSI device support ---></summary>  
-## -Y- Pulse-Width Modulation (PWM) Support --->  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PWM(脉宽调制)是将模拟信号转换为脉波的一种技术，在计算机领域，这项技术常被用于控制风扇转速和背光显示器的亮度。很多微型处理器内部都包含有PWM控制器，此选项为所有PWM控制器驱动提供了一个统一的框架，不确定的选"N"。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/pwm/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generic Pulse-Width Modulation (PWM) support.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In Pulse-Width Modulation, a variation of the width of pulses in a rectangular pulse signal is used as a means to alter the average power of the signal. Applications include efficient power delivery and voltage regulation. In computer systems, PWMs are commonly used to control fans or the brightness of display backlights.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This framework provides a generic interface to PWM devices within the Linux kernel. On the driver side it provides an API to register and unregister a PWM chip, an abstraction of a PWM controller, that supports one or more PWM devices. Client drivers can request PWM devices and use the generic framework to configure as well as enable and disable them.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This generic framework replaces the legacy PWM framework which allows only a single driver implementing the required API. Not all legacy implementations have been ported to the framework yet. The framework provides an API that is backward compatible with the legacy framework so that existing client drivers continue to work as expected.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If unsure, say no.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下列为勾选项：  
-* `<m> Freescale FlexTimer Module (FTM) PWM support`  
-* `<y> ECAP PWM support`  
-* `<y> EHRPWM PWM support`  
+<summary><m> Userspace I/O drivers--->  </m></summary>  
 
-</y></y></m></details>
-
-<details>
-<summary>SCSI device support ---></summary>  
-## IRQ chip support ----  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：/drivers/irqchip/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;没有选择项。  
-
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UIO(Userspace I/O)是运行在用户空间的I/O技术，它为开发用户空间的驱动提供了一个简单的架构(/dev/uioN)。使用uio的设备一般都属于嵌入式系统，不确定的选”N”。[提示]lsuio工具可以列出所有UIO的模块和其映射的内存地址。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/uio/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Enable this to allow the userspace driver core code to be built.  This code allows userspace programs easy access to kernel interrupts and memory locations, allowing some drivers to be written in userspace.  Note that a small kernel driver is also required for interrupt handling to work properly.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If you don’t know what to do here, say N.  </p>
 </details>
 
 <details>
-<summary>SCSI device support ---></summary>  
-## <n> IndustryPack bus support ----  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IndustryPack是工业控制领域常用的一种总线，不确定的选"N"。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/ipack/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This option provides support for the IndustryPack framework.  There are IndustryPack carrier boards, which interface another bus (such as PCI) to an IndustryPack bus, and IndustryPack modules, that are hosted on these buses.  While IndustryPack modules can provide a large variety of functionality, they are most often found in industrial control applications.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Say N if unsure.  
+<summary><n> VFIO Non-Privileged userspace driver framework ----  </n></summary>  
 
-</n></details>
-
-<details>
-<summary>SCSI device support ---></summary>  
-## [Y] Reset Controller Support --->  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为GPIO总线或者芯片内置的重启控制器提供通用支持，仅用于嵌入式设备。不确定的选"N"。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/reset/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generic Reset Controller support.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This framework is designed to abstract reset handling of devices via GPIOs or SoC-internal reset controller modules.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If unsure, say no.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下列为勾选项：  
-* `<y> TI SYSCON Reset Driver`  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This enables the reset driver support for TI devices with memory-mapped reset registers as part of a syscon device node. If you wish to use the reset framework for such memory-mapped devices, say Y here. Otherwise, say N.  
-
-</y></details>
-
-<details>
-<summary>SCSI device support ---></summary>  
-## <n> FMC support ----  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FMC(FPGA Mezzanine Carrier)是一个定义如何将FPGA夹层卡(FPGA Mezzanine Card)连接到主机电路板的接口标准，仅用于嵌入式环境。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/fmc/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FMC (FPGA Mezzanine Carrier) is a mechanical and electrical standard for mezzanine cards that plug into a carrier board. This kernel subsystem supports the matching between carrier and mezzanine based on identifiers stored in the internal I2C EEPROM, as well as having carrier-independent drivers.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The framework was born outside of the kernel and at this time the off-tree code base is more complete.  Code and documentation is at git://ohwr.org/fmc-projects/fmc-bus.git .  
-
-</n></details>
-
-<details>
-<summary>SCSI device support ---></summary>  
-## PHY Subsystem --->  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PHY子系统。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/phy/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下列为勾选项：  
-* `-Y- PHY Core`  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为内核中的所有PHY设备提供一个通用的PHY框架，不确定的选"N"。内核中若有其他部分依赖它，会自动选上。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This framework is designed to provide a generic interface for PHY devices present in the kernel. This layer will have the generic API by which phy drivers can create PHY using the phy framework and phy users can obtain reference to the PHY. All the users of this framework should select this config.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其他为部分芯片的选项。  
-
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VFIO是一套无特权用户空间I/O驱动框架，需要有IOMMU虚拟化硬件支持(AMD-Vi/Intel VT-d)。此选项仅用于宿主机内核，VFIO的目标是在IOMMU硬件的帮助下，取代CONFIG_UIO和CONFIG_KVM_DEVICE_ASSIGNMENT。VFIO主要用于编写高效的用户态驱动，以及在虚拟化环境的属主机中高效的实现设备直通(passthrough)且无须root特权，可用于详见”Documentation/vfio.txt”文档。[提示]QEMU 1.3以上版本才能利用VFIO特性。不玩KVM虚拟化的选”N”。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/vfio/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VFIO provides a framework for secure userspace device drivers. See Documentation/vfio.txt for more details.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If you don’t know what to do here, say N.  </p>
 </details>
 
 <details>
-<summary>SCSI device support ---></summary>  
-## [N] Generic powercap sysfs driver ----  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"power capping"的意思是允许用户把设备的总功耗限定在指定的范围内，此选项允许内核子系统将"power capping"的设置以sysfs的方式导出到用户空间，不确定的选"N"。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/powercap/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The power capping sysfs interface allows kernel subsystems to expose power capping settings to user space in a consistent way.  Usually, it consists of multiple control types that determine which settings may be exposed and power zones representing parts of the system that can be subject to power capping.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If you want this code to be compiled in, say Y here.  
+<summary>[N] Virtualization drivers ----  </summary>  
 
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这个选项仅对PowerPC架构有意义。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/virt/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Say Y here to get to see options for device drivers that support virtualization environments.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If you say N, all options in this submenu will be skipped and disabled.  </p>
 </details>
 
 <details>
-<summary>SCSI device support ---></summary>  
-## <n> MCB support ----  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MCB(MEN Chameleon Bus)是专用于德国MEN Mikro Elektronik公司的FPGA设备的总线，MEN Mikro Elektronik公司的嵌入式计算主要是为航空/航海/铁路及陆地车辆的应用，以及自动化/电力/能源和医疗用途。不确定的选"N"。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/mcb/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The MCB (MEN Chameleon Bus) is a Bus specific to MEN Mikroelektronik  FPGA based devices. It is used to identify MCB based IP-Cores within  an FPGA and provide the necessary framework for instantiating drivers for these devices.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If build as a module, the module is called mcb.ko  
+<summary>Virtio drivers --->  </summary>  
 
-</n></details>
-
-<details>
-<summary>SCSI device support ---></summary>  
-## Performance monitor support --->  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;专用于ARM架构的CPU性能监控框架。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/perf/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下列为勾选项：  
-* `[Y] ARM PMU framework`  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Say y if you want to use CPU performance monitors on ARM-based systems.  
-
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;仅可用于客户机内核的Virtio驱动。Virtio的目标是为各种半虚拟化的虚拟机管理程序(特别是KVM)提供一组通用的模拟设备,目前已实现：network/block/balloon/console/hw_random，未来还会实现更多。下列驱动仅可用在基于lguest或QEMU的半虚拟化客户机中(一般是KVM或XEN)。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/virtio/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This option is selected by any driver which implements the virtio bus, such as<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CONFIG_VIRTIO_PCI,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CONFIG_VIRTIO_MMIO,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CONFIG_RPMSG,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CONFIG_S390_GUEST.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下列为勾选项：  </p>
+<ul>
+<li><code>&lt;Y&gt; PCI driver for virtio devices</code><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;半虚拟化PCI设备驱动，VMM(虚拟机管理程序)必须要有相应的”PCI virtio backend”。基于QEMU的VMM(KVM,Xen)一般都支持该驱动。[提示]由于目前的ABI尚不稳定,建议使用时注意版本匹配。  </li>
+<li><code>&lt;Y&gt; Platform bus driver for memory mapped virtio devices</code><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;支持使用内存映射机制的virtio设备驱动。  </li>
+</ul>
 </details>
 
 <details>
-<summary>SCSI device support ---></summary>  
-## -Y- Reliability, Availability and Serviceability (RAS) features ----  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RAS(可靠、可用、可维护)是一个计算机硬件术语，可靠性描述系统能够持续正确工作多长时间，可用性描述系统能够正确工作的时间百分比，可维护性描述系统从错误恢复到正常需要多长时间。具有高等级RAS的硬件会有一系列额外的技术保障数据的可靠性与正确性。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/ras/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reliability, availability and serviceability (RAS) is a computer hardware engineering term. Computers designed with higher levels of RAS have a multitude of features that protect data integrity and help them stay available for long periods of time without failure.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reliability can be defined as the probability that the system will produce correct outputs up to some given time. Reliability is enhanced by features that help to avoid, detect and repair hardware faults.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Availability is the probability a system is operational at a given time, i.e. the amount of time a device is actually operating as the percentage of total time it should be operating.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Serviceability or maintainability is the simplicity and speed with which a system can be repaired or maintained; if the time to repair a failed system increases, then availability will decrease.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note that Reliability and Availability are distinct concepts: Reliability is a measure of the ability of a system to function correctly, including avoiding data corruption, whereas Availability measures how often it is available for use, even though it may not be functioning correctly. For example, a server may run forever and so have ideal availability, but may be unreliable, with frequent data corruption.  
+<summary>Microsoft Hyper-V guest support ----  </summary>  
 
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;仅在将此Linux内核作为微软Hyper-V虚拟机的来宾操作系统运行时，才需要开启这里的选项。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：/drivers/hv/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Select this option to run Linux as a Hyper-V client operating system.  </p>
 </details>
 
 <details>
-<summary>SCSI device support ---></summary>  
-## Android --->  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;安卓平台专用驱动。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/android/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Enable support for various drivers needed on the Android platform。  
+<summary>[N] Staging drivers ----  </summary>  
 
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;尚在开发中或尚未完成的，目前尚不完善的驱动，切勿用于生产环境。仅供测试人员或者开发者试用。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/staging/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This option allows you to select a number of drivers that are not of the “normal” Linux kernel quality level.  These drivers are placed here in order to get a wider audience to make use of them.  Please note that these drivers are under heavy development, may or may not work, and may contain userspace interfaces that most likely will be changed in the near future.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Using any of these drivers will taint your kernel which might affect support options from both the community, and various commercial support organizations.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If you wish to work on these drivers, to help improve them, or to report problems you have with them, please see the driver_name.README file in the drivers/staging/ directory to see what needs to be worked on, and who to contact.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If in doubt, say N here.  </p>
 </details>
 
 <details>
-<summary>SCSI device support ---></summary>  
-## <n> NVDIMM (Non-Volatile Memory Device) Support ----  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NVDIMM(非易失性内存)支持。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/nvdimm/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generic support for non-volatile memory devices including ACPI-6-NFIT defined resources.  On platforms that define an NFIT, or otherwise can discover NVDIMM resources, a libnvdimm bus is registered to advertise PMEM (persistent memory) namespaces (/dev/pmemX) and BLK (sliding mmio window(s)) namespaces (/dev/ndblkX.Y). A PMEM namespace refers to a memory resource that may span multiple DIMMs and support DAX (see CONFIG_DAX).  A BLK namespace refers to an NVDIMM control region which exposes an mmio register set for windowed access mode to non-volatile memory.  
+<summary>[N] Platform support for Goldfish virtual devices ----  </summary>  
 
-</n></details>
-
-<details>
-<summary>SCSI device support ---></summary>  
-## <n> DAX: direct access to differentiated memory ----  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/dax/Kconfig。  
-
-</n></details>
-
-<details>
-<summary>SCSI device support ---></summary>  
-## -Y- NVMEM Support ----  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NVMEM(非易失性存储器)设备支持，包括：EEPROM、EFUSES……不确定的选"N"。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/nvmem/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Support for NVMEM(Non Volatile Memory) devices like EEPROM, EFUSES...  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This framework is designed to provide a generic interface to NVMEM from both the Linux Kernel and the userspace.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This driver can also be built as a module. If so, the module will be called nvmem_core.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If unsure, say no.  
-
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/platform/goldfish/Kconfig<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Say Y here to get to see options for the Goldfish virtual platform.This option alone does not add any kernel code. Unless you are building for the Android Goldfish emulator say N here.  </p>
 </details>
 
 <details>
-<summary>SCSI device support ---></summary>  
-## <n> System Trace Module devices  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;仅供调试使用。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/hwtracing/stm/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A System Trace Module (STM) is a device exporting data in System Trace Protocol (STP) format as defined by MIPI STP standards.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Examples of such devices are Intel(R) Trace Hub and Coresight STM.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Say Y here to enable System Trace Module device support.  
+<summary>[N] Platform support for Chrome hardware ----  </summary>  
 
-</n></details>
-
-<details>
-<summary>SCSI device support ---></summary>  
-## <n> Intel(R) Trace Hub controller  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;仅供调试使用。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/hwtracing/intel_th/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Intel(R) Trace Hub (TH) is a set of hardware blocks (subdevices) that produce, switch and output trace data from multiple hardware and software sources over several types of trace output ports encoded in System Trace Protocol (MIPI STPv2) and is intended to perform full system debugging.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This option enables intel_th bus and common code used by TH subdevices to interact with each other and hardware and for platform glue layers to drive Intel TH devices.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Say Y here to enable Intel(R) Trace Hub controller support.  
-
-</n></details>
-
-<details>
-<summary>SCSI device support ---></summary>  
-## <n> FPGA Configuration Framework ----  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FPGA配置框架支持，仅用于嵌入式系统。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/fpga/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Say Y here if you want support for configuring FPGAs from the kernel.  The FPGA framework adds a FPGA manager class and FPGA manager drivers.  
-
-</n></details>
-
-<details>
-<summary>SCSI device support ---></summary>  
-## FSI support --->  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/fsi/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FSI - the FRU Support Interface - is a simple bus for low-level access to POWER-based hardware.  
-
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;专用于Google公司的Chromebook笔记本/Chromebox迷你机的设备驱动。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/platform/chrome/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Say Y here to get to see options for platform support for various Chromebooks and Chromeboxes. This option alone does not add any kernel code.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If you say N, all options in this submenu will be skipped and disabled.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Common Clock Framework —&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CCF(Common Clock Framework)是从3.4内核开始引入的新时钟框架，用于取代原有的”Clock Framework”。详见”Documentation/clk.txt”文档。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/clk/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The common clock framework is a single definition of struct clk, useful across many platforms, as well as an implementation of the clock API in include/linux/clk.h. Architectures utilizing the common struct clk should select this option.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下列为勾选项：  </p>
+<ul>
+<li><code>&lt;Y&gt; Clock driver for TI Palmas devices</code><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This driver supports TI Palmas devices 32KHz output KG and KG_AUDIO using common clock framework.  </li>
+</ul>
 </details>
 
 <details>
-<summary>SCSI device support ---></summary>  
-## <y> Trusted Execution Environment support    
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;针对移动端的安全威胁产生的可信执行环境技术。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/tee/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This implements a generic interface towards a Trusted Execution Environment (TEE).  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TEE drivers --->  
-* `<y> OP-TEE`  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/tee/optee/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This implements the OP-TEE Trusted Execution Environment (TEE) driver.  
-</y></y></details>
+<summary>[Y] Hardware Spinlock drivers --->  </summary>  
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;硬件自旋锁驱动。目前仅出现在嵌入式处理器上，自旋锁是保护共享资源的一种锁机制，与互斥锁比较类似，都是为了解决对某项资源的互斥使用。无论是互斥锁，还是自旋锁，在任何时刻，最多只能有一个持有者。也就是说，在任何时刻最多只能有一个执行单元获得锁。但是两者在调度机制上略有不同，对于互斥锁，如果资源已经被占用，资源申请者只能进入睡眠状态。但是自旋锁不会引起申请者睡眠，如果自旋锁已经被别的执行单元保持，调用者就一直在循环中”忙等”(占用CPU但无事可做)，直到该自旋锁被释放。”自旋”一词就是因此而得名。自旋锁的使用非常方便，但仅适用于需要极短时间锁定的场合(例如1毫秒)，以避免消耗太多的CPU空等时间。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/hwspinlock/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下列为勾选项：  </p>
+<ul>
+<li><code>&lt;Y&gt; OMAP Hardware Spinlock device</code><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Say y here to support the OMAP Hardware Spinlock device (firstly introduced in OMAP4).<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If unsure, say N.  </li>
+</ul>
+</details>
+
+<details>
+<summary>Clock Source drivers --->  </summary>  
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;”时钟源”驱动，主要面向嵌入式设备。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/clocksource/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下列为勾选项：  </p>
+<ul>
+<li><code>[Y] Enable ARM architected timer event stream generation by default</code><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This option enables support by default for event stream generation based on the ARM architected timer. It is used for waking up CPUs executing the wfe instruction at a frequency represented as a power-of-2 divisor of the clock rate. The behaviour can also be overridden on the command line using the clocksource.arm_arch_timer.evtstream parameter. The main use of the event stream is wfe-based timeouts of userspace locking implementations. It might also be useful for imposing timeout on wfe to safeguard against any programming errors in case an expected event is not generated.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This must be disabled for hardware validation purposes to detect any hardware anomalies of missing events.  </li>
+</ul>
+</details>
+
+<details>
+<summary>-Y- Mailbox Hardware Support --->  </summary>  
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mailbox硬件支持。这里的”Mailbox”是一个框架，通过消息队列和中断驱动信号，控制芯片上的多个处理器之间的通信。仅用于嵌入式环境。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/mailbox/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mailbox is a framework to control hardware communication between on-chip processors through queued messages and interrupt driven signals. Say Y if your platform supports hardware mailboxes.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下列为勾选项：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{Y} OMAP2+ Mailbox framework support  </p>
+<ul>
+<li><code>(256) Mailbox kfifo default buffer size (bytes)</code>  </li>
+</ul>
+</details>
+
+<details>
+<summary>[Y] IOMMU Hardware Support --->  </summary>  
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IOMMU硬件主要出现在带有I/O虚拟化技术的硬件上，例如带有AMD-Vi或VT-d技术的芯片。IOMMU主要作用：(1)内存地址转换(例如DMA地址转换，scatter-gather)，(2)中断重映射，(3)对设备读取和写入的进行权限检查。这对于提高虚拟化性能和安全性，以及在64位系统上更好的使用32位设备，意义重大。[提示]此选项仅对宿主机有意义，如果此内核要作为来宾操作系统运行，请选”N”。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/iommu/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Say Y here if you want to compile device drivers for IO Memory Management Units into the kernel. These devices usually allow to remap DMA requests and/or remap interrupts from other devices on the system.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下列为勾选项：  </p>
+<ul>
+<li><code>[Y] OMAP IOMMU Support</code>  </li>
+<li><code>[Y] Export OMAP IOMMU internals in DebugFS</code>  </li>
+</ul>
+</details>
+
+<details>
+<summary>Remoteproc drivers --->  </summary>  
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;现代的SoC芯片一般都会以AMP(非对称多处理器)方式集成多个不同的处理器(例如OMAP5432就在单个芯片上集成了2个Cortex-A15处理器，2个Cortex-M4处理器，1个C64x DSP)，这样就可在不同的处理器上分别运行多个不同的操作系统实例(例如，在2个Cortex-A9处理器上以SMP(对称多处理器)方式运行Linux，在2个Cortex-M3和1个C64x上分别运行不同的实时操作系统)。而Remoteproc驱动对此种场合下的处理器间通信非常有用，详见”Documentation/remoteproc.txt”和”Documentation/rpmsg.txt”文档。目前仅对嵌入式系统有意义，不确定的选”N”。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/remoteproc/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下列为勾选项：  </p>
+<ul>
+<li><code>&lt;M&gt; Support for Remote Processor subsystem</code>  </li>
+<li><code>&lt;M&gt; OMAP remoteproc support</code>  </li>
+<li><code>&lt;M&gt; TI PRUSS remoteproc support</code>  </li>
+</ul>
+</details>
+
+<details>
+<summary>Rpmsg drivers --->  </summary>  
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;此项和上面的Remoteproc紧密相关。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/rpmsg/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下列为勾选项：  </p>
+<ul>
+<li><code>&lt;M&gt; Virtio RPMSG bus driver</code>  </li>
+<li><code>&lt;M&gt; rpmsg Remote Procedure Call driver</code>  </li>
+<li><code>&lt;M&gt; PRU RPMsg Communication driver</code>  </li>
+</ul>
+</details>
+
+<details>
+<summary>SOC (System On Chip) specific Drivers --->  </summary>  
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;专用于单片机的设备驱动，皆为嵌入式系统。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下列为勾选项：  </p>
+<ul>
+<li><code>[Y] TI SOC drivers support</code><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/soc/ti/Kconfig  </li>
+</ul>
+</details>
+
+<details>
+<summary>[N] Generic Dynamic Voltage and Frequency Scaling (DVFS) support ----  </summary>  
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DVFS(动态电压与频率调整)可以根据系统负载动态调节设备的运行频率和电压(对于同一芯片，频率越高，需要的电压也越高)，从而达到节能目的。此选项提供了一个类似CPUfreq(CONFIG_CPU_FREQ)的通用DVFS框架(devfreq)。目前DVFS技术进在嵌入式设备(例如Exynos4/Exynos5)上普遍存在，不确定的选”N”。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/devfreq/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A device may have a list of frequencies and voltages available. devfreq, a generic DVFS framework can be registered for a device in order to let the governor provided to devfreq choose an operating frequency based on the device driver’s policy.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Each device may have its own governor and policy. Devfreq can reevaluate the device state periodically and/or based on the notification to “nb”, a notifier block, of devfreq.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Like some CPUs with CPUfreq, a device may have multiple clocks. However, because the clock frequencies of a single device are determined by the single device’s state, an instance of devfreq is attached to a single device and returns a “representative” clock frequency of the device, which is also attached to a device by 1-to-1. The device registering devfreq takes the responsibility to “interpret” the representative frequency and to set its every clock accordingly with the “target” callback given to devfreq.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When OPP is used with the devfreq device, it is recommended to register devfreq’s nb to the OPP’s notifier head.  If OPP is used with the devfreq device, you may use OPP helper functions defined in devfreq.h.  </p>
+</details>
+
+<details>
+<summary>-Y- External Connector Class (extcon) support  --->  </summary>  
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extcon(外部连接器类)允许用户空间通过sysfs和uevent监控外部连接器，同时也支持多状态外部连接器(也就是拥有多个连接线缆的外部连接器)。例如，一端连接到主机USB端口的多状态外部连接器，一端可以同时连接一条HDMI线缆和一个AC适配器。30针的PDMI连接器也是多状态外部连接器的常见例子。不确定的选”N”。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/extcon/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Say Y here to enable external connector class (extcon) support. This allows monitoring external connectors by userspace via sysfs and uevent and supports external connectors with multiple states; i.e., an extcon that may have multiple cables attached. For example, an external connector of a device may be used to connect an HDMI cable and a AC adaptor, and to host USB ports. Many of 30-pin connectors including PDMI are also good examples.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下列为勾选项：  </p>
+<ul>
+<li><code>&lt;M&gt; Palmas USB EXTCON support</code>  </li>
+<li><code>&lt;M&gt; USB GPIO extcon support</code>  </li>
+</ul>
+</details>
+
+<details>
+<summary>-Y- Memory Controller drivers --->  </summary>  
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;内存控制器驱动。这里所说的”内存控制器”仅指嵌入式SoC系统中的各种控制器，不确定的选”N”。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/memory/Kconfig。  </p>
+</details>
+
+<details>
+<summary><y> Industrial I/O support --->  </y></summary>  
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IIO子系统为各种不同总线(i2c、spi等)的嵌入式传感器驱动提供了一个统一的框架。例如：(1)模数转换器，(2)加速度传感器，(3)陀螺仪，(4)惯性测量仪，(5)电容-数字转换器，(6)压力/温度/光线传感器等等。主要用于工业领域和嵌入式领域，不确定的选”N”。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：Industrial I/O support rivers。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The industrial I/O subsystem provides a unified framework for drivers for many different types of embedded sensors using a number of different physical interfaces (i2c, spi, etc).<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下列为主要勾选项：  </p>
+<ul>
+<li><code>-Y- Enable buffer support within IIO</code>  </li>
+<li><code>-Y- Industrial I/O buffering based on kfifo</code>  </li>
+<li><code>-Y- Enable IIO configuration via configfs</code>  </li>
+<li><code>-Y- Enable triggered sampling support</code>  </li>
+<li><code>&lt;Y&gt; Enable software triggers support</code><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其他勾选项以各类芯片为主。  </li>
+</ul>
+</details>
+
+<details>
+<summary><n> Non-Transparent Bridge support ----  </n></summary>  
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PCI-E非透明桥是一个点对点PCI-E总线，用于连接两条对等的PCI-E总线。例如英特尔 Atom S1200处理器， Xeon C5500/C3500 嵌入式处理器等。具体支持的设备号(PCI_DEVICE_ID)可以查看”drivers/ntb/ntb_hw.h”文件或NTB驱动数据库，不确定的选”N”。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/ntb/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The PCI-E Non-transparent bridge hardware is a point-to-point PCI-E busconnecting 2 systems. When configured, writes to the device’s PCImapped memory will be mirrored to a buffer on the remote system.  Thentb Linux driver uses this point-to-point communication as a method totransfer data from one system to the other.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If unsure, say N.  </p>
+</details>
+
+<details>
+<summary>[N] VME bridge support ----  </summary>  
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VME(VersaModule Eurocard)总线是一种通用的计算机总线，主要用于工业控制/军用系统/航空航天/交通运输/医疗等嵌入式领域。而VME桥则是其他总线(例如PCI/PCI-E)到VME总线之间的转换芯片，不确定的选”N”。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/vme/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If you say Y here you get support for the VME bridge Framework.  </p>
+</details>
+
+<details>
+<summary>-Y- Pulse-Width Modulation (PWM) Support --->  </summary>  
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PWM(脉宽调制)是将模拟信号转换为脉波的一种技术，在计算机领域，这项技术常被用于控制风扇转速和背光显示器的亮度。很多微型处理器内部都包含有PWM控制器，此选项为所有PWM控制器驱动提供了一个统一的框架，不确定的选”N”。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/pwm/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generic Pulse-Width Modulation (PWM) support.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In Pulse-Width Modulation, a variation of the width of pulses in a rectangular pulse signal is used as a means to alter the average power of the signal. Applications include efficient power delivery and voltage regulation. In computer systems, PWMs are commonly used to control fans or the brightness of display backlights.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This framework provides a generic interface to PWM devices within the Linux kernel. On the driver side it provides an API to register and unregister a PWM chip, an abstraction of a PWM controller, that supports one or more PWM devices. Client drivers can request PWM devices and use the generic framework to configure as well as enable and disable them.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This generic framework replaces the legacy PWM framework which allows only a single driver implementing the required API. Not all legacy implementations have been ported to the framework yet. The framework provides an API that is backward compatible with the legacy framework so that existing client drivers continue to work as expected.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If unsure, say no.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下列为勾选项：  </p>
+<ul>
+<li><code>&lt;M&gt; Freescale FlexTimer Module (FTM) PWM support</code>  </li>
+<li><code>&lt;Y&gt; ECAP PWM support</code>  </li>
+<li><code>&lt;Y&gt; EHRPWM PWM support</code>  </li>
+</ul>
+</details>
+
+<details>
+<summary>IRQ chip support ----  </summary>  
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：/drivers/irqchip/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;没有选择项。  </p>
+</details>
+
+<details>
+<summary><n> IndustryPack bus support ----  </n></summary>  
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IndustryPack是工业控制领域常用的一种总线，不确定的选”N”。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/ipack/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This option provides support for the IndustryPack framework.  There are IndustryPack carrier boards, which interface another bus (such as PCI) to an IndustryPack bus, and IndustryPack modules, that are hosted on these buses.  While IndustryPack modules can provide a large variety of functionality, they are most often found in industrial control applications.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Say N if unsure.  </p>
+</details>
+
+<details>
+<summary>[Y] Reset Controller Support --->  </summary>  
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为GPIO总线或者芯片内置的重启控制器提供通用支持，仅用于嵌入式设备。不确定的选”N”。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/reset/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generic Reset Controller support.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This framework is designed to abstract reset handling of devices via GPIOs or SoC-internal reset controller modules.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If unsure, say no.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下列为勾选项：  </p>
+<ul>
+<li><code>&lt;Y&gt; TI SYSCON Reset Driver</code><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This enables the reset driver support for TI devices with memory-mapped reset registers as part of a syscon device node. If you wish to use the reset framework for such memory-mapped devices, say Y here. Otherwise, say N.  </li>
+</ul>
+</details>
+
+<details>
+<summary><n> FMC support ----  </n></summary>  
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FMC(FPGA Mezzanine Carrier)是一个定义如何将FPGA夹层卡(FPGA Mezzanine Card)连接到主机电路板的接口标准，仅用于嵌入式环境。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/fmc/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FMC (FPGA Mezzanine Carrier) is a mechanical and electrical standard for mezzanine cards that plug into a carrier board. This kernel subsystem supports the matching between carrier and mezzanine based on identifiers stored in the internal I2C EEPROM, as well as having carrier-independent drivers.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The framework was born outside of the kernel and at this time the off-tree code base is more complete.  Code and documentation is at git://ohwr.org/fmc-projects/fmc-bus.git .  </p>
+</details>
+
+<details>
+<summary>PHY Subsystem --->  </summary>  
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PHY子系统。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/phy/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下列为勾选项：  </p>
+<ul>
+<li><code>-Y- PHY Core</code><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为内核中的所有PHY设备提供一个通用的PHY框架，不确定的选”N”。内核中若有其他部分依赖它，会自动选上。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This framework is designed to provide a generic interface for PHY devices present in the kernel. This layer will have the generic API by which phy drivers can create PHY using the phy framework and phy users can obtain reference to the PHY. All the users of this framework should select this config.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其他为部分芯片的选项。  </li>
+</ul>
+</details>
+
+<details>
+<summary>[N] Generic powercap sysfs driver ----  </summary>  
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;”power capping”的意思是允许用户把设备的总功耗限定在指定的范围内，此选项允许内核子系统将”power capping”的设置以sysfs的方式导出到用户空间，不确定的选”N”。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/powercap/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The power capping sysfs interface allows kernel subsystems to expose power capping settings to user space in a consistent way.  Usually, it consists of multiple control types that determine which settings may be exposed and power zones representing parts of the system that can be subject to power capping.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If you want this code to be compiled in, say Y here.  </p>
+</details>
+
+<details>
+<summary><n> MCB support ----  </n></summary>  
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MCB(MEN Chameleon Bus)是专用于德国MEN Mikro Elektronik公司的FPGA设备的总线，MEN Mikro Elektronik公司的嵌入式计算主要是为航空/航海/铁路及陆地车辆的应用，以及自动化/电力/能源和医疗用途。不确定的选”N”。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/mcb/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The MCB (MEN Chameleon Bus) is a Bus specific to MEN Mikroelektronik  FPGA based devices. It is used to identify MCB based IP-Cores within  an FPGA and provide the necessary framework for instantiating drivers for these devices.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If build as a module, the module is called mcb.ko  </p>
+</details>
+
+<details>
+<summary>Performance monitor support --->  </summary>  
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;专用于ARM架构的CPU性能监控框架。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/perf/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下列为勾选项：  </p>
+<ul>
+<li><code>[Y] ARM PMU framework</code><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Say y if you want to use CPU performance monitors on ARM-based systems.  </li>
+</ul>
+</details>
+
+<details>
+<summary>-Y- Reliability, Availability and Serviceability (RAS) features ----  </summary>  
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RAS(可靠、可用、可维护)是一个计算机硬件术语，可靠性描述系统能够持续正确工作多长时间，可用性描述系统能够正确工作的时间百分比，可维护性描述系统从错误恢复到正常需要多长时间。具有高等级RAS的硬件会有一系列额外的技术保障数据的可靠性与正确性。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/ras/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reliability, availability and serviceability (RAS) is a computer hardware engineering term. Computers designed with higher levels of RAS have a multitude of features that protect data integrity and help them stay available for long periods of time without failure.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reliability can be defined as the probability that the system will produce correct outputs up to some given time. Reliability is enhanced by features that help to avoid, detect and repair hardware faults.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Availability is the probability a system is operational at a given time, i.e. the amount of time a device is actually operating as the percentage of total time it should be operating.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Serviceability or maintainability is the simplicity and speed with which a system can be repaired or maintained; if the time to repair a failed system increases, then availability will decrease.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note that Reliability and Availability are distinct concepts: Reliability is a measure of the ability of a system to function correctly, including avoiding data corruption, whereas Availability measures how often it is available for use, even though it may not be functioning correctly. For example, a server may run forever and so have ideal availability, but may be unreliable, with frequent data corruption.  </p>
+</details>
+
+<details>
+<summary>Android --->  </summary>  
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;安卓平台专用驱动。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/android/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Enable support for various drivers needed on the Android platform。  </p>
+</details>
+
+<details>
+<summary><n> NVDIMM (Non-Volatile Memory Device) Support ----  </n></summary>  
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NVDIMM(非易失性内存)支持。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/nvdimm/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generic support for non-volatile memory devices including ACPI-6-NFIT defined resources.  On platforms that define an NFIT, or otherwise can discover NVDIMM resources, a libnvdimm bus is registered to advertise PMEM (persistent memory) namespaces (/dev/pmemX) and BLK (sliding mmio window(s)) namespaces (/dev/ndblkX.Y). A PMEM namespace refers to a memory resource that may span multiple DIMMs and support DAX (see CONFIG_DAX).  A BLK namespace refers to an NVDIMM control region which exposes an mmio register set for windowed access mode to non-volatile memory.  </p>
+</details>
+
+<details>
+<summary><n> DAX: direct access to differentiated memory ----  </n></summary>  
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/dax/Kconfig。  </p>
+</details>
+
+<details>
+<summary>-Y- NVMEM Support ----  </summary>  
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NVMEM(非易失性存储器)设备支持，包括：EEPROM、EFUSES……不确定的选”N”。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/nvmem/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Support for NVMEM(Non Volatile Memory) devices like EEPROM, EFUSES…<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This framework is designed to provide a generic interface to NVMEM from both the Linux Kernel and the userspace.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This driver can also be built as a module. If so, the module will be called nvmem_core.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If unsure, say no.  </p>
+</details>
+
+<details>
+<summary><n> System Trace Module devices  </n></summary>  
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;仅供调试使用。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/hwtracing/stm/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A System Trace Module (STM) is a device exporting data in System Trace Protocol (STP) format as defined by MIPI STP standards.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Examples of such devices are Intel(R) Trace Hub and Coresight STM.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Say Y here to enable System Trace Module device support.  </p>
+</details>
+
+<details>
+<summary><n> Intel(R) Trace Hub controller  </n></summary>  
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;仅供调试使用。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/hwtracing/intel_th/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Intel(R) Trace Hub (TH) is a set of hardware blocks (subdevices) that produce, switch and output trace data from multiple hardware and software sources over several types of trace output ports encoded in System Trace Protocol (MIPI STPv2) and is intended to perform full system debugging.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This option enables intel_th bus and common code used by TH subdevices to interact with each other and hardware and for platform glue layers to drive Intel TH devices.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Say Y here to enable Intel(R) Trace Hub controller support.  </p>
+</details>
+
+<details>
+<summary><n> FPGA Configuration Framework ----  </n></summary>  
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FPGA配置框架支持，仅用于嵌入式系统。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/fpga/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Say Y here if you want support for configuring FPGAs from the kernel.  The FPGA framework adds a FPGA manager class and FPGA manager drivers.  </p>
+</details>
+
+<details>
+<summary>FSI support --->  </summary>  
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/fsi/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FSI - the FRU Support Interface - is a simple bus for low-level access to POWER-based hardware.  </p>
+</details>
+
+<details>
+<summary><y> Trusted Execution Environment support    </y></summary>  
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;针对移动端的安全威胁产生的可信执行环境技术。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/tee/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This implements a generic interface towards a Trusted Execution Environment (TEE).<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TEE drivers —&gt;  </p>
+<ul>
+<li><code>&lt;Y&gt; OP-TEE</code><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/tee/optee/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This implements the OP-TEE Trusted Execution Environment (TEE) driver.  </li>
+</ul>
+</details>
       
     </div>
     
@@ -1530,18 +1271,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/28/Linux内核Kconfig解读/" rel="next" title="Linux内核Kconfig解读">
-                <i class="fa fa-chevron-left"></i> Linux内核Kconfig解读
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/08/10/跟老男孩学Linux运维/" rel="prev" title="Linux指令合集">
-                Linux指令合集 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/07/19/Windows系统配置Linux子系统开发ARM/" rel="prev" title="Windows系统配置Linux子系统开发ARM">
+                Windows系统配置Linux子系统开发ARM <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
