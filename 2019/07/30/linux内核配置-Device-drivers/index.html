@@ -99,10 +99,10 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux内核配置--Device drivers">
 <meta property="og:url" content="http://yoursite.com/2019/07/30/linux内核配置-Device-drivers/index.html">
-<meta property="og:site_name" content="加油小站">
+<meta property="og:site_name" content="沈建谅的BLOG">
 <meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;内核的配置过程依赖Makefile和arch/arm/Kconfig以及其他文件下的Kconfig文件，通过make menuconfig或者桌面环境下的xconfig/gconfig可以手动配置内核所支持的功能。&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nb">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-05-25T05:10:23.734Z">
+<meta property="og:updated_time" content="2020-05-25T05:17:09.766Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux内核配置--Device drivers">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;内核的配置过程依赖Makefile和arch/arm/Kconfig以及其他文件下的Kconfig文件，通过make menuconfig或者桌面环境下的xconfig/gconfig可以手动配置内核所支持的功能。&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nb">
@@ -140,7 +140,7 @@
 
 
 
-  <title>linux内核配置--Device drivers | 加油小站</title>
+  <title>linux内核配置--Device drivers | 沈建谅的BLOG</title>
   
 
 
@@ -176,7 +176,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">加油小站</span>
+        <span class="site-title">沈建谅的BLOG</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -292,7 +292,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="加油小站">
+      <meta itemprop="name" content="沈建谅的BLOG">
     </span>
 
     
@@ -506,10 +506,10 @@
 </details>  
 
 <details>
-<summary<n> ATA/ATAPI/MFM/RLL support (DEPRECATED) ----  
+<summary> ATA/ATAPI/MFM/RLL support (DEPRECATED) ----</summary>  
 
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;已被废弃的IDE硬盘和ATAPI光驱等接口的驱动(已被CONFIG_ATA取代)。  </p>
-</summary<n></details>
+</details>
 
 
 <details>
@@ -694,76 +694,52 @@
 
 
 <details>
-<summary>SCSI device support ---></summary>  
-## [Y] Adaptive Voltage Scaling class support ----  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;自适应电压调节(Adaptive Voltage Scaling)技术能够动态的对设备工作电压进行精细的调整，拥有比DVFS更佳的电力利用效率，是一种降低功耗与优化性能并举的电源与性能管理技术。AVS在OMAP设备上也被称为"SmartReflex"，目前仅用于嵌入式领域。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/power/avs/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AVS is a power management technique which finely controls the operating voltage of a device in order to optimize (i.e. reduce) its power consumption. At a given operating point the voltage is adapted depending on static factors (chip manufacturing process) and dynamic factors (temperature depending performance). AVS is also called SmartReflex on OMAP devices.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Say Y here to enable Adaptive Voltage Scaling class support.  
+<summary>[Y] Adaptive Voltage Scaling class support ----</summary>  
 
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;自适应电压调节(Adaptive Voltage Scaling)技术能够动态的对设备工作电压进行精细的调整，拥有比DVFS更佳的电力利用效率，是一种降低功耗与优化性能并举的电源与性能管理技术。AVS在OMAP设备上也被称为”SmartReflex”，目前仅用于嵌入式领域。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/power/avs/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AVS is a power management technique which finely controls the operating voltage of a device in order to optimize (i.e. reduce) its power consumption. At a given operating point the voltage is adapted depending on static factors (chip manufacturing process) and dynamic factors (temperature depending performance). AVS is also called SmartReflex on OMAP devices.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Say Y here to enable Adaptive Voltage Scaling class support.  </p>
 </details>
 
 
 
 <details>
-<summary>SCSI device support ---></summary>  
-## [Y] Board level reset or power off --->  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;允许通过操作板载的主电源，关闭或重启整个系统。仅用于嵌入式系统。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/power/reset/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Provides a number of drivers which either reset a complete board or shut it down, by manipulating the main power supply on the board.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Say Y here to enable board reset and power off  
+<summary>[Y] Board level reset or power off ---></summary>  
 
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;允许通过操作板载的主电源，关闭或重启整个系统。仅用于嵌入式系统。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/power/reset/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Provides a number of drivers which either reset a complete board or shut it down, by manipulating the main power supply on the board.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Say Y here to enable board reset and power off  </p>
 </details>
 
 <details>
-<summary>SCSI device support ---></summary>  
-## [Y] Power supply class support --->  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;允许用户空间程序通过sysfs/uevent接口对电源(电池、交流电、USB)进行监控。主要用于笔记本与嵌入式设备。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/power/supply/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Say Y here to enable power supply class support. This allows power supply (batteries, AC, USB) monitoring by userspace via sysfs and uevent (if available) and/or APM kernel interface (if selected below).  
+<summary>[Y] Power supply class support ---></summary>  
 
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;允许用户空间程序通过sysfs/uevent接口对电源(电池、交流电、USB)进行监控。主要用于笔记本与嵌入式设备。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/power/supply/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Say Y here to enable power supply class support. This allows power supply (batteries, AC, USB) monitoring by userspace via sysfs and uevent (if available) and/or APM kernel interface (if selected below).  </p>
 </details>
 
 <details>
-<summary>SCSI device support ---></summary>  
-## <y> Hardware Monitoring support --->  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当前主板大多都有一个监控硬件温度/电压/风扇转速等状况的设备，请按照主板实际使用的芯片选择相应的子项。如果你不知道究竟需要使用哪个驱动，可以使用Superiotool和sensors-detect工具进行检测。另外,某些子项可能还需要CONFIG_I2C的支持。更多详情参见"Documentation/hwmon/userspace-tools"文档。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/hwmon/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hardware monitoring devices let you monitor the hardware health of a system. Most modern motherboards include such a device. It can include temperature sensors, voltage sensors, fan speed sensors and various additional features such as the ability to control the speed of the fans.  If you want this support you should say Y here and also to the specific driver(s) for your sensors chip(s) below.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To find out which specific driver(s) you need, use the sensors-detect script from the lm_sensors package.  Read <file:documentation hwmon userspace-tools> for details.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This support can also be built as a module.  If so, the module will be called hwmon.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下列为勾选项：  
-* `<y> GPIO fan`  
-* `<y> Hwmon driver that uses channels specified via iio maps`  
-* `<y> National Semiconductor LM90 and compatibles`  
-* `<y> National Semiconductor LM95245 and compatibles`  
-* `<m> NTC thermistor support from Murata`  
-* `<m> PWM fan`  
-* `<m> Texas Instruments INA219 and compatibles`  
-* `<y> Texas Instruments TMP102`  
+<summary><y> Hardware Monitoring support ---></y></summary>  
 
-</y></m></m></m></y></y></y></y></file:documentation></y></details>
-
-<details>
-<summary>SCSI device support ---></summary>  
-## -Y- Generic Thermal sysfs driver --->  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为ACPI规范中定义的"thermal"(发热控制)提供一个通用的sysfs接口，以方便与诸如温度传感器和风扇之类的设备通信。由于目前所有PC和服务器都已支持ACPI，并且发热控制也越来越重要，所以建议选"Y"。详情参见"Documentation/thermal/sysfs-api.txt"文档。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/thermal/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generic Thermal Sysfs driver offers a generic mechanism for thermal management. Usually it's made up of one or more thermal zone and cooling device. Each thermal zone contains its own temperature, trip points, cooling devices.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All platforms with ACPI thermal support can use this driver.If you want this support, you should say Y or M here.  
-
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当前主板大多都有一个监控硬件温度/电压/风扇转速等状况的设备，请按照主板实际使用的芯片选择相应的子项。如果你不知道究竟需要使用哪个驱动，可以使用Superiotool和sensors-detect工具进行检测。另外,某些子项可能还需要CONFIG_I2C的支持。更多详情参见”Documentation/hwmon/userspace-tools”文档。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/hwmon/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hardware monitoring devices let you monitor the hardware health of a system. Most modern motherboards include such a device. It can include temperature sensors, voltage sensors, fan speed sensors and various additional features such as the ability to control the speed of the fans.  If you want this support you should say Y here and also to the specific driver(s) for your sensors chip(s) below.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To find out which specific driver(s) you need, use the sensors-detect script from the lm_sensors package.  Read <a href="file:Documentation/hwmon/userspace-tools" target="_blank" rel="noopener">file:Documentation/hwmon/userspace-tools</a> for details.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This support can also be built as a module.  If so, the module will be called hwmon.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下列为勾选项：  </p>
+<ul>
+<li><code>&lt;Y&gt; GPIO fan</code>  </li>
+<li><code>&lt;Y&gt; Hwmon driver that uses channels specified via iio maps</code>  </li>
+<li><code>&lt;Y&gt; National Semiconductor LM90 and compatibles</code>  </li>
+<li><code>&lt;Y&gt; National Semiconductor LM95245 and compatibles</code>  </li>
+<li><code>&lt;M&gt; NTC thermistor support from Murata</code>  </li>
+<li><code>&lt;M&gt; PWM fan</code>  </li>
+<li><code>&lt;M&gt; Texas Instruments INA219 and compatibles</code>  </li>
+<li><code>&lt;Y&gt; Texas Instruments TMP102</code>  </li>
+</ul>
 </details>
 
 <details>
-<summary>SCSI device support ---></summary>  
-## [Y] Watchdog Timer Support --->  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;选"Y"并选中下面相应的驱动之后，再创建一个主/次设备号为10/130的字符设备"/dev/watchdog"，即可拥有一只看门狗。其工作原理是：当/dev/watchdog设备被打开后，如果喂狗守护进程超过60秒没有喂狗(写入"/dev/watchdog")，那么底层的看门狗硬件将会触发整个机器硬重启(相当于按下面板上的"RESET"按钮)。这对于提高服务器的在线率来说意义重大。详情参见"Documentation/watchdog/watchdog-api.txt"文档。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/watchdog/Kconfig。  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If you say Y here (and to one of the following options) and create a character special file /dev/watchdog with major number 10 and minor number 130 using mknod ("man mknod"), you will get a watchdog, i.e.: subsequently opening the file and then failing to write to it for longer than 1 minute will result in rebooting the machine. This could be useful for a networked machine that needs to come back on-line as fast as possible after a lock-up. There's both a watchdog implementation entirely in software (which can sometimes fail to reboot the machine) and a driver for hardware watchdog boards, which are more robust and can also keep track of the temperature inside your computer. For details, read <file:documentation watchdog watchdog-api.txt> in the kernel source.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The watchdog is usually used together with the watchdog daemon which is available from <ftp: ibiblio.org pub linux system daemons watchdog>. This daemon can also monitor NFS connections and can reboot the machine when the process table is full.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If unsure, say N.  
+<summary>-Y- Generic Thermal sysfs driver ---> </summary>  
 
-</ftp:></file:documentation></details>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为ACPI规范中定义的”thermal”(发热控制)提供一个通用的sysfs接口，以方便与诸如温度传感器和风扇之类的设备通信。由于目前所有PC和服务器都已支持ACPI，并且发热控制也越来越重要，所以建议选”Y”。详情参见”Documentation/thermal/sysfs-api.txt”文档。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/thermal/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generic Thermal Sysfs driver offers a generic mechanism for thermal management. Usually it’s made up of one or more thermal zone and cooling device. Each thermal zone contains its own temperature, trip points, cooling devices.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All platforms with ACPI thermal support can use this driver.If you want this support, you should say Y or M here.  </p>
+</details>
+
+<details>
+<summary>[Y] Watchdog Timer Support ---></summary>  
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;选”Y”并选中下面相应的驱动之后，再创建一个主/次设备号为10/130的字符设备”/dev/watchdog”，即可拥有一只看门狗。其工作原理是：当/dev/watchdog设备被打开后，如果喂狗守护进程超过60秒没有喂狗(写入”/dev/watchdog”)，那么底层的看门狗硬件将会触发整个机器硬重启(相当于按下面板上的”RESET”按钮)。这对于提高服务器的在线率来说意义重大。详情参见”Documentation/watchdog/watchdog-api.txt”文档。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参考：drivers/watchdog/Kconfig。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If you say Y here (and to one of the following options) and create a character special file /dev/watchdog with major number 10 and minor number 130 using mknod (“man mknod”), you will get a watchdog, i.e.: subsequently opening the file and then failing to write to it for longer than 1 minute will result in rebooting the machine. This could be useful for a networked machine that needs to come back on-line as fast as possible after a lock-up. There’s both a watchdog implementation entirely in software (which can sometimes fail to reboot the machine) and a driver for hardware watchdog boards, which are more robust and can also keep track of the temperature inside your computer. For details, read <a href="file:Documentation/watchdog/watchdog-api.txt" target="_blank" rel="noopener">file:Documentation/watchdog/watchdog-api.txt</a> in the kernel source.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The watchdog is usually used together with the watchdog daemon which is available from <a href="ftp://ibiblio.org/pub/Linux/system/daemons/watchdog/" target="_blank" rel="noopener">ftp://ibiblio.org/pub/Linux/system/daemons/watchdog/</a>. This daemon can also monitor NFS connections and can reboot the machine when the process table is full.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If unsure, say N.  </p>
+</details>
 
 <details>
 <summary>SCSI device support ---></summary>  
@@ -1624,7 +1600,7 @@
           <img class="site-author-image" itemprop="image" src="https://cdn.nlark.com/yuque/0/2019/jpeg/291611/1573192781996-2600f421-c814-449c-a70d-8adf3aaa7ae4.jpeg" alt="Jianliang·S">
           <p class="site-author-name" itemprop="name">Jianliang·S</p>
            
-              <p class="site-description motion-element" itemprop="description">苦逼开发狗，随缘更新</p>
+              <p class="site-description motion-element" itemprop="description">嵌入式开发</p>
           
         </div>
         <nav class="site-state motion-element">
