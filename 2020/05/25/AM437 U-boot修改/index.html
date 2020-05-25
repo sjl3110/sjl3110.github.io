@@ -97,14 +97,14 @@
 <meta name="description" content="为了让ARM启动时从SD-card搬运数据然后转NAND Flash启动，需要重新配置创龙提供的2014版本的Uboot源码文件，主要思路包括：    编译UBI相关命令 配置环境变量 使用Ubi命令 制作文件系统镜像 烧写文件 添加自定义三取二命令 修改Uboot初始化配置">
 <meta name="keywords" content="linux,u-boot">
 <meta property="og:type" content="article">
-<meta property="og:title" content="AM437 U-Boot修改">
+<meta property="og:title" content="AM437 U-Boot-2014修改">
 <meta property="og:url" content="http://yoursite.com/2020/05/25/AM437 U-boot修改/index.html">
 <meta property="og:site_name" content="沈建谅的BLOG">
 <meta property="og:description" content="为了让ARM启动时从SD-card搬运数据然后转NAND Flash启动，需要重新配置创龙提供的2014版本的Uboot源码文件，主要思路包括：    编译UBI相关命令 配置环境变量 使用Ubi命令 制作文件系统镜像 烧写文件 添加自定义三取二命令 修改Uboot初始化配置">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-05-25T01:32:45.584Z">
+<meta property="og:updated_time" content="2020-05-25T11:48:19.945Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="AM437 U-Boot修改">
+<meta name="twitter:title" content="AM437 U-Boot-2014修改">
 <meta name="twitter:description" content="为了让ARM启动时从SD-card搬运数据然后转NAND Flash启动，需要重新配置创龙提供的2014版本的Uboot源码文件，主要思路包括：    编译UBI相关命令 配置环境变量 使用Ubi命令 制作文件系统镜像 烧写文件 添加自定义三取二命令 修改Uboot初始化配置">
 
 
@@ -140,7 +140,7 @@
 
 
 
-  <title>AM437 U-Boot修改 | 沈建谅的BLOG</title>
+  <title>AM437 U-Boot-2014修改 | 沈建谅的BLOG</title>
   
 
 
@@ -300,7 +300,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">AM437 U-Boot修改</h1>
+          <h1 class="post-title" itemprop="name headline">AM437 U-Boot-2014修改</h1>
         
 
         <div class="post-meta">
@@ -455,6 +455,335 @@ ubi write <span class="number">0x88080000</span> NAND.file-system <span class="n
 <p>主要从相关分区读取文件并保存到内存相应地址中，0x88000000和0x82000000也在环境变量中定义的。不赘述。<br>保存环境变量：  </p>
 <pre><code class="C">saveenv</code></pre>
 <p>关闭电源，设置从nandflash优先启动并拔出sdcard，上电后开发板从nandflash启动。  </p>
+<h2 id="添加自定义三取二命令"><a href="#添加自定义三取二命令" class="headerlink" title="添加自定义三取二命令"></a>添加自定义三取二命令</h2><h3 id="添加自定义命令的方法"><a href="#添加自定义命令的方法" class="headerlink" title="添加自定义命令的方法"></a>添加自定义命令的方法</h3><ul>
+<li>2014版本在common/文件目录下创建cmd_xx.c源码文件，内容如下：（注意U-boot没有C库）<br>在文件最后定义一个声明，主要包括命令名称和帮助信息，例如：<br>``` C<br>/*<br>nandinit– cmd name<br>6        – arvc<br>0        – DONOT repeat cmd while Enter</li>
+<li>/<br>U_BOOT_CMD(<br>   nandinit, 6, 0, do_nandinit,<br>   “2-out-of-3-voting commands\n”,<br>   “[devname] [part] [filename] [flag] [nand_addr]”);<pre><code></code></pre></li>
+</ul>
+<p>表示命令名称为nandinit，包括本身一共最多6个参数，0表示按Enter键不重复命令，do_nandinit表示要执行的主体函数，后面信息为输入nandinit时弹出的帮助信息，一般由命令含义和命令使用说明组成。<br>函数执行的主体为do_nandinit函数，形式如下：</p>
+<pre><code class="C"><span class="comment">/* the main function of NANDINIT CMD */</span>
+<span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">do_nandinit</span><span class="params">(<span class="keyword">cmd_tbl_t</span> *cmdtp, <span class="keyword">int</span> flag, <span class="keyword">int</span> argc, <span class="keyword">char</span> *<span class="keyword">const</span> argv[])</span></span>
+<span class="function"></span>{
+    <span class="keyword">if</span> (argc &lt; <span class="number">2</span>)
+        <span class="keyword">return</span> CMD_RET_USAGE;
+
+    <span class="comment">//函数将执行的内容</span>
+
+    <span class="keyword">return</span> <span class="number">0</span>;
+}</code></pre>
+<p>上面函数的参数，cmd_tbl_t是默认定义的，flag是重复标志，后面是命令行输入命令后紧跟的参数，与C语言命令行使用一致。  </p>
+<ul>
+<li>在Makefile中添加编译  </li>
+</ul>
+<pre><code class="Makefile">obj-<span class="variable">$(CONFIG_CMD_NANDINIT)</span> += cmd_nandinit.o</code></pre>
+<h3 id="编写自定义命令源码"><a href="#编写自定义命令源码" class="headerlink" title="编写自定义命令源码"></a>编写自定义命令源码</h3><details>
+<summary>cmd_nandinit.c</summary>  
+
+<pre><code class="C"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;common.h&gt;</span></span>
+<span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;command.h&gt;</span></span>
+<span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;exports.h&gt;</span></span>
+<span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;nand.h&gt;</span></span>
+<span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;onenand_uboot.h&gt;</span></span>
+<span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/mtd/mtd.h&gt;</span></span>
+<span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/mtd/partitions.h&gt;</span></span>
+<span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ubi_uboot.h&gt;</span></span>
+<span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;asm/errno.h&gt;</span></span>
+<span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;jffs2/load_kernel.h&gt;</span></span>
+<span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bootretry.h&gt;</span></span>
+<span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cli.h&gt;</span></span>
+<span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;hash.h&gt;</span></span>
+<span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;watchdog.h&gt;</span></span>
+<span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;asm/io.h&gt;</span></span>
+<span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/compiler.h&gt;</span></span>
+<span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fs.h&gt;</span></span>
+<span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;malloc.h&gt;</span></span>
+<span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;asm/byteorder.h&gt;</span></span>
+<span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;jffs2/jffs2.h&gt;</span></span>
+
+<span class="meta">#<span class="meta-keyword">define</span> MLO_ADDR 0x80000000</span>
+<span class="meta">#<span class="meta-keyword">define</span> UBOOTIMG_ADDR 0x81000000</span>
+<span class="meta">#<span class="meta-keyword">define</span> FDT_ADDR 0x88000000</span>
+<span class="meta">#<span class="meta-keyword">define</span> IMG_ADDR 0x82000000</span>
+<span class="meta">#<span class="meta-keyword">define</span> FS_ADDR 0x88080000</span>
+
+<span class="meta">#<span class="meta-keyword">define</span> ADDR1 0x85000000</span>
+<span class="meta">#<span class="meta-keyword">define</span> ADDR2 0x8a000000</span>
+<span class="meta">#<span class="meta-keyword">define</span> ADDR3 0x8f000000</span>
+<span class="meta">#<span class="meta-keyword">define</span> ADDR_OUT 0x80000000</span>
+
+<span class="meta">#<span class="meta-keyword">define</span> NAND_SPL 0x00000000</span>
+<span class="meta">#<span class="meta-keyword">define</span> NAND_SPL_BACKUP1 0x00040000</span>
+<span class="meta">#<span class="meta-keyword">define</span> NAND_SPL_BACKUP2 0x00080000</span>
+<span class="meta">#<span class="meta-keyword">define</span> NAND_SPL_BACKUP3 0x000c0000</span>
+<span class="meta">#<span class="meta-keyword">define</span> NAND_UBOOT_SPL_OS 0x00100000</span>
+<span class="meta">#<span class="meta-keyword">define</span> NAND_UBOOT 0x00180000</span>
+<span class="meta">#<span class="meta-keyword">define</span> NAND_KERNEL 0x00300000</span>
+
+<span class="keyword">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">ubi_device</span> *<span class="title">ubi</span>;</span>   <span class="comment">//define ubi device</span>
+
+<span class="comment">/*load file from eMMC*/</span>
+<span class="function"><span class="keyword">int</span> <span class="title">load_file</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *dev_name, <span class="keyword">const</span> <span class="keyword">char</span> *part, <span class="keyword">unsigned</span> <span class="keyword">long</span> addr, <span class="keyword">const</span> <span class="keyword">char</span> *filename)</span></span>
+<span class="function"></span>{
+    <span class="keyword">unsigned</span> <span class="keyword">long</span> bytes = <span class="number">0</span>;
+    <span class="keyword">unsigned</span> <span class="keyword">long</span> pos = <span class="number">0</span>;
+    <span class="keyword">int</span> len_read;
+    <span class="keyword">unsigned</span> <span class="keyword">long</span> time;
+    fs_set_blk_dev(dev_name, part, FS_TYPE_ANY);   <span class="comment">//judge the mmc part</span>
+    time = get_timer(<span class="number">0</span>);
+    len_read = fs_read(filename, addr, pos, bytes);
+    time = get_timer(time);
+    <span class="keyword">if</span> (len_read &lt;= <span class="number">0</span>)
+        <span class="keyword">return</span> <span class="number">-1</span>;
+    <span class="keyword">return</span> len_read;
+}
+
+
+<span class="comment">/*read 4 bytes  data from base_addr + addr, addr is the offset */</span>
+<span class="function"><span class="keyword">static</span> uint32_t <span class="title">mem_read</span><span class="params">(uint addr, uint base_address)</span></span>
+<span class="function"></span>{
+    ulong bytes = <span class="number">4</span>;
+    <span class="keyword">uint32_t</span> x;
+    <span class="keyword">const</span> <span class="keyword">void</span> *buf = map_sysmem(base_address + addr, bytes);
+    x = *(<span class="keyword">volatile</span> <span class="keyword">uint32_t</span> *)buf;
+    unmap_sysmem(buf);
+    <span class="keyword">return</span> x;
+}
+
+
+<span class="comment">/* write 4 bytes data to base_addr + addr, addr is the offset */</span>
+<span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">mem_write</span><span class="params">(uint addr, uint base_address, <span class="keyword">uint32_t</span> value)</span></span>
+<span class="function"></span>{
+    ulong writeval, bytes = <span class="number">4</span>;
+    <span class="keyword">void</span> *buf;
+    writeval = (ulong)value;
+    buf = map_sysmem(addr + base_address, bytes);
+    *((u32 *)buf) = (u32)writeval;
+    unmap_sysmem(buf);
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+
+<span class="comment">/* nand write data into addr + offset of NAND flash */</span>
+<span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">nandwrite</span><span class="params">(<span class="keyword">int</span> addr, <span class="keyword">loff_t</span> offset, <span class="keyword">size_t</span> length)</span></span>
+<span class="function"></span>{
+    <span class="keyword">nand_info_t</span> *nand;
+    <span class="keyword">int</span> dev = nand_curr_device;
+    nand = &amp;nand_info[dev];
+    <span class="keyword">return</span> nand_write_skip_bad(nand, offset, &amp;length, <span class="literal">NULL</span>, length, (u_char *)addr, <span class="number">0</span>);
+}
+
+<span class="comment">/* function copied from cmd_ubi.c */</span>
+<span class="function"><span class="keyword">static</span> struct ubi_volume *<span class="title">ubi_findvolume</span><span class="params">(<span class="keyword">char</span> *volume)</span></span>
+<span class="function"></span>{
+    <span class="class"><span class="keyword">struct</span> <span class="title">ubi_volume</span> *<span class="title">vol</span> = <span class="title">NULL</span>;</span>
+    <span class="keyword">int</span> i;
+
+    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; ubi-&gt;vtbl_slots; i++)
+    {
+        vol = ubi-&gt;volumes[i];
+        <span class="keyword">if</span> (vol &amp;&amp; !<span class="built_in">strcmp</span>(vol-&gt;name, volume))
+            <span class="keyword">return</span> vol;
+    }
+
+    <span class="built_in">printf</span>(<span class="string">"Volume %s not found!\n"</span>, volume);
+    <span class="keyword">return</span> <span class="literal">NULL</span>;
+}
+
+<span class="comment">/* function copied from cmd_ubi.c */</span>
+<span class="function"><span class="keyword">int</span> <span class="title">ubi_continue_write</span><span class="params">(<span class="keyword">char</span> *volume, <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> size)</span></span>
+<span class="function"></span>{
+    <span class="keyword">int</span> err = <span class="number">1</span>;
+    <span class="class"><span class="keyword">struct</span> <span class="title">ubi_volume</span> *<span class="title">vol</span>;</span>
+
+    vol = ubi_findvolume(volume);
+    <span class="keyword">if</span> (vol == <span class="literal">NULL</span>)
+        <span class="keyword">return</span> ENODEV;
+
+    err = ubi_more_update_data(ubi, vol, buf, size);
+    <span class="keyword">if</span> (err &lt; <span class="number">0</span>)
+    {
+        <span class="built_in">printf</span>(<span class="string">"Couldnt or partially wrote data\n"</span>);
+        <span class="keyword">return</span> -err;
+    }
+
+    <span class="keyword">if</span> (err)
+    {
+        size = err;
+
+        err = ubi_check_volume(ubi, vol-&gt;vol_id);
+        <span class="keyword">if</span> (err &lt; <span class="number">0</span>)
+            <span class="keyword">return</span> -err;
+
+        <span class="keyword">if</span> (err)
+        {
+            ubi_warn(<span class="string">"volume %d on UBI device %d is corrupted"</span>,
+                     vol-&gt;vol_id, ubi-&gt;ubi_num);
+            vol-&gt;corrupted = <span class="number">1</span>;
+        }
+
+        vol-&gt;checked = <span class="number">1</span>;
+        ubi_gluebi_updated(vol);
+    }
+
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+
+<span class="comment">/* function copied from cmd_ubi.c */</span>
+<span class="function"><span class="keyword">int</span> <span class="title">ubi_beginwrite</span><span class="params">(<span class="keyword">char</span> *volume, <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> size, <span class="keyword">size_t</span> full_size)</span></span>
+<span class="function"></span>{
+    <span class="keyword">int</span> err = <span class="number">1</span>;
+    <span class="keyword">int</span> rsvd_bytes = <span class="number">0</span>;
+    <span class="class"><span class="keyword">struct</span> <span class="title">ubi_volume</span> *<span class="title">vol</span>;</span>
+
+    vol = ubi_findvolume(volume);
+    <span class="keyword">if</span> (vol == <span class="literal">NULL</span>)
+        <span class="keyword">return</span> ENODEV;
+
+    rsvd_bytes = vol-&gt;reserved_pebs * (ubi-&gt;leb_size - vol-&gt;data_pad);
+    <span class="keyword">if</span> (size &lt; <span class="number">0</span> || size &gt; rsvd_bytes)
+    {
+        <span class="built_in">printf</span>(<span class="string">"size &gt; volume size! Aborting!\n"</span>);
+        <span class="keyword">return</span> EINVAL;
+    }
+
+    err = ubi_start_update(ubi, vol, full_size);
+    <span class="keyword">if</span> (err &lt; <span class="number">0</span>)
+    {
+        <span class="built_in">printf</span>(<span class="string">"Cannot start volume update\n"</span>);
+        <span class="keyword">return</span> -err;
+    }
+
+    <span class="keyword">return</span> ubi_continue_write(volume, buf, size);
+}
+
+<span class="comment">/*equal the cmd in uboot: ubi wirte ADDR(buf) UBI:volume_name(*volume) size */</span>
+<span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">ubiwrite</span><span class="params">(<span class="keyword">char</span> *volume, <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> size)</span></span>
+<span class="function"></span>{
+    <span class="keyword">return</span> ubi_beginwrite(volume, buf, size, size);
+}
+
+<span class="comment">/* the main function of NANDINIT CMD */</span>
+<span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">do_nandinit</span><span class="params">(<span class="keyword">cmd_tbl_t</span> *cmdtp, <span class="keyword">int</span> flag, <span class="keyword">int</span> argc, <span class="keyword">char</span> *<span class="keyword">const</span> argv[])</span></span>
+<span class="function"></span>{
+    <span class="keyword">if</span> (argc &lt; <span class="number">2</span>)
+        <span class="keyword">return</span> CMD_RET_USAGE;
+
+    <span class="keyword">int</span> file_length = <span class="number">0</span>;
+
+    <span class="comment">/* </span>
+<span class="comment">    U-BOOT: nandinit mmc 0:1 /MLO 0 0x00000000</span>
+<span class="comment">    # argv[1] = "mmc"                --flash device name</span>
+<span class="comment">    # argv[2] = "0:1"                --the part of eMMC</span>
+<span class="comment">    # argv[3] = "/MLO"                --path and name</span>
+<span class="comment">    # argv[4] = "0"                    --flag,0-&gt;use nand write;1-&gt;use ubi write</span>
+<span class="comment">    # argv[5] = "0x00000000"        --the beginning address of mtd part</span>
+<span class="comment">                "NAND.file-system"    --the name of ubi volume</span>
+<span class="comment">    */</span>
+
+    <span class="comment">/*load file into three different address of DDRAM    */</span>
+    file_length = load_file(argv[<span class="number">1</span>], argv[<span class="number">2</span>], ADDR1, argv[<span class="number">3</span>]);
+    load_file(argv[<span class="number">1</span>], argv[<span class="number">2</span>], ADDR2, argv[<span class="number">3</span>]);
+    load_file(argv[<span class="number">1</span>], argv[<span class="number">2</span>], ADDR3, argv[<span class="number">3</span>]);
+
+    ulong data1 = <span class="number">0</span>, data2 = <span class="number">0</span>, data3 = <span class="number">0</span>;
+    ulong data_out = <span class="number">0</span>;
+    uint offset = <span class="number">0</span>;
+    <span class="keyword">int</span> count, count_2k = <span class="number">0</span>;
+    count = file_length / <span class="number">4</span> + <span class="number">1</span>;
+
+    <span class="keyword">unsigned</span> <span class="keyword">long</span> time = <span class="number">0</span>;
+
+    <span class="comment">/*flag = 0 ,start nand write file into mtd*/</span>
+    <span class="keyword">if</span> (!<span class="built_in">strcmp</span>(argv[<span class="number">4</span>], <span class="string">"0"</span>))
+    {
+        <span class="keyword">loff_t</span> nand_off = simple_strtoul(argv[<span class="number">5</span>], <span class="literal">NULL</span>, <span class="number">16</span>);
+        <span class="built_in">printf</span>(<span class="string">"start\t3-to-2 [%s]\t\t\t\n"</span>, argv[<span class="number">3</span>]);
+        time = get_timer(<span class="number">0</span>);
+        <span class="keyword">while</span> (count &gt; <span class="number">0</span>)
+        {
+            data1 = mem_read(offset, ADDR1);
+            data2 = mem_read(offset, ADDR2);
+            data3 = mem_read(offset, ADDR3);
+            data_out = (data1 &amp; data2) | (data1 &amp; data3) | (data2 &amp; data3);
+            mem_write(offset, ADDR_OUT, data_out);
+            offset += <span class="number">4</span>;
+            <span class="keyword">if</span> ((offset % <span class="number">2048</span> == <span class="number">0</span>) &amp;&amp; (offset &gt; <span class="number">0</span>))
+            {
+                nandwrite(ADDR_OUT + offset - <span class="number">2048</span>, (<span class="keyword">loff_t</span>)(nand_off + offset - <span class="number">2048</span>), <span class="number">2048</span>);
+            }
+            count--;
+        }
+        count_2k = file_length / <span class="number">2048</span>;
+        nandwrite(ADDR_OUT + <span class="number">2048</span> * count_2k, (<span class="keyword">loff_t</span>)(nand_off + <span class="number">2048</span> * count_2k), file_length - count_2k * <span class="number">2048</span>);
+        time = get_timer(time);
+        <span class="built_in">printf</span>(<span class="string">"end\t3-to-2 [%s]\t\t\tin %lu ms\n"</span>, argv[<span class="number">3</span>],time);
+    }
+    <span class="comment">/*flag = 1 ,start ubi write file into NAND.file-system*/</span>
+    <span class="keyword">else</span> <span class="keyword">if</span> (!<span class="built_in">strcmp</span>(argv[<span class="number">4</span>], <span class="string">"1"</span>))
+    {
+        ubi = ubi_devices[<span class="number">0</span>];
+        <span class="built_in">printf</span>(<span class="string">"start\t3-to-2 [%s]\t\t\t\n"</span>, argv[<span class="number">3</span>]);
+        time = get_timer(<span class="number">0</span>);
+        <span class="keyword">while</span> (count &gt; <span class="number">0</span>)
+        {
+            data1 = mem_read(offset, ADDR1);
+            data2 = mem_read(offset, ADDR2);
+            data3 = mem_read(offset, ADDR3);
+            data_out = (data1 &amp; data2) | (data1 &amp; data3) | (data2 &amp; data3);
+            mem_write(offset, ADDR_OUT, data_out);
+            offset += <span class="number">4</span>;
+            count--;
+        }
+
+        <span class="built_in">printf</span>(<span class="string">"start ubi_write filesystem to [%s]\n"</span>, argv[<span class="number">5</span>]);
+        <span class="keyword">int</span> ret;
+        ret = ubiwrite(argv[<span class="number">5</span>], (<span class="keyword">void</span> *)ADDR_OUT, (<span class="keyword">size_t</span>)file_length);
+        <span class="keyword">if</span> (!ret)
+        {
+            <span class="built_in">printf</span>(<span class="string">"%d MB written to volume %s\n"</span>, file_length / <span class="number">1024</span> / <span class="number">1024</span>, <span class="string">"NAND.file-system"</span>);
+        }
+        time = get_timer(time);
+        <span class="built_in">printf</span>(<span class="string">"end\t3-to-2 [%s]\t\t\tin %lu ms\n"</span>, argv[<span class="number">3</span>],time);
+    }
+    <span class="keyword">else</span>
+    {
+        <span class="keyword">return</span> CMD_RET_USAGE;
+    }
+
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+
+<span class="comment">/*</span>
+<span class="comment">nandinit-- cmd name </span>
+<span class="comment">6        -- arvc</span>
+<span class="comment">0        -- DONOT repeat cmd while Enter</span>
+<span class="comment">*/</span>
+U_BOOT_CMD(
+    nandinit, <span class="number">6</span>, <span class="number">0</span>, do_nandinit,
+    <span class="string">"2-out-of-3-voting commands\n"</span>,
+    <span class="string">"[devname] [part] [filename] [flag] [nand_addr]"</span>);
+</code></pre>
+</details>
+上面的源码包括内存读写函数、ubi读写命令、nand读命令等，在do_nandinit()中进行三取二操作。  
+
+<h2 id="修改Uboot初始化配置"><a href="#修改Uboot初始化配置" class="headerlink" title="修改Uboot初始化配置"></a>修改Uboot初始化配置</h2><p>在am43xx_evm.h中重新配置自定义命令进行三取二操作，首先添加一个自定义的NAND_INIT命令，再将NAND_INIT命令加入到CONFIG_BOOTCOMMAND中。  </p>
+<pre><code class="C"><span class="meta">#<span class="meta-keyword">define</span> CONFIG_BOOTCOMMAND \</span>
+    <span class="string">"if mmc rescan; then "</span> \
+        <span class="string">"echo SD/MMC found on device ${devnum};"</span> \
+        NAND_INIT \
+    <span class="string">"fi; "</span> \
+    <span class="string">"run nandboot;"</span> 
+
+<span class="meta">#<span class="meta-keyword">define</span> NAND_INIT <span class="meta-string">"nand erase.chip;"</span> \</span>
+    <span class="string">"ubi part NAND.file-system 2048 ;"</span> \
+    <span class="string">"ubi create NAND.file-system ;"</span> \
+    <span class="string">"nandinit mmc 0:1 /MLO 0 0x00000000;"</span> \
+    <span class="string">"nandinit mmc 0:1 /MLO 0 0x00040000;"</span> \
+    <span class="string">"nandinit mmc 0:1 /MLO 0 0x00080000;"</span> \
+    <span class="string">"nandinit mmc 0:1 /MLO 0 0x000c0000;"</span> \
+    <span class="string">"nandinit mmc 0:1 /u-boot.img 0 0x00180000; "</span> \
+    <span class="string">"nandinit mmc 0:2 /boot/am437x-gp-evm.dtb 0 0x00100000; "</span> \
+    <span class="string">"nandinit mmc 0:2 /boot/zImage 0 0x00300000; "</span> \
+    <span class="string">"nandinit mmc 0:2 /boot/ubifs.img 1 NAND.file-system ; "</span> \</code></pre>
+<p>上述CONFIG_BOOTCOMMAN中首先扫描eMMC设备是否存在，如果存在SD卡，则运行NAND_INIT，主要是先加载再运行三取二命令；如果未连接eMMC设备，则直接nandboot启动。</p>
 
       
     </div>
@@ -705,7 +1034,7 @@ ubi write <span class="number">0x88080000</span> NAND.file-system <span class="n
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#U-boot添加Ubi和Ubifs命令"><span class="nav-number">1.</span> <span class="nav-text">U-boot添加Ubi和Ubifs命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置环境变量"><span class="nav-number">2.</span> <span class="nav-text">配置环境变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用UBI命令"><span class="nav-number">3.</span> <span class="nav-text">使用UBI命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#制作文件系统镜像"><span class="nav-number">4.</span> <span class="nav-text">制作文件系统镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#烧写文件"><span class="nav-number">5.</span> <span class="nav-text">烧写文件</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#U-boot添加Ubi和Ubifs命令"><span class="nav-number">1.</span> <span class="nav-text">U-boot添加Ubi和Ubifs命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置环境变量"><span class="nav-number">2.</span> <span class="nav-text">配置环境变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用UBI命令"><span class="nav-number">3.</span> <span class="nav-text">使用UBI命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#制作文件系统镜像"><span class="nav-number">4.</span> <span class="nav-text">制作文件系统镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#烧写文件"><span class="nav-number">5.</span> <span class="nav-text">烧写文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加自定义三取二命令"><span class="nav-number">6.</span> <span class="nav-text">添加自定义三取二命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#添加自定义命令的方法"><span class="nav-number">6.1.</span> <span class="nav-text">添加自定义命令的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编写自定义命令源码"><span class="nav-number">6.2.</span> <span class="nav-text">编写自定义命令源码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改Uboot初始化配置"><span class="nav-number">7.</span> <span class="nav-text">修改Uboot初始化配置</span></a></li></ol></div>
             
 
           </div>
