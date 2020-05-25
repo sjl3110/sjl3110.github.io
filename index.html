@@ -375,9 +375,23 @@
 
       
         
-          
-            <h2 id="数据可视化效果预览"><a href="#数据可视化效果预览" class="headerlink" title="数据可视化效果预览"></a>数据可视化效果预览</h2>
-          
+          <p>为了让ARM启动时从SD-card搬运数据然后转NAND Flash启动，需要重新配置创龙提供的2014版本的Uboot源码文件，主要思路包括：  </p>
+<ul>
+<li>编译UBI相关命令</li>
+<li>配置环境变量</li>
+<li>使用Ubi命令</li>
+<li>制作文件系统镜像</li>
+<li>烧写文件</li>
+<li>添加自定义三取二命令</li>
+<li>修改Uboot初始化配置</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/05/25/AM437 U-boot修改/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

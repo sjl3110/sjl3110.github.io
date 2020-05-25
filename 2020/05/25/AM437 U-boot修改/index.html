@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="数据可视化效果预览">
+<meta name="description" content="为了让ARM启动时从SD-card搬运数据然后转NAND Flash启动，需要重新配置创龙提供的2014版本的Uboot源码文件，主要思路包括：    编译UBI相关命令 配置环境变量 使用Ubi命令 制作文件系统镜像 烧写文件 添加自定义三取二命令 修改Uboot初始化配置">
 <meta name="keywords" content="linux,u-boot">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AM437 U-Boot修改">
 <meta property="og:url" content="http://yoursite.com/2020/05/25/AM437 U-boot修改/index.html">
 <meta property="og:site_name" content="加油小站">
-<meta property="og:description" content="数据可视化效果预览">
+<meta property="og:description" content="为了让ARM启动时从SD-card搬运数据然后转NAND Flash启动，需要重新配置创龙提供的2014版本的Uboot源码文件，主要思路包括：    编译UBI相关命令 配置环境变量 使用Ubi命令 制作文件系统镜像 烧写文件 添加自定义三取二命令 修改Uboot初始化配置">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-05-25T01:12:19.132Z">
+<meta property="og:updated_time" content="2020-05-25T01:24:33.994Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AM437 U-Boot修改">
-<meta name="twitter:description" content="数据可视化效果预览">
+<meta name="twitter:description" content="为了让ARM启动时从SD-card搬运数据然后转NAND Flash启动，需要重新配置创龙提供的2014版本的Uboot源码文件，主要思路包括：    编译UBI相关命令 配置环境变量 使用Ubi命令 制作文件系统镜像 烧写文件 添加自定义三取二命令 修改Uboot初始化配置">
 
 
 
@@ -372,7 +372,52 @@
       
 
       
-        <h2 id="数据可视化效果预览"><a href="#数据可视化效果预览" class="headerlink" title="数据可视化效果预览"></a>数据可视化效果预览</h2>
+        <p>为了让ARM启动时从SD-card搬运数据然后转NAND Flash启动，需要重新配置创龙提供的2014版本的Uboot源码文件，主要思路包括：  </p>
+<ul>
+<li>编译UBI相关命令</li>
+<li>配置环境变量</li>
+<li>使用Ubi命令</li>
+<li>制作文件系统镜像</li>
+<li>烧写文件</li>
+<li>添加自定义三取二命令</li>
+<li>修改Uboot初始化配置</li>
+</ul>
+<a id="more"></a>  
+<h2 id="U-boot添加Ubi和Ubifs命令"><a href="#U-boot添加Ubi和Ubifs命令" class="headerlink" title="U-boot添加Ubi和Ubifs命令"></a>U-boot添加Ubi和Ubifs命令</h2><p>在uboot-2014的include/configs/am43xx_evm.h中添加如下声明。  </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* #define CONFIG_MTD_DEVICE            1 */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONFIG_MTD_PARTITIONS        1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONFIG_CMD_MTDPARTS         </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONFIG_CMD_UBIFS           </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONFIG_CMD_UBI         </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONFIG_LZO                   1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONFIG_RBTREE                1</span></span><br><span class="line">```  </span><br><span class="line">## 配置环境变量</span><br><span class="line">在上述头文件中修改nandroot变量：  </span><br><span class="line">``` C</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> NANDARGS \</span></span><br><span class="line">    <span class="string">"mtdids="</span> MTDIDS_DEFAULT <span class="string">"\0"</span> \</span><br><span class="line">    <span class="string">"mtdparts="</span> MTDPARTS_DEFAULT <span class="string">"\0"</span> \</span><br><span class="line">    <span class="string">"nandargs=setenv bootargs console=$&#123;console&#125; "</span> \</span><br><span class="line">        <span class="string">"$&#123;optargs&#125; "</span> \</span><br><span class="line">        <span class="string">"root=$&#123;nandroot&#125; "</span> \</span><br><span class="line">        <span class="string">"rootfstype=$&#123;nandrootfstype&#125;\0"</span> \</span><br><span class="line">    <span class="string">"nandroot=ubi0:NAND.file-system rw ubi.mtd=NAND.file-system,2048\0"</span> \</span><br><span class="line">    <span class="string">"nandrootfstype=ubifs rootwait=1\0"</span> \</span><br><span class="line">    <span class="string">"nandboot=echo Booting from nand ...; "</span> \</span><br><span class="line">        <span class="string">"run nandargs; "</span> \</span><br><span class="line">        <span class="string">"nand read $&#123;fdtaddr&#125; NAND.u-boot-spl-os; "</span> \</span><br><span class="line">        <span class="string">"nand read $&#123;loadaddr&#125; NAND.kernel; "</span> \</span><br><span class="line">        <span class="string">"bootz $&#123;loadaddr&#125; - $&#123;fdtaddr&#125;\0"</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> NANDBOOT            <span class="meta-string">"run nandboot; "</span></span></span><br><span class="line">```  </span><br><span class="line">其中，ubi0:NAND.file-system是由分区表决定的，ubi0指设备名，NAND.file-system是分区名，rw指分区可读可写，<span class="number">2048</span>代表VID offset，不可或缺，下面需要使用这个变量。</span><br><span class="line">分区表也在头文件中定义：  </span><br><span class="line">``` C</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MTDPARTS_DEFAULT        <span class="meta-string">"mtdparts=nand.0:"</span> \</span></span><br><span class="line">                    <span class="string">"256k(NAND.SPL),"</span> \</span><br><span class="line">                    <span class="string">"256k(NAND.SPL.backup1),"</span> \</span><br><span class="line">                    <span class="string">"256k(NAND.SPL.backup2),"</span> \</span><br><span class="line">                    <span class="string">"256k(NAND.SPL.backup3),"</span> \</span><br><span class="line">                    <span class="string">"512k(NAND.u-boot-spl-os),"</span> \</span><br><span class="line">                    <span class="string">"1m(NAND.u-boot),"</span> \</span><br><span class="line">                    <span class="string">"256k(NAND.u-boot-env),"</span> \</span><br><span class="line">                    <span class="string">"256k(NAND.u-boot-env.backup1),"</span> \</span><br><span class="line">                    <span class="string">"7m(NAND.kernel),"</span> \</span><br><span class="line">                    <span class="string">"-(NAND.file-system)"</span></span><br><span class="line">```  </span><br><span class="line">注意mtd计数从<span class="number">0</span>开始，因此文件系统分区为mtd=<span class="number">9</span>。分区名称一定要与nandroot变量中一致，否则一定会出现无法加载的错误。  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 使用UBI命令</span><br><span class="line">UBI包括ubi part、ubi create、ubi write、ubi info (l)等命令。进入uboot后使用mtd可以查看分区表，接下来运行：  </span><br><span class="line">``` C</span><br><span class="line">nand erase.part NAND.file-system       <span class="comment">//擦除分区</span></span><br><span class="line">ubi part NAND.file-system <span class="number">2048</span>        <span class="comment">//2048与环境变量一致，否则默认512</span></span><br><span class="line">ubi create NAND.file-system           <span class="comment">//制作卷</span></span><br></pre></td></tr></table></figure>
+
+<p>使用ubi info l命令查看分区，注意usable_leb_size参数为126976，在制作镜像要用。  </p>
+<h2 id="制作文件系统镜像"><a href="#制作文件系统镜像" class="headerlink" title="制作文件系统镜像"></a>制作文件系统镜像</h2><p>在rootfs文件系统上一级运行如下命令，并将ubifs.img拷贝到sd card的rootfs/boot路径下。  </p>
+<pre><code class="C">sudo mkfs.ubifs -r ./rootfs/ -m <span class="number">2048</span> -e <span class="number">126976</span> -c <span class="number">4300</span> -o ~/ubifs.img</code></pre>
+<p>注意-c, –max-leb-cnt=COUNT  maximum logical erase block count，主要和容量大小有关，如果太小会提示设置一个合理值。另外-e, –leb-size=SIZE:logical erase block size设置为126976。  </p>
+<h2 id="烧写文件"><a href="#烧写文件" class="headerlink" title="烧写文件"></a>烧写文件</h2><p>将开发板设置为优先从SDIO（MMC 0）启动，启动进入uboot命令行，运行：  </p>
+<pre><code class="C">env <span class="keyword">default</span> -a</code></pre>
+<p>上述步骤还原编译的环境变量，下面依次运行下面指令（注意事先擦除各分区）。  </p>
+<pre><code class="C"><span class="comment">//烧写MLO至NAND.SPL，烧写u-boot.img至NAND.u-boot。</span>
+load mmc <span class="number">0</span>:<span class="number">1</span> <span class="number">0x80000000</span> /MLO                    <span class="comment">//load MLO from sdcard</span>
+nand write <span class="number">0x80000000</span> <span class="number">0x00000000</span> <span class="number">0x00016f30</span>     
+nand write <span class="number">0x80000000</span> <span class="number">0x00040000</span> <span class="number">0x00016f30</span>
+nand write <span class="number">0x80000000</span> <span class="number">0x00080000</span> <span class="number">0x00016f30</span>
+nand write <span class="number">0x80000000</span> <span class="number">0x000c0000</span> <span class="number">0x00016f30</span>
+load mmc <span class="number">0</span>:<span class="number">1</span> <span class="number">0x90000000</span> /u-boot.img              <span class="comment">//load u-boot.img from sdcard</span>
+nand write <span class="number">0x90000000</span> <span class="number">0x00180000</span> <span class="number">0x000817e0</span>
+load mmc <span class="number">0</span>:<span class="number">2</span> <span class="number">0x88000000</span> /boot/am437x-gp-evm.dtb   <span class="comment">//load dtb from sdcard</span>
+
+<span class="comment">//烧写zImage至NAND.kernel，设备树至NAND.u-boot-spl-os。</span>
+load mmc <span class="number">0</span>:<span class="number">2</span> <span class="number">0x82000000</span> /boot/zImage             <span class="comment">//load zImage from sdcard</span>
+load mmc <span class="number">0</span>:<span class="number">2</span> <span class="number">0x88080000</span> /boot/rootfs.tar.gz         <span class="comment">//load gz rootf from sdcard </span>
+nand write <span class="number">0x82000000</span> <span class="number">0x00300000</span> <span class="number">0x00461568</span>     <span class="comment">//sizeof zImage  4593000</span>
+nand write <span class="number">0x88000000</span> <span class="number">0x00100000</span> <span class="number">0x0000c774</span>     <span class="comment">//sizeof dtb   51060</span>
+
+<span class="comment">//烧写ubifs镜像，UBI分区的步骤需要先做一遍。</span>
+load mmc <span class="number">0</span>:<span class="number">2</span> <span class="number">0x88080000</span> /boot/ubifs.img
+ubi write <span class="number">0x88080000</span> NAND.file-system <span class="number">0x12414000</span></code></pre>
+<p>设置nandboot：  </p>
+<pre><code class="C">setenv bootcmd nand read <span class="number">0x88000000</span> NAND.u-boot-spl-os\;nand read <span class="number">0x82000000</span> NAND.kernel\;bootz <span class="number">0x82000000</span> - <span class="number">0x88000000</span></code></pre>
+<p>主要从相关分区读取文件并保存到内存相应地址中，0x88000000和0x82000000也在环境变量中定义的。不赘述。<br>保存环境变量：  </p>
+<pre><code class="C">saveenv</code></pre>
+<p>关闭电源，设置从nandflash优先启动并拔出sdcard，上电后开发板从nandflash启动。  </p>
+
       
     </div>
     
@@ -618,7 +663,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据可视化效果预览"><span class="nav-number">1.</span> <span class="nav-text">数据可视化效果预览</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#U-boot添加Ubi和Ubifs命令"><span class="nav-number">1.</span> <span class="nav-text">U-boot添加Ubi和Ubifs命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#制作文件系统镜像"><span class="nav-number">2.</span> <span class="nav-text">制作文件系统镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#烧写文件"><span class="nav-number">3.</span> <span class="nav-text">烧写文件</span></a></li></ol></div>
             
 
           </div>
